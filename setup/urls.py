@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from techsupport import views
+from techsupport.views import loginscreen
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', loginscreen, name='loginscreen'),
 ]
