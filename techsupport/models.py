@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 
 
-class User(models):
+class User(models.Model):
     username = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     is_admin = models.BooleanField(default=False)
@@ -34,13 +34,14 @@ class Comment(models.Model):
 class Levels(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    entities = models.ForeignKey('Entities', on_delete=models.CASCADE, related_name='levels')
+    room_entities = models.ForeignKey('Entities', related_name='levels', on_delete=models.CASCADE)
     def __str__(self):
         return self.name
     
 class Entities(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
+    room_levels = models.ForeignKey('Levels', related_name='entities', on_delete=models.CASCADE)
     def __str__(self):
         return self.name
     

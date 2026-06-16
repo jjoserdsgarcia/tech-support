@@ -1,8 +1,68 @@
-from django.shortcuts import render
-
+from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from .models import User, Ticket, Comment, Levels, Entities
+from django.contrib import messages
 
 # Create your views here.
 
 
 def loginscreen(request):
-    return render(request, 'techsupport/loginscreen.html')
+    if request.method == 'GET':
+        return render(request, 'techsupport/loginscreen.html')
+    elif request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('mainlobby')
+        else:
+            return render(request, 'techsupport/loginscreen.html', {'error': 'Credenciais inválidas'})
+
+
+@login_required
+def mainlobby(request):
+    return render(request, 'techsupport/mainlobby.html')
+
+
+@login_required
+def ticketing(request):
+    return render(request, 'techsupport/ticketing.html')
+
+def registerscreen(request):
+   if request.method == 'GET':
+        return render(request, 'techsupport/registerscreen.html')
+   elif request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username já existe.')
+            return render(request, 'techsupport/registerscreen.html')
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, 'Email já registrado.')
+            return render(request, 'techsupport/registerscreen.html')
+        else:
+            user = User.objects.create_user(username=username, password=password, email=email)
+            user.save()
+            messages.success(request, 'Conta criada com sucesso. Faça login para continuar.')
+            return redirect('techsupport/loginscreen.html')
+
+@login_required
+def update_history(request):
+    return render(request, 'techsupport/update_history.html')
+
+@login_required
+def user_management(request):
+    return render(request, 'techsupport/user_management.html')
+
+@login_required
+def entity_management(request):
+    return render(request, 'techsupport/entity_management.html')
+
+@login_required
+def level_management(request):
+    return render(request, 'techsupport/level_management.html')
+
+
