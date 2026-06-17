@@ -22,13 +22,36 @@ def loginscreen(request):
 
 
 @login_required
-def mainlobby(request):
-    return render(request, 'techsupport/mainlobby.html')
+def dashboard(request):
+    from .models import Levels, Entities, User, Ticket
+
+
+    dashboard_data = {
+
+        'levels_count': Levels.objects.count(),
+        'entities_count': Entities.objects.count(),
+        'users_count': User.objects.count(),
+        'total_tickets': Ticket.objects.count(),
+        'open_tickets': Ticket.objects.filter(status='open').count(),
+        'closed_tickets': Ticket.objects.filter(status='closed').count(),
+    }
+
+    return render(request, 'techsupport/dashboard.html', {'dashboard_data': dashboard_data})
 
 
 @login_required
 def ticketing(request):
-    return render(request, 'techsupport/ticketing.html')
+    
+    if request.method == 'GET':
+        return render(request, 'techsupport/ticketing.html')
+    elif request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        priority = request.POST.get('priority')
+        ticket = Ticket.objects.create(title=title, description=description, priority=priority)
+        ticket.save()
+        messages.success(request, 'Ticket criado com sucesso.')
+        return redirect('ticketing')
 
 def registerscreen(request):
    if request.method == 'GET':
