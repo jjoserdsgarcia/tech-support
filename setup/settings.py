@@ -116,3 +116,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Login
+LOGIN_URL = 'loginscreen'
+LOGIN_REDIRECT_URL = 'mainlobby'
+LOGOUT_REDIRECT_URL = 'loginscreen'
