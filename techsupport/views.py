@@ -22,7 +22,7 @@ def loginscreen(request):
 
 
 @login_required
-def dashboard(request):
+def mainlobby(request):
     from .models import Levels, Entities, User, Ticket
 
 
@@ -36,7 +36,7 @@ def dashboard(request):
         'closed_tickets': Ticket.objects.filter(status='closed').count(),
     }
 
-    return render(request, 'techsupport/dashboard.html', {'dashboard_data': dashboard_data})
+    return render(request, 'techsupport/mainlobby.html', {'dashboard_data': dashboard_data})
 
 
 @login_required
