@@ -34,14 +34,14 @@ class Comment(models.Model):
 class Levels(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    room_entities = models.ForeignKey('Entities', related_name='levels', on_delete=models.CASCADE)
+    room_entities = models.ForeignKey('Entities', related_name='levels', on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return self.name
     
 class Entities(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
-    room_levels = models.ForeignKey('Levels', related_name='entities', on_delete=models.CASCADE)
+    room_levels = models.ForeignKey('Levels', related_name='entities', on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return self.name
     
