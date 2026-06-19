@@ -22,8 +22,8 @@ def loginscreen(request):
 
 
 @login_required
-def dashboard(request):
-    from .models import Levels, Entities, User, Ticket
+def mainlobby(request):
+    from .models import Levels, Entities, User, Ticket, Comment
 
 
     dashboard_data = {
@@ -34,9 +34,13 @@ def dashboard(request):
         'total_tickets': Ticket.objects.count(),
         'open_tickets': Ticket.objects.filter(status='open').count(),
         'closed_tickets': Ticket.objects.filter(status='closed').count(),
+        'entity_name': Entities.objects.first().name if Entities.objects.exists() else 'N/A',
+        'recent_tickets': Ticket.objects.all().order_by('-created_at')[:5],
+        'recent_comments': Comment.objects.all().order_by('-created_at')[:5],
+        'authors': {comment.author.username if comment.author else 'Unknown' for comment in Comment.objects.all()},
     }
 
-    return render(request, 'techsupport/dashboard.html', {'dashboard_data': dashboard_data})
+    return render(request, 'techsupport/mainlobby.html', {'dashboard_data': dashboard_data})
 
 
 #@login_required

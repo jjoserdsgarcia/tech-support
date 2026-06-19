@@ -6,9 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Support - Main Lobby</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <style>
         :root {
             --backrooms-yellow: #f6e58d;
@@ -35,98 +33,47 @@
         }
 
         body {
-            background:
-                linear-gradient(
-                    180deg,
-                    #f6e58d 0%,
-                    #f1dd72 50%,
-                    #e8d15b 100%
-                );
+            background: linear-gradient(180deg, #f6e58d 0%, #f1dd72 50%, #e8d15b 100%);
         }
-
-        /* Wallpaper */
 
         .backrooms-pattern {
             position: fixed;
             inset: 0;
-
-            background-image:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.03) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(0, 0, 0, 0.03) 1px,
-                    transparent 1px
-                );
-
+            background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
             background-size: 30px 30px;
-
             z-index: -4;
         }
-
-        /* Scanlines */
 
         .scanlines {
             position: fixed;
             inset: 0;
-
-            background:
-                repeating-linear-gradient(
-                    to bottom,
-                    rgba(255,255,255,0.02),
-                    rgba(255,255,255,0.02) 2px,
-                    rgba(0,0,0,0.03) 3px,
-                    rgba(0,0,0,0.03) 4px
-                );
-
+            background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02) 2px, rgba(0, 0, 0, 0.03) 3px, rgba(0, 0, 0, 0.03) 4px);
             pointer-events: none;
-
             z-index: 999;
         }
-
-        /* Noise */
 
         .noise {
             position: fixed;
             inset: 0;
-
             opacity: .04;
-
-            background-image:
-                radial-gradient(
-                    circle,
-                    #000 1px,
-                    transparent 1px
-                );
-
+            background-image: radial-gradient(circle, #000 1px, transparent 1px);
             background-size: 4px 4px;
-
             pointer-events: none;
-
             z-index: 998;
         }
-
-        /* Vinheta */
 
         .vignette {
             position: fixed;
             inset: 0;
-
-            box-shadow:
-                inset 0 0 250px rgba(0,0,0,.35);
-
+            box-shadow: inset 0 0 250px rgba(0, 0, 0, .35);
             pointer-events: none;
-
             z-index: 997;
         }
 
-        /* Flicker */
-
         @keyframes flicker {
 
-            0%,100% {
+            0%,
+            100% {
                 opacity: 1;
             }
 
@@ -147,24 +94,24 @@
             animation: flicker 7s infinite;
         }
 
-        /* Glitch */
-
         @keyframes glitch {
 
-            0%,95%,100% {
+            0%,
+            95%,
+            100% {
                 transform: translate(0);
             }
 
             96% {
-                transform: translate(-2px,1px);
+                transform: translate(-2px, 1px);
             }
 
             97% {
-                transform: translate(2px,-1px);
+                transform: translate(2px, -1px);
             }
 
             98% {
-                transform: translate(-1px,2px);
+                transform: translate(-1px, 2px);
             }
 
             99% {
@@ -178,18 +125,14 @@
             animation: glitch 12s infinite;
         }
 
-        /* Sidebar */
-
         .sidebar {
             width: 280px;
-
             background: var(--sidebar-bg);
-
             backdrop-filter: blur(3px);
-
-            border-right: 1px solid rgba(0,0,0,.1);
-
+            border-right: 1px solid rgba(0, 0, 0, .1);
             padding: 25px;
+            display: flex;
+            flex-direction: column;
         }
 
         .logo {
@@ -207,28 +150,19 @@
 
         .menu-item {
             display: block;
-
             text-decoration: none;
-
             color: #333;
-
             padding: 12px 18px;
-
             border-radius: 8px;
-
             margin-bottom: 10px;
-
             transition: .25s;
         }
 
         .menu-item:hover {
             background: var(--backrooms-dark);
             color: white;
-
             transform: translateX(8px);
         }
-
-        /* Área principal */
 
         .main-content {
             flex: 1;
@@ -240,7 +174,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             margin-bottom: 30px;
         }
 
@@ -257,1492 +190,519 @@
             color: var(--danger);
             font-weight: bold;
         }
-    </style>
 
+        .radar {
+            width: 240px;
+            height: 240px;
+            margin: auto;
+            border-radius: 50%;
+            position: relative;
+            background: radial-gradient(circle, #0f0 1px, transparent 2px), rgba(0, 40, 0, .8);
+            overflow: hidden;
+        }
+
+        .radar::before {
+            content: "";
+            position: absolute;
+            width: 50%;
+            height: 2px;
+            background: #00ff00;
+            left: 50%;
+            top: 50%;
+            transform-origin: left center;
+            animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .pulse {
+            position: absolute;
+            border: 2px solid rgba(0, 255, 0, .35);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .pulse1 {
+            width: 60px;
+            height: 60px;
+        }
+
+        .pulse2 {
+            width: 120px;
+            height: 120px;
+        }
+
+        .pulse3 {
+            width: 180px;
+            height: 180px;
+        }
+
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #00ff00;
+            border-radius: 50%;
+        }
+
+        .dot1 {
+            top: 30%;
+            left: 70%;
+        }
+
+        .dot2 {
+            top: 60%;
+            left: 40%;
+        }
+
+        .dot3 {
+            top: 20%;
+            left: 45%;
+        }
+
+        .dashboard-card {
+            transition: .3s;
+            cursor: pointer;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .25);
+        }
+
+        .level-card {
+            border-left: 6px solid #f1c40f;
+        }
+
+        .entity-card {
+            border-left: 6px solid #e74c3c;
+        }
+
+        .user-card {
+            border-left: 6px solid #3498db;
+        }
+
+        .ticket-card {
+            border-left: 6px solid #2ecc71;
+        }
+    </style>
 </head>
 
 <body>
-
-<div class="backrooms-pattern"></div>
-<div class="scanlines"></div>
-<div class="noise"></div>
-<div class="vignette"></div>
-
-<div class="dashboard-wrapper">
-
-    <!-- ===========================
-        SIDEBAR
-============================ -->
-
-<aside class="sidebar">
-
-    <div class="logo">
-
-        <h2>TECH SUPPORT</h2>
-
-        <small>
-            Backrooms Internal Network
-        </small>
-
-    </div>
-
-    <hr>
-
-    <div class="mb-4">
-
-        <small class="text-muted">
-            MENU PRINCIPAL
-        </small>
-
-    </div>
-
-    <nav>
-
-        <a href="#" class="menu-item active">
-
-            🏠 Dashboard
-
-        </a>
-
-        <a href="#" class="menu-item">
-
-            🗺️ Níveis
-
-        </a>
-
-        <a href="#" class="menu-item">
-
-            👁️ Entidades
-
-        </a>
-
-        <a href="#" class="menu-item">
-
-            👥 Usuários
-
-        </a>
-
-        <a href="#" class="menu-item">
-
-            🎫 Tickets
-
-        </a>
-
-    </nav>
-
-    <hr class="my-4">
-
-    <div class="mb-3">
-
-        <small class="text-muted">
-
-            SISTEMA
-
-        </small>
-
-    </div>
-
-    <nav>
-
-        <a href="#" class="menu-item">
-
-            📜 Logs
-
-        </a>
-
-        <a href="#" class="menu-item">
-
-            📷 Câmeras
-
-        </a>
-
-        <a href="#" class="menu-item">
-
-            📡 Monitoramento
-
-        </a>
-
-        <a href="#" class="menu-item">
-
-            🧪 Pesquisas
-
-        </a>
-
-        <a href="#" class="menu-item">
-
-            ⚙ Configurações
-
-        </a>
-
-    </nav>
-
-    <hr class="my-4">
-
-    <div class="card shadow-sm border-0 bg-dark text-light">
-
-        <div class="card-body">
-
-            <h6 class="mb-3">
-
-                STATUS DA REDE
-
-            </h6>
-
-            <div class="d-flex justify-content-between">
-
-                <span>
-
-                    Sistema
-
-                </span>
-
-                <span class="text-success">
-
-                    ONLINE
-
-                </span>
-
+    <div class="backrooms-pattern"></div>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    <div class="vignette"></div>
+
+    <div class="dashboard-wrapper">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>TECH SUPPORT</h2>
+                <small>Backrooms Internal Network</small>
             </div>
 
-            <div class="d-flex justify-content-between mt-2">
+            <hr>
 
-                <span>
-
-                    Banco
-
-                </span>
-
-                <span class="text-success">
-
-                    OK
-
-                </span>
-
+            <div class="mb-4">
+                <small class="text-muted">MENU PRINCIPAL</small>
             </div>
 
-            <div class="d-flex justify-content-between mt-2">
+            <nav>
+                <a href="#" class="menu-item active">🏠 Dashboard</a>
+                <a href="#" class="menu-item">🗺️ Níveis</a>
+                <a href="#" class="menu-item">👁️ Entidades</a>
+                <a href="#" class="menu-item">👥 Usuários</a>
+                <a href="#" class="menu-item">🎫 Tickets</a>
+            </nav>
 
-                <span>
+            <hr class="my-4">
 
-                    Câmeras
+            <div class="mb-3"><small class="text-muted">SISTEMA</small></div>
 
-                </span>
+            <nav>
+                <a href="#" class="menu-item">📜 Logs</a>
+                <a href="#" class="menu-item">📷 Câmeras</a>
+                <a href="#" class="menu-item">📡 Monitoramento</a>
+                <a href="#" class="menu-item">🧪 Pesquisas</a>
+                <a href="#" class="menu-item">⚙ Configurações</a>
+            </nav>
 
-                <span class="text-warning">
+            <hr class="my-4">
 
-                    93%
-
-                </span>
-
+            <div class="card shadow-sm border-0 bg-dark text-light">
+                <div class="card-body">
+                    <h6 class="mb-3">STATUS DA REDE</h6>
+                    <div class="d-flex justify-content-between"><span>Sistema</span><span
+                            class="text-success">ONLINE</span></div>
+                    <div class="d-flex justify-content-between mt-2"><span>Banco</span><span
+                            class="text-success">OK</span></div>
+                    <div class="d-flex justify-content-between mt-2"><span>Câmeras</span><span
+                            class="text-warning">93%</span></div>
+                    <div class="d-flex justify-content-between mt-2"><span>Energia</span><span
+                            class="text-success">NORMAL</span></div>
+                </div>
             </div>
 
-            <div class="d-flex justify-content-between mt-2">
-
-                <span>
-
-                    Energia
-
-                </span>
-
-                <span class="text-success">
-
-                    NORMAL
-
-                </span>
-
+            <div class="mt-4">
+                <div class="card bg-warning bg-opacity-25 border-warning">
+                    <div class="card-body">
+                        <small>Último acesso</small>
+                        <h6 id="clock">--:--:--</h6>
+                    </div>
+                </div>
             </div>
 
-        </div>
-
-    </div>
-
-    <div class="mt-4">
-
-        <div class="card bg-warning bg-opacity-25 border-warning">
-
-            <div class="card-body">
-
-                <small>
-
-                    Último acesso
-
-                </small>
-
-                <h6 id="clock">
-
-                    --:--:--
-
-                </h6>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="mt-4">
-
-        <div class="card bg-dark text-success border-success">
-
-            <div class="card-body">
-
-                <small>
-
-                    CONSOLE
-
-                </small>
-
-<pre class="mb-0 mt-2" style="font-size:12px;">
+            <div class="mt-4">
+                <div class="card bg-dark text-success border-success">
+                    <div class="card-body">
+                        <small>CONSOLE</small>
+                        <pre class="mb-0 mt-2" style="font-size:12px;">
 > LINK ESTABLISHED
-
 > SERVER ONLINE
-
 > LEVEL ???
-
 > SIGNAL 100%
-
 > WAITING...
 </pre>
-
+                    </div>
+                </div>
             </div>
 
-        </div>
-
-    </div>
-
-    <div class="mt-auto pt-4">
-
-        <hr>
-
-        <div class="text-center">
-
-            <small>
-
-                Tech Support v1.0
-
-                <br>
-
-                Internal Access Only
-
-            </small>
-
-        </div>
-
-    </div>
-
-</aside>
-
-<!-- ===========================
-        MAIN CONTENT
-============================ -->
-
-<main class="main-content">
-
-<div class="topbar">
-
-    <div>
-
-        <h2>
-
-            Main Lobby
-
-        </h2>
-
-        <small>
-
-            Sistema Central das Backrooms
-
-        </small>
-
-    </div>
-
-    <div class="system-status">
-
-        <div>
-
-            STATUS
-
-        </div>
-
-        <h4 class="online">
-
-            ● ONLINE
-
-        </h4>
-
-        <small>
-
-            Connection Stable
-
-        </small>
-
-    </div>
-
-</div>
-
-
-<!-- =======================================
-            DASHBOARD
-======================================== -->
-
-<div class="row g-4">
-
-    <!-- NÍVEIS -->
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="card dashboard-card level-card h-100">
-
-            <div class="card-body">
-
-                <div class="d-flex justify-content-between align-items-center">
-
-                    <div>
-
-                        <small class="text-uppercase">
-
-                            Níveis
-
-                        </small>
-
-                        <h1 class="display-4 fw-bold mt-2">
-
-                            {{ total_levels|default:"48" }}
-
-                        </h1>
-
-                    </div>
-
-                    <div class="display-3">
-
-                        🗺️
-
-                    </div>
-
-                </div>
-
+            <div class="mt-auto pt-4">
                 <hr>
-
-                <div class="small">
-
-                    Áreas catalogadas
-
+                <div class="text-center">
+                    <small>
+                        Tech Support v1.0
+                        <br>
+                        Internal Access Only
+                    </small>
                 </div>
+            </div>
+        </aside>
 
+        <main class="main-content">
+            <div class="topbar">
+                <div>
+                    <h2>Main Lobby</h2>
+                    <small>Sistema Central das Backrooms</small>
+                </div>
+                <div class="system-status">
+                    <div>Usuário</div>
+                    <h5 class="mb-0">{{ request.user.get_full_name|default:request.user.username }}</h5>
+                    <div>STATUS</div>
+                    <h4 class="online">● ONLINE</h4>
+                    <small>Connection Stable</small>
+                </div>
             </div>
 
-        </div>
-
-    </div>
-
-    <!-- ENTIDADES -->
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="card dashboard-card entity-card h-100">
-
-            <div class="card-body">
-
-                <div class="d-flex justify-content-between align-items-center">
-
-                    <div>
-
-                        <small class="text-uppercase">
-
-                            Entidades
-
-                        </small>
-
-                        <h1 class="display-4 fw-bold mt-2">
-
-                            {{ total_entities|default:"96" }}
-
-                        </h1>
-
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card dashboard-card level-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-uppercase">Níveis</small>
+                                    <h1 class="display-4 fw-bold mt-2">{{ dashboard_data.levels_count|default:"0" }}
+                                    </h1>
+                                </div>
+                                <div class="display-3">🗺️</div>
+                            </div>
+                            <hr>
+                            <div class="small">Áreas catalogadas</div>
+                        </div>
                     </div>
-
-                    <div class="display-3">
-
-                        👁️
-
-                    </div>
-
                 </div>
 
-                <hr>
-
-                <div class="small">
-
-                    Entidades registradas
-
+                <div class="col-lg-3 col-md-6">
+                    <div class="card dashboard-card entity-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-uppercase">Entidades</small>
+                                    <h1 class="display-4 fw-bold mt-2">{{ dashboard_data.entities_count|default:"0" }}
+                                    </h1>
+                                </div>
+                                <div class="display-3">👁️</div>
+                            </div>
+                            <hr>
+                            <div class="small">Entidades registradas</div>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="col-lg-3 col-md-6">
+                    <div class="card dashboard-card user-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-uppercase">Usuários</small>
+                                    <h1 class="display-4 fw-bold mt-2">{{ dashboard_data.users_count|default:"0" }}
+                                    </h1>
+                                </div>
+                                <div class="display-3">👥</div>
+                            </div>
+                            <hr>
+                            <div class="small">Operadores online</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="card dashboard-card ticket-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-uppercase">Tickets</small>
+                                    <h1 class="display-4 fw-bold mt-2">{{ dashboard_data.total_tickets|default:"0" }}
+                                    </h1>
+                                </div>
+                                <div class="display-3">🎫</div>
+                            </div>
+                            <hr>
+                            <div class="small">Chamados ativos — Abertos: {{ dashboard_data.open_tickets|default:"0" }}
+                                / Fechados: {{ dashboard_data.closed_tickets|default:"0" }}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-        </div>
-
-    </div>
-
-    <!-- USUÁRIOS -->
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="card dashboard-card user-card h-100">
-
-            <div class="card-body">
-
-                <div class="d-flex justify-content-between align-items-center">
-
-                    <div>
-
-                        <small class="text-uppercase">
-
-                            Usuários
-
-                        </small>
-
-                        <h1 class="display-4 fw-bold mt-2">
-
-                            {{ total_users|default:"18" }}
-
-                        </h1>
-
+            <div class="row mt-5">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header"><strong>Monitoramento em Tempo Real</strong></div>
+                        <div class="card-body">
+                            <div class="progress mb-4" style="height:30px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                    style="width:92%;">Sistema Operacional</div>
+                            </div>
+                            <div class="progress mb-4" style="height:30px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                                    style="width:74%;">Monitoramento das Entidades</div>
+                            </div>
+                            <div class="progress mb-4" style="height:30px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
+                                    style="width:58%;">Tickets Processados</div>
+                            </div>
+                            <div class="progress" style="height:30px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                                    style="width:31%;">Ameaças Detectadas</div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="display-3">
-
-                        👥
-
-                    </div>
-
                 </div>
 
-                <hr>
-
-                <div class="small">
-
-                    Operadores online
-
+                <div class="col-lg-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header"><strong>Threat Level</strong></div>
+                        <div class="card-body text-center">
+                            <h1 id="threatLevel" style="color:#28a745;font-size:60px;font-weight:bold;">LOW</h1>
+                            <p>Nenhuma atividade crítica detectada.</p>
+                            <div class="alert alert-success">Sistema Operando Normalmente</div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
 
-        </div>
-
-    </div>
-
-    <!-- TICKETS -->
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="card dashboard-card ticket-card h-100">
-
-            <div class="card-body">
-
-                <div class="d-flex justify-content-between align-items-center">
-
-                    <div>
-
-                        <small class="text-uppercase">
-
-                            Tickets
-
-                        </small>
-
-                        <h1 class="display-4 fw-bold mt-2">
-
-                            {{ total_tickets|default:"34" }}
-
-                        </h1>
-
-                    </div>
-
-                    <div class="display-3">
-
-                        🎫
-
-                    </div>
-
-                </div>
-
-                <hr>
-
-                <div class="small">
-
-                    Chamados ativos
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- =======================================
-        STATUS GERAL
-======================================== -->
-
-<div class="row mt-5">
-
-    <div class="col-lg-8">
-
-        <div class="card shadow-sm">
-
-            <div class="card-header">
-
-                <strong>
-
-                    Monitoramento em Tempo Real
-
-                </strong>
-
-            </div>
-
-            <div class="card-body">
-
-                <div class="progress mb-4" style="height:30px;">
-
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                        style="width:92%;">
-
-                        Sistema Operacional
-
-                    </div>
-
-                </div>
-
-                <div class="progress mb-4" style="height:30px;">
-
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                        style="width:74%;">
-
-                        Monitoramento das Entidades
-
-                    </div>
-
-                </div>
-
-                <div class="progress mb-4" style="height:30px;">
-
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
-                        style="width:58%;">
-
-                        Tickets Processados
-
-                    </div>
-
-                </div>
-
-                <div class="progress" style="height:30px;">
-
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                        style="width:31%;">
-
-                        Ameaças Detectadas
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-lg-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-header">
-
-                <strong>
-
-                    Threat Level
-
-                </strong>
-
-            </div>
-
-            <div class="card-body text-center">
-
-                <h1 id="threatLevel"
-
-                    style="
-                    color:#28a745;
-                    font-size:60px;
-                    font-weight:bold;
-                    ">
-
-                    LOW
-
-                </h1>
-
-                <p>
-
-                    Nenhuma atividade crítica detectada.
-
-                </p>
-
-                <div class="alert alert-success">
-
-                    Sistema Operando Normalmente
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- =======================================
-        CONSOLE
-======================================== -->
-
-<div class="card mt-5">
-
-    <div class="card-header">
-
-        <strong>
-
-            Console de Monitoramento
-
-        </strong>
-
-    </div>
-
-    <div class="card-body bg-dark text-success">
-
-<pre id="terminal" style="height:260px;overflow:auto;">
-
+            <div class="card mt-5">
+                <div class="card-header"><strong>Console de Monitoramento</strong></div>
+                <div class="card-body bg-dark text-success">
+                    <pre id="terminal" style="height:260px;overflow:auto;">
 > Initializing Internal Network...
-
 > Connecting Operators...
-
 > Loading Database...
-
 > Entity Scanner Activated...
-
 > Waiting...
-
 </pre>
+                </div>
+            </div>
 
+            <div class="row mt-5">
+                <div class="col-lg-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header"><strong>Radar de Entidades</strong></div>
+                        <div class="card-body text-center">
+                            <div class="radar">
+                                <div class="pulse pulse1"></div>
+                                <div class="pulse pulse2"></div>
+                                <div class="pulse pulse3"></div>
+                                <div class="dot dot1"></div>
+                                <div class="dot dot2"></div>
+                                <div class="dot dot3"></div>
+                            </div>
+                            <hr>
+                            <h5 id="entityName"> {{ dashboard_data.entity_name|default:"Entidade não identificada" }}
+                            </h5>
+                            <small>Distância: <span id="entityDistance">123 m</span></small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header"><strong>Tickets</strong></div>
+                        <div class="list-group list-group-flush">
+
+
+                            {% for ticket in dashboard_data.recent_tickets %}
+                            <a href="#" class="list-group-item list-group-item-action">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">{{ ticket.title }}</h6>
+
+                                </div>
+                                <p class="mb-1">{{ ticket.description|truncatechars:50 }}</p>
+                                <small>Status: {{ ticket.status }}</small>
+                                <div>
+                                    <small>Autor: {{ dashboard_data.authors|join:", " }}</small>
+                                </div>
+                                <a>
+                                    <div>
+
+                                        <small class="mx-3">Comentários:
+                                            {% for comentario in dashboard_data.recent_comments %}
+                                            <div class="mx-2 alert alert-success">
+
+                                                {{comentario.content}}
+                                            </div>
+                                            {% endfor %}
+
+                                        </small>
+
+                                    </div>
+                                </a>
+
+
+                            </a>
+                            {% empty %}
+                            <div class="list-group-item">
+                                <p class="mb-0">Nenhum ticket recente.</p>
+                            </div>
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header"><strong>Operadores</strong></div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3 alert alert-success"><span>
+                                    {{ user.username}} </span><span class="badge bg-success"></span> {{ user.is_admin }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Atividade do Sistema</div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Hora</th>
+                                        <th>Evento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>12:14</td>
+                                        <td>Scanner iniciado</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12:19</td>
+                                        <td>Ticket recebido</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12:28</td>
+                                        <td>Banco sincronizado</td>
+                                    </tr>
+                                    <tr>
+                                        <td>12:31</td>
+                                        <td>Nova entidade registrada</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">Alertas</div>
+                        <div class="card-body">
+                            <div class="alert alert-success"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
     </div>
 
-</div>
-
-<!-- ===================================================
-                PAINEL DE MONITORAMENTO
-=================================================== -->
-
-<div class="row mt-5">
-
-    <!-- Radar -->
-
-    <div class="col-lg-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-header">
-
-                <strong>Radar de Entidades</strong>
-
-            </div>
-
-            <div class="card-body text-center">
-
-                <div class="radar">
-
-                    <div class="pulse pulse1"></div>
-                    <div class="pulse pulse2"></div>
-                    <div class="pulse pulse3"></div>
-
-                    <div class="dot dot1"></div>
-                    <div class="dot dot2"></div>
-                    <div class="dot dot3"></div>
-
-                </div>
-
-                <hr>
-
-                <h5 id="entityName">
-
-                    Entity-001
-
-                </h5>
-
-                <small>
-
-                    Distância:
-                    <span id="entityDistance">
-
-                        123 m
-
-                    </span>
-
-                </small>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Últimos Tickets -->
-
-    <div class="col-lg-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-header">
-
-                <strong>
-
-                    Últimos Tickets
-
-                </strong>
-
-            </div>
-
-            <div class="list-group list-group-flush">
-
-                <div class="list-group-item">
-
-                    🎫 Ticket #1032
-
-                    <br>
-
-                    <small>
-
-                        Falha na energia do Level 2
-
-                    </small>
-
-                </div>
-
-                <div class="list-group-item">
-
-                    🎫 Ticket #1033
-
-                    <br>
-
-                    <small>
-
-                        Entidade localizada
-
-                    </small>
-
-                </div>
-
-                <div class="list-group-item">
-
-                    🎫 Ticket #1034
-
-                    <br>
-
-                    <small>
-
-                        Sistema reiniciado
-
-                    </small>
-
-                </div>
-
-                <div class="list-group-item">
-
-                    🎫 Ticket #1035
-
-                    <br>
-
-                    <small>
-
-                        Comunicação perdida
-
-                    </small>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Operadores -->
-
-    <div class="col-lg-4">
-
-        <div class="card shadow-sm h-100">
-
-            <div class="card-header">
-
-                <strong>
-
-                    Operadores
-
-                </strong>
-
-            </div>
-
-            <div class="card-body">
-
-                <div class="d-flex justify-content-between mb-3">
-
-                    <span>
-
-                        Operator Alpha
-
-                    </span>
-
-                    <span class="badge bg-success">
-
-                        ONLINE
-
-                    </span>
-
-                </div>
-
-                <div class="d-flex justify-content-between mb-3">
-
-                    <span>
-
-                        Operator Bravo
-
-                    </span>
-
-                    <span class="badge bg-success">
-
-                        ONLINE
-
-                    </span>
-
-                </div>
-
-                <div class="d-flex justify-content-between mb-3">
-
-                    <span>
-
-                        Operator Delta
-
-                    </span>
-
-                    <span class="badge bg-warning">
-
-                        AWAY
-
-                    </span>
-
-                </div>
-
-                <div class="d-flex justify-content-between">
-
-                    <span>
-
-                        Operator Echo
-
-                    </span>
-
-                    <span class="badge bg-danger">
-
-                        OFFLINE
-
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ============================================ -->
-
-<div class="row mt-5">
-
-    <div class="col-lg-6">
-
-        <div class="card">
-
-            <div class="card-header">
-
-                Atividade do Sistema
-
-            </div>
-
-            <div class="card-body">
-
-                <table class="table">
-
-                    <thead>
-
-                        <tr>
-
-                            <th>Hora</th>
-                            <th>Evento</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-
-                            <td>
-
-                                12:14
-
-                            </td>
-
-                            <td>
-
-                                Scanner iniciado
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>
-
-                                12:19
-
-                            </td>
-
-                            <td>
-
-                                Ticket recebido
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>
-
-                                12:28
-
-                            </td>
-
-                            <td>
-
-                                Banco sincronizado
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>
-
-                                12:31
-
-                            </td>
-
-                            <td>
-
-                                Nova entidade registrada
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-lg-6">
-
-        <div class="card">
-
-            <div class="card-header">
-
-                Alertas
-
-            </div>
-
-            <div class="card-body">
-
-                <div class="alert alert-success">
-
-                    Sistema Operacional
-
-                </div>
-
-                <div class="alert alert-warning">
-
-                    Pequena perda de sinal
-
-                </div>
-
-                <div class="alert alert-info">
-
-                    Banco sincronizado
-
-                </div>
-
-                <div class="alert alert-danger">
-
-                    Entity-008 detectada
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<style>
-
-.radar{
-
-width:240px;
-height:240px;
-
-margin:auto;
-
-border-radius:50%;
-
-position:relative;
-
-background:
-
-radial-gradient(circle,#0f0 1px,transparent 2px),
-
-rgba(0,40,0,.8);
-
-overflow:hidden;
-
-}
-
-.radar::before{
-
-content:"";
-
-position:absolute;
-
-width:50%;
-
-height:2px;
-
-background:#00ff00;
-
-left:50%;
-
-top:50%;
-
-transform-origin:left center;
-
-animation:spin 5s linear infinite;
-
-}
-
-@keyframes spin{
-
-100%{
-
-transform:rotate(360deg);
-
-}
-
-}
-
-.pulse{
-
-position:absolute;
-
-border:2px solid rgba(0,255,0,.35);
-
-border-radius:50%;
-
-top:50%;
-
-left:50%;
-
-transform:translate(-50%,-50%);
-
-}
-
-.pulse1{
-
-width:60px;
-
-height:60px;
-
-}
-
-.pulse2{
-
-width:120px;
-
-height:120px;
-
-}
-
-.pulse3{
-
-width:180px;
-
-height:180px;
-
-}
-
-.dot{
-
-position:absolute;
-
-width:10px;
-
-height:10px;
-
-background:#00ff00;
-
-border-radius:50%;
-
-}
-
-.dot1{
-
-top:30%;
-
-left:70%;
-
-}
-
-.dot2{
-
-top:60%;
-
-left:40%;
-
-}
-
-.dot3{
-
-top:20%;
-
-left:45%;
-
-}
-
-.dashboard-card{
-
-transition:.3s;
-
-cursor:pointer;
-
-}
-
-.dashboard-card:hover{
-
-transform:translateY(-10px);
-
-box-shadow:0 15px 35px rgba(0,0,0,.25);
-
-}
-
-.level-card{
-
-border-left:6px solid #f1c40f;
-
-}
-
-.entity-card{
-
-border-left:6px solid #e74c3c;
-
-}
-
-.user-card{
-
-border-left:6px solid #3498db;
-
-}
-
-.ticket-card{
-
-border-left:6px solid #2ecc71;
-
-}
-
-</style>
-
-
-<script>
-
-// ================================
-// Relógio
-// ================================
-
-function updateClock(){
-
-    const now = new Date();
-
-    document.getElementById("clock").innerHTML =
-        now.toLocaleDateString("pt-BR") +
-        "<br>" +
-        now.toLocaleTimeString("pt-BR");
-
-}
-
-setInterval(updateClock,1000);
-
-updateClock();
-
-
-// ================================
-// Console
-// ================================
-
-const logs=[
-
-"> Conectando aos servidores...",
-
-"> Banco sincronizado.",
-
-"> Scanner iniciado.",
-
-"> Nenhuma ameaça encontrada.",
-
-"> Comunicação estabilizada.",
-
-"> Ticket recebido.",
-
-"> Banco atualizado.",
-
-"> Entity-001 localizada.",
-
-"> Entity-004 desapareceu.",
-
-"> Monitorando câmeras.",
-
-"> Aguardando comandos.",
-
-"> Operador conectado.",
-
-"> Sistema operacional estável.",
-
-"> Backup realizado."
-
-];
-
-setInterval(()=>{
-
-const terminal=document.getElementById("terminal");
-
-const msg=logs[Math.floor(Math.random()*logs.length)];
-
-terminal.innerHTML += "\n"+msg;
-
-terminal.scrollTop=terminal.scrollHeight;
-
-},2500);
-
-
-// ================================
-// Threat Level
-// ================================
-
-const threat=document.getElementById("threatLevel");
-
-const levels=[
-
-{
-text:"LOW",
-color:"#28a745"
-},
-
-{
-text:"MEDIUM",
-color:"#ffc107"
-},
-
-{
-text:"HIGH",
-color:"#dc3545"
-}
-
-];
-
-setInterval(()=>{
-
-const t=levels[Math.floor(Math.random()*levels.length)];
-
-threat.innerHTML=t.text;
-
-threat.style.color=t.color;
-
-},8000);
-
-
-// ================================
-// Radar
-// ================================
-
-const names=[
-
-"Entity-001",
-
-"Entity-004",
-
-"Entity-011",
-
-"Entity-023",
-
-"Entity-033",
-
-"Entity-045",
-
-"Entity-067",
-
-"Entity-099"
-
-];
-
-setInterval(()=>{
-
-document.getElementById("entityName").innerHTML=
-
-names[Math.floor(Math.random()*names.length)];
-
-document.getElementById("entityDistance").innerHTML=
-
-Math.floor(Math.random()*300)+" m";
-
-},4000);
-
-
-// ================================
-// Glitch
-// ================================
-
-function glitch(){
-
-document.body.style.transform=
-
-"translate("+
-
-(Math.random()*6-3)+"px,"+
-
-(Math.random()*6-3)+"px)";
-
-setTimeout(()=>{
-
-document.body.style.transform="";
-
-},120);
-
-}
-
-setInterval(glitch,9000);
-
-
-// ================================
-// Flicker
-// ================================
-
-function flicker(){
-
-document.body.style.filter="brightness(.93)";
-
-setTimeout(()=>{
-
-document.body.style.filter="brightness(1)";
-
-},120);
-
-}
-
-setInterval(flicker,7000);
-
-
-// ================================
-// Status ONLINE piscando
-// ================================
-
-const online=document.querySelector(".online");
-
-setInterval(()=>{
-
-online.style.opacity=".3";
-
-setTimeout(()=>{
-
-online.style.opacity="1";
-
-},350);
-
-},1000);
-
-
-// ================================
-// Cards
-// ================================
-
-const cards=document.querySelectorAll(".dashboard-card");
-
-cards.forEach(card=>{
-
-card.addEventListener("mouseenter",()=>{
-
-card.style.transform="translateY(-10px) scale(1.02)";
-
-});
-
-card.addEventListener("mouseleave",()=>{
-
-card.style.transform="";
-
-});
-
-});
-
-
-// ================================
-// Efeito de Digitação
-// ================================
-
-const title=document.querySelector("h2");
-
-let visible=true;
-
-setInterval(()=>{
-
-visible=!visible;
-
-title.style.opacity=visible?"1":"0.96";
-
-},500);
-
-</script>
-
-</main>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            document.getElementById("clock").innerHTML = now.toLocaleDateString("pt-BR") + "<br>" + now.toLocaleTimeString("pt-BR");
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        const logs = [
+            "> Conectando aos servidores...",
+            "> Banco sincronizado.",
+            "> Scanner iniciado.",
+            "> Nenhuma ameaça encontrada.",
+            "> Comunicação estabilizada.",
+            "> Ticket recebido.",
+            "> Banco atualizado.",
+            "> Entity-001 localizada.",
+            "> Entity-004 desapareceu.",
+            "> Monitorando câmeras.",
+            "> Aguardando comandos.",
+            "> Operador conectado.",
+            "> Sistema operacional estável.",
+            "> Backup realizado."
+        ];
+        setInterval(() => {
+            const terminal = document.getElementById("terminal");
+            const msg = logs[Math.floor(Math.random() * logs.length)];
+            terminal.innerHTML += "\n" + msg;
+            terminal.scrollTop = terminal.scrollHeight;
+        }, 2500);
+
+        const threat = document.getElementById("threatLevel");
+        const levels = [{ text: "LOW", color: "#28a745" }, { text: "MEDIUM", color: "#ffc107" }, { text: "HIGH", color: "#dc3545" }];
+        setInterval(() => {
+            const t = levels[Math.floor(Math.random() * levels.length)];
+            threat.innerHTML = t.text;
+            threat.style.color = t.color;
+        }, 8000);
+
+        const names = ["Entity-001", "Entity-004", "Entity-011", "Entity-023", "Entity-033", "Entity-045", "Entity-067", "Entity-099"];
+        setInterval(() => {
+            document.getElementById("entityName").innerHTML = names[Math.floor(Math.random() * names.length)];
+            document.getElementById("entityDistance").innerHTML = Math.floor(Math.random() * 300) + " m";
+        }, 4000);
+
+        function glitch() {
+            document.body.style.transform = "translate(" + (Math.random() * 6 - 3) + "px," + (Math.random() * 6 - 3) + "px)";
+            setTimeout(() => { document.body.style.transform = ""; }, 120);
+        }
+        setInterval(glitch, 9000);
+
+        function flicker() {
+            document.body.style.filter = "brightness(.93)";
+            setTimeout(() => { document.body.style.filter = "brightness(1)"; }, 120);
+        }
+        set
