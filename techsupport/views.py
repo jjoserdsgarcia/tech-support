@@ -39,7 +39,7 @@ def dashboard(request):
     return render(request, 'techsupport/dashboard.html', {'dashboard_data': dashboard_data})
 
 
-@login_required
+#@login_required
 def ticketing(request):
     
     if request.method == 'GET':
@@ -87,5 +87,9 @@ def entity_management(request):
 @login_required
 def level_management(request):
     return render(request, 'techsupport/level_management.html')
+
+@login_required
+def mainlobby(request):
+    return render(request, 'techsupport/mainlobby.html')
 
 

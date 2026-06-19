@@ -18,9 +18,13 @@ from django.contrib import admin
 from django.urls import path
 from techsupport import views
 from techsupport.views import loginscreen, mainlobby
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('', loginscreen, name='loginscreen'),
     path('login/', loginscreen, name='loginscreen'),
+
     path('mainlobby/', mainlobby, name='mainlobby'),
+    path('ticketing/', views.ticketing, name='ticketing'),
 ]
