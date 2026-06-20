@@ -1,232 +1,264 @@
 {% load static %}
 <!doctype html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login • Tech Support</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<title>M.E.G • Liminal Access System</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        :root {
-            --back-bg: #f6e58d;
-            /* amarelo pálido */
-            --wall-accent: #f2d76b;
-            --card-bg: rgba(255, 255, 235, 0.9);
-            --accent-dark: #b58f12;
-            --muted: #7a6a25;
-        }
+<style>
 
-        html,
-        body {
-            height: 100%;
-            background: linear-gradient(180deg, var(--back-bg) 0%, #efe06a 40%, #e6d25a 100%);
-            font-family: "Segoe UI", Roboto, Arial, sans-serif;
-            color: #2b2b2b;
-        }
+/* =========================================================
+   FUNDO BACKROOMS
+========================================================= */
 
-        /* Subtile repeating wallpaper pattern (CSS only) */
-        .backrooms-pattern {
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
-            background-size: 28px 28px, 28px 28px;
-            filter: saturate(0.95) contrast(1.02);
-            z-index: -1;
-        }
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: "Segoe UI", sans-serif;
 
-        /* Floor effect */
-        .floor-gradient {
-            position: absolute;
-            inset: auto 0 0 0;
-            height: 38%;
-            background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.03) 40%, rgba(0, 0, 0, 0.06) 100%);
-            pointer-events: none;
-        }
+    background: radial-gradient(circle at center,
+        #1a1a1a 0%,
+        #0b0b0b 50%,
+        #000 100%);
+}
 
-        /* Login card */
-        .login-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            border-radius: 12px;
-            max-width: 420px;
-            width: 100%;
-            padding: 28px;
-        }
+/* vinheta forte */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle,
+        transparent 0%,
+        rgba(0,0,0,0.6) 55%,
+        rgba(0,0,0,0.95) 100%);
+    pointer-events: none;
+}
 
-        .site-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
-        }
+/* =========================================================
+   LÂMPADA REALISTA
+========================================================= */
 
-        .brand-logo {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, var(--wall-accent), var(--accent-dark));
-            box-shadow: 0 3px 8px rgba(181, 143, 18, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 18px;
-        }
+.ceiling {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 140px;
+    background: #111;
+    z-index: 10;
+}
 
-        .backrooms-note {
-            font-size: 13px;
-            color: var(--muted);
-        }
+/* corpo da lâmpada */
+.bulb {
+    position: fixed;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
 
-        .form-control:focus {
-            border-color: var(--accent-dark);
-            box-shadow: 0 0 0 0.15rem rgba(181, 143, 18, 0.12);
-        }
+    background: radial-gradient(circle,
+        #fff6c2 0%,
+        #ffe88a 30%,
+        #c9a94a 70%,
+        #6b5a1d 100%);
 
-        .btn-ts {
-            background: linear-gradient(90deg, var(--accent-dark), #8c650e);
-            color: #fff;
-            border: none;
-        }
+    box-shadow:
+        0 0 40px rgba(255,230,140,0.9),
+        0 0 120px rgba(255,220,120,0.5),
+        0 0 200px rgba(255,210,100,0.25);
 
-        /* small ambient flicker */
-        @keyframes flicker {
-            0% {
-                filter: brightness(1);
-            }
+    z-index: 11;
+}
 
-            50% {
-                filter: brightness(0.98);
-            }
+/* luz ambiente da lâmpada */
+.ambient {
+    position: fixed;
+    inset: 0;
 
-            100% {
-                filter: brightness(1);
-            }
-        }
+    background: radial-gradient(circle at 50% 25%,
+        rgba(255,240,170,0.35) 0%,
+        rgba(255,220,140,0.18) 25%,
+        rgba(0,0,0,0.85) 60%,
+        rgba(0,0,0,1) 100%);
 
-        .ambient {
-            animation: flicker 6s infinite;
-        }
+    pointer-events: none;
+}
 
-        /* responsive spacing */
-        .wrap {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
+/* =========================================================
+   LANTERNA (MOUSE)
+========================================================= */
 
-        .notice {
-            font-size: 0.9rem;
-            color: #6b5b17;
-        }
-    </style>
+.flashlight {
+    position: fixed;
+    inset: 0;
+
+    background: radial-gradient(circle at var(--x) var(--y),
+        rgba(255,255,230,0.25) 0%,
+        rgba(0,0,0,0.85) 45%,
+        rgba(0,0,0,1) 70%);
+
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+}
+
+.login-card {
+    width: 420px;
+    padding: 28px;
+
+    background: rgba(255,255,240,0.92);
+    border-radius: 14px;
+
+    box-shadow: 0 30px 90px rgba(0,0,0,0.6);
+
+    backdrop-filter: blur(6px);
+}
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+#intro {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    color: #d6c77a;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: monospace;
+    z-index: 9999;
+}
+
+</style>
 </head>
 
 <body>
-    <div class="backrooms-pattern"></div>
-    <div class="wrap">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-9 col-lg-6">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="site-brand ambient">
-                            <div class="brand-logo">TS</div>
-                            <div>
-                                <div style="font-weight:700; font-size:1.1rem;">Tech Support</div>
-                                <div class="backrooms-note">Sistema de Atendimento — Tickets</div>
-                            </div>
 
+<!-- LÂMPADA -->
+<div class="ceiling"></div>
+<div class="bulb" id="bulb"></div>
 
+<!-- AMBIENTE -->
+<div class="ambient" id="ambient"></div>
 
-                            <div class="login-card mx-auto">
-                                <!-- Django messages -->
-                                {% if messages %}
-                                <div class="mb-3">
-                                    {% for message in messages %}
-                                    <div class="alert alert-{{ message.tags }} mb-2" role="alert">{{ message }}</div>
-                                    {% endfor %}
-                                </div>
-                                {% endif %}
+<!-- LANTERNA -->
+<div class="flashlight"></div>
 
-                                <!-- Non-field errors -->
-                                {% if form.non_field_errors %}
-                                <div class="alert alert-danger">
-                                    {{ form.non_field_errors }}
-                                </div>
-                                {% endif %}
+<!-- INTRO -->
+<div id="intro">
+    <div>M.E.G DATABASE NODE</div>
+    <div id="bootText" style="margin-top:10px;font-size:12px;">initializing...</div>
+</div>
 
-                                <form method="post" action="{% url 'loginscreen' %}">
-                                    {% csrf_token %}
+<!-- LOGIN -->
+<div class="wrap">
+    <div class="login-card">
 
-                                    <div class="mb-3">
-                                        <label for="id_username" class="form-label">Usuário</label>
-                                        <input type="text" name="username" autofocus maxlength="150"
-                                            class="form-control{% if form.username.errors %} is-invalid{% endif %}"
-                                            id="id_username" placeholder="seu.email@empresa.com"
-                                            value="{{ form.username.value|default:'' }}">
-                                        {% if form.username.errors %}
-                                        <div class="invalid-feedback">
-                                            {{ form.username.errors|join:", " }}
-                                        </div>
-                                        {% endif %}
-                                    </div>
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:15px;">
+            <div style="
+                width:42px;height:42px;border-radius:8px;
+                background:linear-gradient(135deg,#f3df7a,#8c6a12);
+                display:flex;align-items:center;justify-content:center;
+                color:#fff;font-weight:bold;">TS</div>
 
-                                    <div class="mb-3">
-                                        <label for="id_password" class="form-label">Senha</label>
-                                        <input type="password" name="password"
-                                            class="form-control{% if form.password.errors %} is-invalid{% endif %}"
-                                            id="id_password" placeholder="••••••••">
-                                        {% if form.password.errors %}
-                                        <div class="invalid-feedback">
-                                            {{ form.password.errors|join:", " }}
-                                        </div>
-                                        {% endif %}
-                                    </div>
-
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember"
-                                                id="id_remember" <label class="form-check-label"
-                                                for="id_remember">Lembrar-me</label>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="d-grid mb-3">
-                                        <button type="submit" class="btn btn-ts btn-lg">Entrar</button>
-                                    </div>
-
-                                    <div class="text-center">
-                                        <small class="text-muted">Ao entrar, você aceita as políticas internas da Tech
-                                            Support.</small>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="text-center mt-3">
-                                <small class="backrooms-note">Se estiver em uma área segura, entre em contato com o time
-                                    de
-                                    suporte.</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div>
+                <div style="font-weight:700;">Tech Support</div>
+                <div style="font-size:12px;opacity:0.6;">System Access Panel</div>
             </div>
+        </div>
 
-            <div class="floor-gradient"></div>
+        <form method="post" action="{% url 'loginscreen' %}">
+            {% csrf_token %}
+            <input class="form-control mb-2" name="username" placeholder="Usuário">
+            <input class="form-control mb-3" type="password" name="password" placeholder="Senha">
+            <button class="btn btn-dark w-100">Entrar</button>
+        </form>
 
-            <!-- Optional Bootstrap JS (CDN) -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+</div>
+
+<script>
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+const intro = document.getElementById("intro");
+const bootText = document.getElementById("bootText");
+
+const lines = [
+    "initializing system...",
+    "loading environment...",
+    "stabilizing light source...",
+    "ready."
+];
+
+let i = 0;
+
+setInterval(() => {
+    bootText.textContent = lines[i++];
+    if (i >= lines.length) {
+        setTimeout(() => intro.style.opacity = "0", 800);
+        setTimeout(() => intro.remove(), 1500);
+    }
+}, 700);
+
+/* =========================================================
+   LANTERNA
+========================================================= */
+
+document.addEventListener("mousemove", (e) => {
+    document.documentElement.style.setProperty("--x", e.clientX + "px");
+    document.documentElement.style.setProperty("--y", e.clientY + "px");
+});
+
+/* =========================================================
+   FLICKER DA LÂMPADA (REALISTA)
+========================================================= */
+
+const bulb = document.getElementById("bulb");
+const ambient = document.getElementById("ambient");
+
+setInterval(() => {
+
+    if (Math.random() > 0.92) {
+
+        bulb.style.opacity = "0.6";
+        ambient.style.opacity = "0.6";
+
+        setTimeout(() => {
+            bulb.style.opacity = "1";
+            ambient.style.opacity = "1";
+        }, 90);
+    }
+
+}, 400);
+
+</script>
+
 </body>
-
 </html>

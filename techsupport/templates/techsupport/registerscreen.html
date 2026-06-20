@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M.E.G DATABASE ACCESS TERMINAL</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= RESET ================= */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:#0f0f0d;
+  font-family:"Share Tech Mono";
+  color:#dcd8b8;
+  height:100vh;
+  overflow:hidden;
+}
+
+/* ================= INTRO ================= */
+#intro{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle,#0c0c0a,#000);
+  z-index:99999;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+.scan{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(
+    rgba(255,255,255,0.03),
+    transparent,
+    rgba(255,255,255,0.02)
+  );
+  animation:scanMove 2.5s linear infinite;
+}
+
+@keyframes scanMove{
+  0%{transform:translateY(-100%);}
+  100%{transform:translateY(100%);}
+}
+
+.introBox{
+  text-align:center;
+  font-family:Orbitron;
+  color:#f5e28b;
+  letter-spacing:3px;
+  z-index:2;
+}
+
+#type{
+  font-size:14px;
+  color:#7CFF7C;
+  text-shadow:0 0 10px #7CFF7C;
+  min-height:20px;
+}
+
+.sub{
+  margin-top:10px;
+  font-size:11px;
+  opacity:.6;
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  50%{opacity:0.2;}
+}
+
+/* ================= WINDOW ================= */
+
+.window{
+  width:95%;
+  height:92vh;
+  margin:20px auto;
+  background:#14130f;
+  border:1px solid #3d3a2b;
+  display:flex;
+  flex-direction:column;
+}
+
+/* TOP */
+.topbar{
+  height:60px;
+  background:#1b1a14;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+  font-family:Orbitron;
+  color:#f5e28b;
+  letter-spacing:2px;
+}
+
+.status-dot{
+  width:8px;
+  height:8px;
+  background:#7CFF7C;
+  border-radius:50%;
+  box-shadow:0 0 8px #7CFF7C;
+  display:inline-block;
+  margin-right:6px;
+}
+
+/* LAYOUT */
+.content{
+  flex:1;
+  display:grid;
+  grid-template-columns:260px 1fr 260px;
+  gap:15px;
+  padding:15px;
+}
+
+.panel{
+  background:#1a1913;
+  border:1px solid #333020;
+  padding:15px;
+}
+
+.center{
+  background:#12110d;
+  padding:20px;
+  border:1px solid #333020;
+}
+
+h2{
+  font-family:Orbitron;
+  font-size:16px;
+  color:#f5e28b;
+  margin-bottom:10px;
+  letter-spacing:2px;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:6px 0;
+  background:#0e0e0c;
+  border:1px solid #3a382b;
+  color:#fff;
+  outline:none;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  background:#e6d98a;
+  border:none;
+  font-family:Orbitron;
+  cursor:pointer;
+}
+
+/* METRICS */
+.bar{
+  height:10px;
+  background:#2a2921;
+  margin:5px 0;
+}
+
+.fill{
+  height:100%;
+  background:#7CFF7C;
+  width:50%;
+}
+
+/* FOOTER */
+.footer{
+  height:35px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 10px;
+  background:#1b1a14;
+  font-size:12px;
+  font-family:Orbitron;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= INTRO ================= -->
+<div id="intro">
+  <div class="scan"></div>
+
+  <div class="introBox">
+    <div id="type"></div>
+    <div class="sub">INITIALIZING DATABASE CORE...</div>
+  </div>
+</div>
+
+<!-- ================= SYSTEM ================= -->
+<div class="window">
+
+  <div class="topbar">
+    <div>
+      <span class="status-dot"></span>
+      M.E.G INTERNAL DATABASE
+    </div>
+
+    <div id="clock">00:00:00</div>
+  </div>
+
+  <div class="content">
+
+    <div class="panel">
+      <h2>SYSTEM STATUS</h2>
+
+      <p>DATABASE: ONLINE</p>
+      <p>AUTH SERVER: ACTIVE</p>
+
+      <hr style="margin:10px 0;opacity:.2">
+
+      <p>ACTIVE USERS:</p>
+      <p id="users">LOADING...</p>
+
+    </div>
+
+    <div class="center">
+
+      <h2>EMPLOYEE ENROLLMENT</h2>
+
+      <input placeholder="Full Name">
+      <input placeholder="Username">
+      <input type="email" placeholder="Corporate Email">
+      <input type="password" placeholder="Password">
+
+      <button>INITIALIZE REGISTRATION</button>
+
+    </div>
+
+    <div class="panel">
+
+      <h2>SERVER METRICS</h2>
+
+      CPU LOAD
+      <div class="bar"><div class="fill" id="cpu"></div></div>
+
+      RAM USAGE
+      <div class="bar"><div class="fill" id="ram"></div></div>
+
+      <p id="ping">PING: --</p>
+      <p id="temp">TEMP: --</p>
+
+      <hr style="margin:10px 0;opacity:.2">
+
+      <p>ACTIVE TICKETS: 127</p>
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div>M.E.G RESTRICTED ACCESS SYSTEM</div>
+    <div id="log">SYSTEM INITIALIZED</div>
+  </div>
+
+</div>
+
+<script>
+
+/* ================= INTRO TYPE ================= */
+
+const introText = [
+  "M.E.G CORE SYSTEM BOOTING...",
+  "ACCESSING BACKROOMS DATABASE...",
+  "SYNCING REALITY NODES...",
+  "WARNING: LEVEL INSTABILITY DETECTED...",
+  "ESTABLISHING SECURE CONNECTION..."
+];
+
+let i = 0;
+let char = 0;
+
+function typeIntro(){
+  if(i >= introText.length) return;
+
+  let current = introText[i];
+
+  document.getElementById("type").innerText =
+    current.substring(0, char);
+
+  char++;
+
+  if(char > current.length){
+    char = 0;
+    i++;
+    setTimeout(typeIntro, 600);
+  }else{
+    setTimeout(typeIntro, 35);
+  }
+}
+
+typeIntro();
+
+/* REMOVE INTRO */
+setTimeout(()=>{
+  document.getElementById("intro").style.transition = "1.5s";
+  document.getElementById("intro").style.opacity = "0";
+
+  setTimeout(()=>{
+    document.getElementById("intro").style.display = "none";
+  },1500);
+
+},7000);
+
+/* ================= SYSTEM ================= */
+
+setInterval(()=>{
+  document.getElementById("clock").innerText =
+  new Date().toLocaleTimeString();
+},1000);
+
+setInterval(()=>{
+  document.getElementById("cpu").style.width =
+  (Math.random()*40+30)+"%";
+
+  document.getElementById("ram").style.width =
+  (Math.random()*30+40)+"%";
+},2500);
+
+function loadUsers(){
+  document.getElementById("users").innerText =
+  Math.floor(Math.random()*40+20);
+}
+
+setInterval(loadUsers,4000);
+loadUsers();
+
+setInterval(()=>{
+  document.getElementById("ping").innerText =
+  "PING: "+(Math.floor(Math.random()*20)+10)+"ms";
+
+  document.getElementById("temp").innerText =
+  "TEMP: "+(Math.floor(Math.random()*10)+35)+"°C";
+},2000);
+
+const logs=[
+"User authentication system online",
+"Database sync completed",
+"New recruit detected",
+"Security scan passed",
+"System monitoring active"
+];
+
+setInterval(()=>{
+  document.getElementById("log").innerText =
+  logs[Math.floor(Math.random()*logs.length)];
+},3500);
+
+</script>
+
+</body>
+</html>

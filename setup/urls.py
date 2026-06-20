@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from techsupport import views
-from techsupport.views import loginscreen, mainlobby
+from techsupport.views import loginscreen, mainlobby, registerscreen
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,6 @@ urlpatterns = [
 
     path('mainlobby/', mainlobby, name='mainlobby'),
     path('ticketing/', views.ticketing, name='ticketing'),
+    path('register/', registerscreen, name='registerscreen'),
+    
 ]
