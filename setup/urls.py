@@ -26,7 +26,11 @@ urlpatterns = [
     path('login/', loginscreen, name='loginscreen'),
 
     path('mainlobby/', mainlobby, name='mainlobby'),
-    path('ticketing/', views.ticketing, name='ticketing'),
+
+    
     path('register/', registerscreen, name='registerscreen'),
     
+
+    path('ticketing/', views.ticketing2, name='ticketing'),
+
 ]

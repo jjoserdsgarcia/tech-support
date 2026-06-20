@@ -12,6 +12,8 @@ class User(models.Model):
     def __str__(self):
         return self.username
     
+    
+    
 class Ticket(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
@@ -20,6 +22,7 @@ class Ticket(models.Model):
     status = models.CharField(max_length=20, default='open')
     priority = models.CharField(max_length=20, default='medium')
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
     def __str__(self):
         return self.title
     

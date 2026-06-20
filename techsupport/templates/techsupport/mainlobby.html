@@ -564,10 +564,11 @@
                                     <div>
 
                                         <small class="mx-3">Comentários:
-                                            {% for comentario in dashboard_data.recent_comments %}
+                                            {% for comentario in ticket.comments.all %}
                                             <div class="mx-2 alert alert-success">
 
                                                 {{comentario.content}}
+
                                             </div>
                                             {% endfor %}
 
