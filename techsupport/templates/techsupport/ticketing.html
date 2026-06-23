@@ -165,43 +165,85 @@
 
 
 
-        /* =====================
+  /* =====================
 SIDEBAR
 ===================== */
 
+.sidebar {
 
-        .sidebar {
+    width: 280px;
 
+    background:
+        linear-gradient(
+            180deg,
+            rgba(20,20,20,0.98) 0%,
+            rgba(10,10,10,0.98) 50%,
+            rgba(4,4,4,1) 100%
+        );
 
-            width: 280px;
+    color: white;
 
+    padding: 30px;
 
-            background:
+    position: relative;
 
-                linear-gradient(180deg,
-                    #111,
-                    #050505);
+    overflow: hidden;
 
+    border-right: 1px solid rgba(255, 230, 109, 0.18);
 
-            color: white;
+    box-shadow:
+        0 0 40px rgba(0,0,0,.5),
+        15px 0 50px rgba(0,0,0,.45),
+        inset -1px 0 0 rgba(255,230,109,.08);
 
+    backdrop-filter: blur(10px);
+}
 
-            padding: 30px;
+/* brilho lateral */
 
+.sidebar::before {
 
-            box-shadow:
+    content: "";
 
+    position: absolute;
 
-                15px 0 40px rgba(0, 0, 0, .35);
+    top: 0;
+    right: 0;
 
+    width: 1px;
+    height: 100%;
 
+    background:
+        linear-gradient(
+            transparent,
+            rgba(255,230,109,.5),
+            transparent
+        );
 
-            border-right:
+    box-shadow:
+        0 0 12px rgba(255,230,109,.4);
+}
 
-                1px solid rgba(255, 230, 109, .2);
+/* textura tecnológica */
 
+.sidebar::after {
 
-        }
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        repeating-linear-gradient(
+            180deg,
+            transparent 0px,
+            transparent 30px,
+            rgba(255,230,109,.015) 31px
+        );
+
+    pointer-events: none;
+}
 
 
 
@@ -604,804 +646,335 @@ CARDS
 
 
 
-        /* =====================
-PANELS
+ /* =====================
+SIDEBAR
 ===================== */
 
+.sidebar {
 
-        .panel {
+    position: fixed;
 
+    left: 0;
+    top: 0;
 
-            background:
+    height: 100vh;
+    width: 280px;
 
+    padding: 30px;
 
-                rgba(255, 255, 240, .85);
+    color: #fff;
 
+    overflow: hidden;
 
+    transition: .45s ease;
 
-            backdrop-filter: blur(15px);
+    background:
+        radial-gradient(
+            circle at top center,
+            rgba(255,230,109,.08) 0%,
+            transparent 40%
+        ),
+        linear-gradient(
+            180deg,
+            #181818 0%,
+            #0d0d0d 55%,
+            #030303 100%
+        );
 
+    border-right: 1px solid rgba(255,230,109,.15);
 
-            border-radius: 22px;
+    box-shadow:
+        0 0 60px rgba(0,0,0,.6),
+        20px 0 60px rgba(0,0,0,.5),
+        inset -1px 0 0 rgba(255,230,109,.08);
 
+    backdrop-filter: blur(12px);
+}
 
-            padding: 22px;
+/* brilho lateral */
 
+.sidebar::before {
 
-            margin-bottom: 25px;
+    content: "";
 
+    position: absolute;
 
-            border:
+    top: 0;
+    right: 0;
 
+    width: 2px;
+    height: 100%;
 
-                1px solid rgba(180, 160, 60, .35);
+    background:
+        linear-gradient(
+            transparent,
+            rgba(255,230,109,.7),
+            transparent
+        );
 
+    box-shadow:
+        0 0 15px rgba(255,230,109,.6),
+        0 0 30px rgba(255,230,109,.3);
+}
 
+/* textura */
 
-            box-shadow:
+.sidebar::after {
 
+    content: "";
 
-                0 15px 40px rgba(0, 0, 0, .15);
+    position: absolute;
 
+    inset: 0;
 
-        }
+    background:
+        repeating-linear-gradient(
+            180deg,
+            transparent 0px,
+            transparent 32px,
+            rgba(255,230,109,.015) 33px
+        );
 
+    pointer-events: none;
+}
 
+/* fechada */
 
-        /* FILTROS */
+.sidebar.closed {
 
+    width: 85px;
 
-        .filters {
+    padding: 30px 15px;
+}
 
-
-            display: grid;
-
-
-            grid-template-columns:
-
-                2fr 1fr 1fr 1fr;
-
-
-            gap: 15px;
-
-
-        }
-
-
-
-        .filters input,
-        .filters select {
-
-
-            height: 48px;
-
-
-            padding: 0 15px;
-
-
-            border-radius: 12px;
-
-
-            border: 1px solid #d4c36b;
-
-
-            background: #fffbea;
-
-
-            color: #333;
-
-
-            transition: .3s;
-
-
-        }
-
-
-
-
-        .filters input:focus,
-        .filters select:focus {
-
-
-            outline: none;
-
-
-            border-color: #ffe66d;
-
-
-            box-shadow:
-
-
-                0 0 0 4px rgba(255, 230, 109, .25);
-
-
-        }
-
-
-
-
-
-        /* =====================
-TABLE
+/* =====================
+LOGO
 ===================== */
 
+.logo {
 
-        .table {
+    position: relative;
 
+    margin-bottom: 45px;
 
-            width: 100%;
+    padding-bottom: 20px;
 
+    border-bottom:
+        1px solid rgba(255,230,109,.12);
+}
 
-            border-collapse: collapse;
+.logo h2 {
 
+    color: #ffe66d;
 
-        }
+    font-size: 28px;
 
+    line-height: 1;
 
+    letter-spacing: 2px;
 
-        .table th {
+    font-weight: 800;
 
+    text-shadow:
+        0 0 15px rgba(255,230,109,.45);
+}
 
-            background: #111;
+.logo p {
 
+    margin-top: 10px;
 
-            color: #ffe66d;
+    color: #888;
 
+    font-size: 12px;
 
-            padding: 16px;
+    letter-spacing: 1px;
+}
 
+/* =====================
+MENU
+===================== */
 
-            text-align: left;
+.menu {
 
+    display: flex;
 
-            letter-spacing: 1px;
+    flex-direction: column;
 
+    gap: 12px;
+}
 
-        }
+.menu a {
 
+    position: relative;
 
+    height: 54px;
 
-        .table td {
+    padding: 0 16px;
 
+    display: flex;
 
-            padding: 18px;
+    align-items: center;
 
+    gap: 15px;
 
-            background: rgba(255, 255, 255, .5);
+    color: #d8d8d8;
 
+    text-decoration: none;
 
-            border-bottom:
+    border-radius: 14px;
 
-                1px solid rgba(0, 0, 0, .08);
+    overflow: hidden;
 
+    transition: .3s;
+}
 
-        }
+.menu a::before {
 
+    content: "";
 
+    position: absolute;
 
-        .table tbody tr {
+    left: 0;
+    top: 50%;
 
+    width: 3px;
+    height: 0;
 
-            transition: .25s;
+    transform: translateY(-50%);
 
+    background: #ffe66d;
 
-        }
+    border-radius: 50px;
 
+    transition: .3s;
+}
 
+.menu a:hover::before {
 
-        .table tbody tr:hover {
+    height: 65%;
+}
 
+.menu a:hover {
 
-            background: #fff4b0;
+    color: #ffe66d;
 
+    background:
+        rgba(255,230,109,.08);
 
-        }
+    transform: translateX(6px);
 
+    box-shadow:
+        0 0 20px rgba(255,230,109,.08);
+}
 
+.menu i {
 
+    color: #ffe66d;
 
-        .empty-state td {
+    font-size: 20px;
 
+    min-width: 22px;
+}
 
-            text-align: center;
+/* sidebar fechada */
 
+.sidebar.closed .logo h2,
+.sidebar.closed .logo p,
+.sidebar.closed .menu span,
+.sidebar.closed .status-text {
 
-            padding: 80px;
+    opacity: 0;
 
+    pointer-events: none;
+}
 
-            color: #777;
+.sidebar.closed .menu a {
 
+    justify-content: center;
 
-        }
+    padding: 0;
+}
 
+/* =====================
+STATUS
+===================== */
 
+.status {
 
-        /* SCROLL */
+    position: absolute;
 
-        ::-webkit-scrollbar {
+    bottom: 30px;
 
-            width: 8px;
+    left: 20px;
+    right: 20px;
 
-        }
+    padding: 16px;
 
+    text-align: center;
 
-        ::-webkit-scrollbar-thumb {
+    border-radius: 16px;
 
+    background:
+        rgba(255,230,109,.05);
 
-            background: #111;
+    border:
+        1px solid rgba(255,230,109,.15);
 
+    backdrop-filter: blur(10px);
+}
 
-            border-radius: 20px;
+.signal {
 
+    width: 12px;
+    height: 12px;
 
-        }
+    margin: auto auto 10px;
 
+    border-radius: 50%;
 
+    background: #4cff4c;
 
+    box-shadow:
+        0 0 15px #4cff4c,
+        0 0 30px #4cff4c;
 
-        /* RESPONSIVO */
+    animation: pulse 2s infinite;
+}
 
+@keyframes pulse {
 
-        @media(max-width:1200px) {
+    0%,100% {
 
+        opacity: 1;
+        transform: scale(1);
+    }
 
-            .stats {
+    50% {
 
+        opacity: .4;
+        transform: scale(.75);
+    }
+}
 
-                grid-template-columns:
+.status strong {
 
-                    repeat(2, 1fr);
+    display: block;
 
+    color: #ffe66d;
 
-            }
+    letter-spacing: 2px;
 
+    font-size: 13px;
+}
 
-        }
+.status small {
 
+    color: #999;
 
+    font-size: 10px;
 
-        @media(max-width:800px) {
-
-
-            .sidebar {
-
-                display: none;
-
-            }
-
-
-            .stats {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-
-            .filters {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-        }
-    </style>
-
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-
-    <head>
-
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>Backrooms Control System</title>
-
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
-
-        <style>
-            :root {
-
-                --yellow: #ffe66d;
-                --dark: #080808;
-                --panel: #f7f0c8;
-
-            }
-
-
-            * {
-
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-
-            }
-
-
-
-            body {
-
-                font-family: 'Segoe UI', sans-serif;
-
-                height: 100vh;
-
-                overflow: hidden;
-
-
-                background:
-
-
-                    radial-gradient(circle at top,
-                        #fff2a3,
-                        transparent 40%),
-
-
-                    linear-gradient(135deg,
-                        #d7c56c,
-                        #bca84c);
-
-            }
-
-
-
-            /* textura parede */
-
-            body::before {
-
-                content: "";
-
-                position: fixed;
-
-                inset: 0;
-
-
-                background:
-
-                    linear-gradient(rgba(0, 0, 0, .04) 1px,
-                        transparent 1px),
-
-                    linear-gradient(90deg,
-                        rgba(0, 0, 0, .04) 1px,
-                        transparent 1px);
-
-
-                background-size: 40px 40px;
-
-
-                pointer-events: none;
-
-            }
-
-
-
-            /* BOTÃO */
-
-            .menu-toggle {
-
-
-                position: fixed;
-
-
-                top: 20px;
-
-                left: 20px;
-
-
-                z-index: 1000;
-
-
-                width: 45px;
-
-                height: 45px;
-
-
-                border: none;
-
-
-                border-radius: 12px;
-
-
-                background: #111;
-
-
-                color: var(--yellow);
-
-
-                font-size: 22px;
-
-
-                cursor: pointer;
-
-
-                box-shadow:
-
-                    0 0 25px rgba(255, 230, 109, .35);
-
-
-            }
-
-
-
-
-
-            /* SIDEBAR */
-
-
-            .sidebar {
-
-
-                position: fixed;
-
-
-                left: 0;
-
-                top: 0;
-
-
-                height: 100vh;
-
-
-                width: 280px;
-
-
-                padding: 30px;
-
-
-                background:
-
-
-                    linear-gradient(180deg,
-                        #111,
-                        #050505);
-
-
-                color: white;
-
-
-                transition: .45s ease;
-
-
-                border-right:
-
-                    1px solid rgba(255, 230, 109, .2);
-
-
-                box-shadow:
-
-
-                    15px 0 50px rgba(0, 0, 0, .5);
-
-
-            }
-
-
-
-
-
-            /* FECHADA */
-
-
-            .sidebar.closed {
-
-
-                width: 85px;
-
-
-                padding: 30px 15px;
-
-
-            }
-
-
-
-
-
-            /* LOGO */
-
-
-            .logo {
-
-
-                margin-bottom: 45px;
-
-
-            }
-
-
-
-            .logo h2 {
-
-
-                color: var(--yellow);
-
-
-                font-size: 28px;
-
-
-                line-height: 1;
-
-
-                letter-spacing: 2px;
-
-
-                text-shadow:
-
-                    0 0 15px rgba(255, 230, 109, .6);
-
-
-            }
-
-
-
-            .logo p {
-
-
-                color: #777;
-
-
-                margin-top: 10px;
-
-
-                font-size: 12px;
-
-
-            }
-
-
-
-
-
-            /* MENU */
-
-
-            .menu {
-
-
-                display: flex;
-
-
-                flex-direction: column;
-
-
-                gap: 12px;
-
-
-            }
-
-
-
-            .menu a {
-
-
-                height: 52px;
-
-
-                padding: 0 15px;
-
-
-                display: flex;
-
-
-                align-items: center;
-
-
-                gap: 15px;
-
-
-                color: #ddd;
-
-
-                text-decoration: none;
-
-
-                border-radius: 12px;
-
-
-                transition: .3s;
-
-
-            }
-
-
-
-
-            .menu a:hover {
-
-
-                background:
-
-                    rgba(255, 230, 109, .12);
-
-
-                color: var(--yellow);
-
-
-                transform: translateX(5px);
-
-
-            }
-
-
-
-
-
-            .menu i {
-
-
-                color: var(--yellow);
-
-
-                font-size: 20px;
-
-
-                min-width: 20px;
-
-
-            }
-
-
-
-
-
-            /* esconder texto fechado */
-
-
-            .sidebar.closed .logo h2,
-            .sidebar.closed .logo p,
-            .sidebar.closed .menu span,
-            .sidebar.closed .status-text {
-
-
-                opacity: 0;
-
-
-                pointer-events: none;
-
-
-            }
-
-
-
-
-            .sidebar.closed .menu a {
-
-
-                justify-content: center;
-
-
-                padding: 0;
-
-
-            }
-
-
-
-
-
-            /* STATUS BACKROOMS */
-
-
-            .status {
-
-
-                position: absolute;
-
-
-                bottom: 35px;
-
-
-                left: 30px;
-
-
-                right: 30px;
-
-
-                padding: 15px;
-
-
-                text-align: center;
-
-
-                border-radius: 15px;
-
-
-                border:
-
-                    1px solid rgba(255, 230, 109, .3);
-
-
-                background:
-
-                    rgba(255, 230, 109, .05);
-
-
-                color: var(--yellow);
-
-
-            }
-
-
-
-            .signal {
-
-
-                width: 12px;
-
-
-                height: 12px;
-
-
-                margin: auto;
-
-
-                margin-bottom: 10px;
-
-
-                border-radius: 50%;
-
-
-                background: #4cff4c;
-
-
-                box-shadow:
-
-                    0 0 20px #4cff4c;
-
-
-                animation:
-
-                    pulse 2s infinite;
-
-
-            }
-
-
-
-            @keyframes pulse {
-
-
-                50% {
-
-                    opacity: .3;
-
-                    transform: scale(.7);
-
-                }
-
-
-            }
-
-
-
-
-            .status strong {
-
-
-                display: block;
-
-
-                letter-spacing: 2px;
-
-
-            }
-
-
-
-            .status small {
-
-
-                color: #999;
-
-
-                font-size: 10px;
-
-
-            }
-
-
+    letter-spacing: 1px;
+}
 
 
 
@@ -1698,17 +1271,7 @@ TABLE
             </a>
 
 
-            <a href="#">
-                <i class="bi bi-bar-chart"></i>
-                <span>Reports</span>
-            </a>
-
-
-            <a href="#">
-                <i class="bi bi-gear"></i>
-                <span>Settings</span>
-            </a>
-
+        
 
         </nav>
 
@@ -1725,7 +1288,7 @@ TABLE
             <div class="status-text">
 
                 <strong>
-                    LEVEL 0
+                    MONITORING SYSTEM
                 </strong>
 
 
