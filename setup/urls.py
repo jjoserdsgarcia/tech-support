@@ -22,7 +22,7 @@ from techsupport.views import loginscreen, mainlobby, registerscreen
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    path('', loginscreen, name='loginscreen'),
+    
     path('login/', loginscreen, name='loginscreen'),
 
     path('mainlobby/', mainlobby, name='mainlobby'),
