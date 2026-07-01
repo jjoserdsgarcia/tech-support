@@ -1,8 +1,8 @@
-{% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -154,119 +154,813 @@
             z-index: 9999;
         }
     </style>
+    =======
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>M.E.G Access Terminal</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+            background: #000;
+        }
+
+        .backrooms {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+
+            background:
+                radial-gradient(circle at center,
+                    rgba(110, 90, 30, .25),
+                    rgba(10, 10, 10, .95)),
+                linear-gradient(#3f3418,
+                    #161616);
+
+            overflow: hidden;
+        }
+
+        /* PAREDES */
+
+        .backrooms::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background-image:
+                repeating-linear-gradient(90deg,
+                    rgba(255, 230, 120, .03) 0px,
+                    rgba(255, 230, 120, .03) 180px,
+                    rgba(0, 0, 0, .06) 180px,
+                    rgba(0, 0, 0, .06) 184px);
+
+            opacity: .7;
+        }
+
+        /* PORTA AO FUNDO */
+
+        .door {
+            position: absolute;
+
+            width: 220px;
+            height: 380px;
+
+            left: 50%;
+            top: 45%;
+
+            transform: translate(-50%, -50%);
+
+            background: rgba(0, 0, 0, .4);
+
+            filter: blur(3px);
+
+            box-shadow:
+                0 0 50px rgba(0, 0, 0, .9);
+
+            z-index: 1;
+        }
+
+        /* CRIATURA */
+
+        .entity {
+            position: absolute;
+
+            width: 60px;
+            height: 120px;
+
+            left: 50%;
+            top: 42%;
+
+            transform: translateX(-50%);
+
+            background: black;
+
+            border-radius: 50px;
+
+            opacity: .55;
+
+            filter: blur(6px);
+
+            z-index: 2;
+        }
+
+        /* LÂMPADA */
+
+        .lamp-system {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+
+        .wire {
+            width: 3px;
+            height: 160px;
+            background: #111;
+            margin: auto;
+        }
+
+        .lampSwing {
+            transform-origin: top center;
+            position: relative;
+        }
+
+        .lamp {
+            width: 140px;
+            height: 80px;
+
+            border-radius: 100px 100px 30px 30px;
+
+            background:
+                linear-gradient(#444,
+                    #161616);
+
+            box-shadow:
+                inset 0 5px 10px rgba(255, 255, 255, .15),
+                0 15px 25px rgba(0, 0, 0, .9);
+        }
+
+        .bulb {
+            position: absolute;
+
+            left: 50%;
+            top: 45px;
+
+            transform: translateX(-50%);
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #fff4ba;
+
+            box-shadow:
+                0 0 30px #fff5af,
+                0 0 80px #ffe66b,
+                0 0 200px #ffe66b;
+        }
+
+        /* LUZ */
+
+        /* ==========================
+   AMBIENTE BACKROOMS REALISTA
+========================== */
+
+        .backrooms {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+
+            background:
+                linear-gradient(to bottom,
+                    #6d5b25 0%,
+                    #5b4a1f 20%,
+                    #40351a 45%,
+                    #211d16 75%,
+                    #101010 100%);
+        }
+
+        /* TETO */
+
+        .backrooms::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 35%;
+
+            background:
+                repeating-linear-gradient(90deg,
+                    rgba(255, 255, 255, .04) 0px,
+                    rgba(255, 255, 255, .04) 220px,
+                    rgba(0, 0, 0, .08) 220px,
+                    rgba(0, 0, 0, .08) 225px);
+
+            opacity: .35;
+        }
+
+        /* PORTA */
+
+        .door {
+            position: absolute;
+
+            width: 260px;
+            height: 420px;
+
+            left: 50%;
+            top: 40%;
+
+            transform: translate(-50%, -50%);
+
+            background:
+                linear-gradient(to bottom,
+                    rgba(20, 20, 20, .7),
+                    rgba(0, 0, 0, .95));
+
+            border: 1px solid rgba(255, 255, 255, .03);
+
+            filter: blur(2px);
+
+            box-shadow:
+                0 0 120px rgba(0, 0, 0, .9);
+
+            z-index: 1;
+        }
+
+        /* SILHUETA */
+
+        .entity {
+            position: absolute;
+
+            width: 70px;
+            height: 150px;
+
+            left: 50%;
+            top: 38%;
+
+            transform: translateX(-50%);
+
+            background: black;
+
+            border-radius: 40px;
+
+            opacity: .45;
+
+            filter: blur(10px);
+
+            z-index: 2;
+        }
+
+        /* ==========================
+   LÂMPADA REALISTA
+========================== */
+
+        .wire {
+            width: 2px;
+            height: 180px;
+
+            background:
+                linear-gradient(to right,
+                    #000,
+                    #333,
+                    #000);
+        }
+
+        .lamp {
+            width: 160px;
+            height: 90px;
+
+            border-radius: 120px 120px 35px 35px;
+
+            background:
+                linear-gradient(to bottom,
+                    #4d4d4d,
+                    #1c1c1c);
+
+            box-shadow:
+                inset 0 10px 15px rgba(255, 255, 255, .15),
+                inset 0 -10px 15px rgba(0, 0, 0, .5),
+                0 20px 30px rgba(0, 0, 0, .8);
+        }
+
+        /* LÂMPADA INTERNA */
+
+        .bulb {
+            position: absolute;
+
+            left: 50%;
+            top: 52px;
+
+            transform: translateX(-50%);
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #fff8d2;
+
+            box-shadow:
+                0 0 25px #fff7b0,
+                0 0 60px #ffe77a,
+                0 0 140px #ffd84d,
+                0 0 280px rgba(255, 220, 100, .8);
+        }
+
+        /* CONE DE LUZ */
+
+        .light {
+            position: absolute;
+
+            top: 40px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 1400px;
+            height: 1400px;
+
+            pointer-events: none;
+
+            background:
+                radial-gradient(circle,
+
+                    rgba(255, 235, 160, .75) 0%,
+
+                    rgba(255, 235, 160, .35) 18%,
+
+                    rgba(255, 235, 160, .12) 38%,
+
+                    rgba(255, 235, 160, .05) 55%,
+
+                    transparent 78%);
+
+            filter: blur(20px);
+        }
+
+        /* REFLEXO NO CHÃO */
+
+        .floorGlow {
+            position: absolute;
+
+            left: 50%;
+            bottom: -250px;
+
+            transform: translateX(-50%);
+
+            width: 1000px;
+            height: 500px;
+
+            background:
+                radial-gradient(ellipse,
+                    rgba(255, 220, 120, .18),
+                    transparent 70%);
+
+            filter: blur(60px);
+
+            pointer-events: none;
+        }
+
+        /* NÉVOA */
+
+        .fog {
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(circle,
+                    rgba(255, 230, 150, .05),
+                    transparent 70%);
+
+            filter: blur(20px);
+
+            animation: fogMove 18s infinite alternate ease-in-out;
+        }
+
+        /* LOGIN */
+
+        .login {
+            backdrop-filter: blur(8px);
+
+            background:
+                rgba(0, 0, 0, .18);
+
+            border:
+                1px solid rgba(255, 230, 120, .15);
+
+            padding: 35px;
+
+            box-shadow:
+                0 0 50px rgba(0, 0, 0, .4);
+        }
+
+        /* LOGIN */
+
+        .login {
+
+            position: absolute;
+
+            left: 50%;
+            top: 58%;
+
+            transform: translate(-50%, -50%);
+
+            width: 420px;
+
+            z-index: 100;
+        }
+
+        .login h1 {
+
+            text-align: center;
+
+            color: #ffe58c;
+
+            font-size: 42px;
+
+            letter-spacing: 8px;
+
+            margin-bottom: 35px;
+
+            text-shadow:
+                0 0 15px rgba(255, 240, 150, .5);
+        }
+
+        .inputBox {
+
+            margin-bottom: 15px;
+        }
+
+        .inputBox input {
+
+            width: 100%;
+
+            height: 55px;
+
+            border: none;
+
+            outline: none;
+
+            padding-left: 20px;
+
+            color: white;
+
+            font-size: 16px;
+
+            background:
+                rgba(0, 0, 0, .35);
+
+            border:
+                1px solid rgba(255, 220, 100, .2);
+
+            backdrop-filter: blur(5px);
+        }
+
+        .inputBox input::placeholder {
+            color: #b8a567;
+        }
+
+        button {
+
+            width: 100%;
+            height: 55px;
+
+            border: none;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            letter-spacing: 4px;
+
+            background:
+                linear-gradient(#b59844,
+                    #7d6828);
+
+            transition: .3s;
+        }
+
+        button:hover {
+
+            box-shadow:
+                0 0 40px rgba(255, 220, 100, .5);
+
+            transform: translateY(-2px);
+        }
+
+        .footer {
+
+            margin-top: 50px;
+
+            text-align: center;
+
+            color: #8d7a40;
+
+            font-size: 11px;
+
+            line-height: 22px;
+        }
+
+        /* NÉVOA */
+
+        .fog {
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(circle,
+                    rgba(255, 220, 100, .03),
+                    transparent 70%);
+
+            animation: fogMove 12s infinite alternate;
+        }
+
+        @keyframes fogMove {
+
+            from {
+                transform: translateX(-20px);
+            }
+
+            to {
+                transform: translateX(20px);
+            }
+        }
+
+        /* VINHETA */
+
+        .vignette {
+
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+                radial-gradient(transparent 45%,
+                    rgba(0, 0, 0, .9) 100%);
+        }
+
+        /* GRANULAÇÃO */
+
+        .noise {
+
+            position: fixed;
+            inset: 0;
+
+            opacity: .06;
+
+            pointer-events: none;
+
+            background-image:
+                repeating-radial-gradient(circle,
+                    white 0px,
+                    transparent 1px);
+        }
+
+        .glitch {
+            animation: glitch 0.15s;
+        }
+
+        @keyframes glitch {
+
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(2px, -2px);
+            }
+
+            60% {
+                transform: translate(-1px, 1px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+    </style>
+    >>>>>>> 7ea012f1ae2d7de93d38de34f581b61d4c33c923
 </head>
 
 <body>
 
-    <!-- LÂMPADA -->
-    <div class="ceiling"></div>
-    <div class="bulb" id="bulb"></div>
+    <<<<<<< HEAD <!-- LÂMPADA -->
+        <div class="ceiling"></div>
+        <div class="bulb" id="bulb"></div>
 
-    <!-- AMBIENTE -->
-    <div class="ambient" id="ambient"></div>
+        <!-- AMBIENTE -->
+        <div class="ambient" id="ambient"></div>
 
-    <!-- LANTERNA -->
-    <div class="flashlight"></div>
+        <!-- LANTERNA -->
+        <div class="flashlight"></div>
 
-    <!-- INTRO -->
-    <div id="intro">
-        <div>M.E.G DATABASE NODE</div>
-        <div id="bootText" style="margin-top:10px;font-size:12px;">initializing...</div>
-    </div>
+        <!-- INTRO -->
+        <div id="intro">
+            <div>M.E.G DATABASE NODE</div>
+            <div id="bootText" style="margin-top:10px;font-size:12px;">initializing...</div>
+        </div>
 
-    <!-- LOGIN -->
-    <div class="wrap">
-        <div class="login-card">
+        <!-- LOGIN -->
+        <div class="wrap">
+            <div class="login-card">
 
-            <div style="display:flex;gap:10px;align-items:center;margin-bottom:15px;">
-                <div style="
+                <div style="display:flex;gap:10px;align-items:center;margin-bottom:15px;">
+                    <div style="
                 width:42px;height:42px;border-radius:8px;
                 background:linear-gradient(135deg,#f3df7a,#8c6a12);
                 display:flex;align-items:center;justify-content:center;
                 color:#fff;font-weight:bold;">TS</div>
 
-                <div>
-                    <div style="font-weight:700;">Tech Support</div>
-                    <div style="font-size:12px;opacity:0.6;">System Access Panel</div>
+                    <div>
+                        <div style="font-weight:700;">Tech Support</div>
+                        <div style="font-size:12px;opacity:0.6;">System Access Panel</div>
+                    </div>
                 </div>
+
+                <form method="post" action="{% url 'loginscreen' %}">
+                    {% csrf_token %}
+                    <input class="form-control mb-2" name="username" placeholder="Nome">
+                    <input class="form-control mb-3" type="password" name="password" placeholder="Senha">
+                    <button class="btn btn-dark w-100">Entrar</button>
+                    <div class="text-center mt-3">
+                        <small>Não tem uma conta? <a href="{% url 'registerscreen' %}">Criar conta</a></small>
+                    </div>
+                    {% if error %}
+                    <div class="alert alert-danger" role="alert" style="margin-top: 15px;">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                </form>
+
+            </div>
+        </div>
+
+        <script>
+
+            /* =========================================================
+               INTRO
+            ========================================================= */
+
+            const intro = document.getElementById("intro");
+            const bootText = document.getElementById("bootText");
+
+            const lines = [
+                "initializing system...",
+                "loading environment...",
+                "stabilizing light source...",
+                "ready."
+            ];
+
+            let i = 0;
+
+            setInterval(() => {
+                bootText.textContent = lines[i++];
+                if (i >= lines.length) {
+                    setTimeout(() => intro.style.opacity = "0", 800);
+                    setTimeout(() => intro.remove(), 1500);
+                }
+            }, 700);
+
+            /* =========================================================
+               LANTERNA
+            ========================================================= */
+
+            document.addEventListener("mousemove", (e) => {
+                document.documentElement.style.setProperty("--x", e.clientX + "px");
+                document.documentElement.style.setProperty("--y", e.clientY + "px");
+            });
+
+            /* =========================================================
+               FLICKER DA LÂMPADA (REALISTA)
+            ========================================================= */
+
+            const bulb = document.getElementById("bulb");
+            const ambient = document.getElementById("ambient");
+
+            setInterval(() => {
+
+                if (Math.random() > 0.92) {
+
+                    bulb.style.opacity = "0.6";
+                    ambient.style.opacity = "0.6";
+
+                    setTimeout(() => {
+                        bulb.style.opacity = "1";
+                        ambient.style.opacity = "1";
+                    }, 90);
+                }
+
+            }, 400);
+
+<div class="backrooms">
+
+    <div class="door"></div>
+
+    <div class="entity"></div>
+
+    <div class="fog"></div>
+
+    <div class="lamp-system">
+
+        <div class="wire"></div>
+
+        <div class="lampSwing" id="lampSwing">
+
+            <div class="lamp">
+                <div class="bulb" id="bulb"></div>
             </div>
 
-            <form method="post" action="{% url 'loginscreen' %}">
-                {% csrf_token %}
-                <input class="form-control mb-2" name="username" placeholder="Nome">
-                <input class="form-control mb-3" type="password" name="password" placeholder="Senha">
-                <button class="btn btn-dark w-100">Entrar</button>
-                <div class="text-center mt-3">
-                    <small>Não tem uma conta? <a href="{% url 'registerscreen' %}">Criar conta</a></small>
-                </div>
-                {% if error %}
-                <div class="alert alert-danger" role="alert" style="margin-top: 15px;">
-                    {{ error }}
-                </div>
-                {% endif %}
-            </form>
+            <div class="light"></div>
 
         </div>
+
     </div>
 
-    <script>
+    <div class="login">
 
-        /* =========================================================
-           INTRO
-        ========================================================= */
+        <h1>M.E.G ACCESS</h1>
 
-        const intro = document.getElementById("intro");
-        const bootText = document.getElementById("bootText");
+        <div class="inputBox">
+            <input type="text" placeholder="Usuário">
+        </div>
 
-        const lines = [
-            "initializing system...",
-            "loading environment...",
-            "stabilizing light source...",
-            "ready."
-        ];
+        <div class="inputBox">
+            <input type="password" placeholder="Senha">
+        </div>
 
-        let i = 0;
+        <button>ENTRAR</button>
 
-        setInterval(() => {
-            bootText.textContent = lines[i++];
-            if (i >= lines.length) {
-                setTimeout(() => intro.style.opacity = "0", 800);
-                setTimeout(() => intro.remove(), 1500);
-            }
-        }, 700);
+        <div class="footer">
+            M.E.G DATABASE SYSTEM<br>
+            CLEARANCE LEVEL IV REQUIRED
+        </div>
 
-        /* =========================================================
-           LANTERNA
-        ========================================================= */
+    </div>
 
-        document.addEventListener("mousemove", (e) => {
-            document.documentElement.style.setProperty("--x", e.clientX + "px");
-            document.documentElement.style.setProperty("--y", e.clientY + "px");
-        });
+</div>
 
-        /* =========================================================
-           FLICKER DA LÂMPADA (REALISTA)
-        ========================================================= */
+<div class="noise"></div>
+<div class="vignette"></div>
 
-        const bulb = document.getElementById("bulb");
-        const ambient = document.getElementById("ambient");
+<script>
 
-        setInterval(() => {
+const lamp = document.getElementById("lampSwing");
+const bulb = document.getElementById("bulb");
 
-            if (Math.random() > 0.92) {
+let angle = 0.25;
+let velocity = 0;
 
-                bulb.style.opacity = "0.6";
-                ambient.style.opacity = "0.6";
+function animate(){
 
-                setTimeout(() => {
-                    bulb.style.opacity = "1";
-                    ambient.style.opacity = "1";
-                }, 90);
-            }
+    velocity += -0.002 * angle;
 
-        }, 400);
+    velocity *= 0.997;
 
-    </script>
+    angle += velocity;
+
+    lamp.style.transform =
+    `rotate(${angle * 50}deg)`;
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+/* Tremulação */
+const light = document.querySelector(".light");
+
+function flicker(){
+
+    const intensity = 0.7 + Math.random() * 0.3;
+
+    bulb.style.opacity = intensity;
+
+    light.style.opacity = intensity;
+
+    if(Math.random() < 0.12){
+
+        bulb.style.opacity = 0.15;
+        light.style.opacity = 0.1;
+
+        setTimeout(()=>{
+            bulb.style.opacity = 1;
+            light.style.opacity = 1;
+        },50);
+    }
+
+    setTimeout(flicker,80 + Math.random()*300);
+}
+
+flicker();
+
+
+        </script>
 
 </body>
 
