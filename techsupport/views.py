@@ -108,7 +108,7 @@ def registerscreen(request):
             messages.error(request, 'Email já registrado.')
             return render(request, 'techsupport/registerscreen.html')
         else:
-            user = User.objects.create(username=username, password=password, email=email)
+            user = User.objects.create_user(username=username, password=password, email=email)
             user.save()
             messages.success(request, 'Conta criada com sucesso. Faça login para continuar.')
             return redirect('loginscreen')
