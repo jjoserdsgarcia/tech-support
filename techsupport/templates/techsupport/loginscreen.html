@@ -1,755 +1,626 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>M.E.G • Liminal Access System</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        /* =========================================================
-   FUNDO BACKROOMS
-========================================================= */
-
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
-            font-family: "Segoe UI", sans-serif;
-
-            background: radial-gradient(circle at center,
-                    #1a1a1a 0%,
-                    #0b0b0b 50%,
-                    #000 100%);
-        }
-
-        /* vinheta forte */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: radial-gradient(circle,
-                    transparent 0%,
-                    rgba(0, 0, 0, 0.6) 55%,
-                    rgba(0, 0, 0, 0.95) 100%);
-            pointer-events: none;
-        }
-
-        /* =========================================================
-   LÂMPADA REALISTA
-========================================================= */
-
-        .ceiling {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 140px;
-            background: #111;
-            z-index: 10;
-        }
-
-        /* corpo da lâmpada */
-        .bulb {
-            position: fixed;
-            top: 130px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-
-            background: radial-gradient(circle,
-                    #fff6c2 0%,
-                    #ffe88a 30%,
-                    #c9a94a 70%,
-                    #6b5a1d 100%);
-
-            box-shadow:
-                0 0 40px rgba(255, 230, 140, 0.9),
-                0 0 120px rgba(255, 220, 120, 0.5),
-                0 0 200px rgba(255, 210, 100, 0.25);
-
-            z-index: 11;
-        }
-
-        /* luz ambiente da lâmpada */
-        .ambient {
-            position: fixed;
-            inset: 0;
-
-            background: radial-gradient(circle at 50% 25%,
-                    rgba(255, 240, 170, 0.35) 0%,
-                    rgba(255, 220, 140, 0.18) 25%,
-                    rgba(0, 0, 0, 0.85) 60%,
-                    rgba(0, 0, 0, 1) 100%);
-
-            pointer-events: none;
-        }
-
-        /* =========================================================
-   LANTERNA (MOUSE)
-========================================================= */
-
-        .flashlight {
-            position: fixed;
-            inset: 0;
-
-            background: radial-gradient(circle at var(--x) var(--y),
-                    rgba(255, 255, 230, 0.25) 0%,
-                    rgba(0, 0, 0, 0.85) 45%,
-                    rgba(0, 0, 0, 1) 70%);
-
-            pointer-events: none;
-            mix-blend-mode: screen;
-        }
-
-        /* =========================================================
-   LOGIN
-========================================================= */
-
-        .wrap {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 5;
-        }
-
-        .login-card {
-            width: 420px;
-            padding: 28px;
+<title>M.E.G Access Terminal</title>
 
-            background: rgba(255, 255, 240, 0.92);
-            border-radius: 14px;
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 
-            box-shadow: 0 30px 90px rgba(0, 0, 0, 0.6);
+<style>
 
-            backdrop-filter: blur(6px);
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        /* =========================================================
-   INTRO
-========================================================= */
+body{
+    overflow:hidden;
+    font-family:'Orbitron',sans-serif;
+    background:#000;
+}
 
-        #intro {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            color: #d6c77a;
+.backrooms{
+    position:relative;
+    width:100vw;
+    height:100vh;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    background:
+    radial-gradient(circle at center,
+    rgba(110,90,30,.25),
+    rgba(10,10,10,.95)),
+    linear-gradient(
+    #3f3418,
+    #161616);
 
-            font-family: monospace;
-            z-index: 9999;
-        }
-    </style>
-    =======
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    overflow:hidden;
+}
 
-    <title>M.E.G Access Terminal</title>
+/* PAREDES */
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+.backrooms::before{
+    content:"";
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    position:absolute;
+    inset:0;
 
-        body {
-            overflow: hidden;
-            font-family: 'Orbitron', sans-serif;
-            background: #000;
-        }
+    background-image:
+    repeating-linear-gradient(
+        90deg,
+        rgba(255,230,120,.03) 0px,
+        rgba(255,230,120,.03) 180px,
+        rgba(0,0,0,.06) 180px,
+        rgba(0,0,0,.06) 184px
+    );
 
-        .backrooms {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
+    opacity:.7;
+}
 
-            background:
-                radial-gradient(circle at center,
-                    rgba(110, 90, 30, .25),
-                    rgba(10, 10, 10, .95)),
-                linear-gradient(#3f3418,
-                    #161616);
+/* PORTA AO FUNDO */
 
-            overflow: hidden;
-        }
+.door{
+    position:absolute;
 
-        /* PAREDES */
+    width:220px;
+    height:380px;
 
-        .backrooms::before {
-            content: "";
+    left:50%;
+    top:45%;
 
-            position: absolute;
-            inset: 0;
+    transform:translate(-50%,-50%);
 
-            background-image:
-                repeating-linear-gradient(90deg,
-                    rgba(255, 230, 120, .03) 0px,
-                    rgba(255, 230, 120, .03) 180px,
-                    rgba(0, 0, 0, .06) 180px,
-                    rgba(0, 0, 0, .06) 184px);
+    background:rgba(0,0,0,.4);
 
-            opacity: .7;
-        }
+    filter:blur(3px);
 
-        /* PORTA AO FUNDO */
+    box-shadow:
+    0 0 50px rgba(0,0,0,.9);
 
-        .door {
-            position: absolute;
+    z-index:1;
+}
 
-            width: 220px;
-            height: 380px;
+/* CRIATURA */
 
-            left: 50%;
-            top: 45%;
+.entity{
+    position:absolute;
 
-            transform: translate(-50%, -50%);
+    width:60px;
+    height:120px;
 
-            background: rgba(0, 0, 0, .4);
+    left:50%;
+    top:42%;
 
-            filter: blur(3px);
+    transform:translateX(-50%);
 
-            box-shadow:
-                0 0 50px rgba(0, 0, 0, .9);
+    background:black;
 
-            z-index: 1;
-        }
+    border-radius:50px;
 
-        /* CRIATURA */
+    opacity:.55;
 
-        .entity {
-            position: absolute;
+    filter:blur(6px);
 
-            width: 60px;
-            height: 120px;
+    z-index:2;
+}
 
-            left: 50%;
-            top: 42%;
+/* LÂMPADA */
 
-            transform: translateX(-50%);
+.lamp-system{
+    position:absolute;
+    left:50%;
+    top:0;
+    transform:translateX(-50%);
+    z-index:5;
+}
 
-            background: black;
+.wire{
+    width:3px;
+    height:160px;
+    background:#111;
+    margin:auto;
+}
 
-            border-radius: 50px;
+.lampSwing{
+    transform-origin:top center;
+    position:relative;
+}
 
-            opacity: .55;
+.lamp{
+    width:140px;
+    height:80px;
 
-            filter: blur(6px);
+    border-radius:100px 100px 30px 30px;
 
-            z-index: 2;
-        }
+    background:
+    linear-gradient(
+    #444,
+    #161616);
 
-        /* LÂMPADA */
+    box-shadow:
+    inset 0 5px 10px rgba(255,255,255,.15),
+    0 15px 25px rgba(0,0,0,.9);
+}
 
-        .lamp-system {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%);
-            z-index: 5;
-        }
+.bulb{
+    position:absolute;
 
-        .wire {
-            width: 3px;
-            height: 160px;
-            background: #111;
-            margin: auto;
-        }
+    left:50%;
+    top:45px;
 
-        .lampSwing {
-            transform-origin: top center;
-            position: relative;
-        }
+    transform:translateX(-50%);
 
-        .lamp {
-            width: 140px;
-            height: 80px;
+    width:40px;
+    height:40px;
 
-            border-radius: 100px 100px 30px 30px;
+    border-radius:50%;
 
-            background:
-                linear-gradient(#444,
-                    #161616);
+    background:#fff4ba;
 
-            box-shadow:
-                inset 0 5px 10px rgba(255, 255, 255, .15),
-                0 15px 25px rgba(0, 0, 0, .9);
-        }
+    box-shadow:
+    0 0 30px #fff5af,
+    0 0 80px #ffe66b,
+    0 0 200px #ffe66b;
+}
 
-        .bulb {
-            position: absolute;
+/* LUZ */
 
-            left: 50%;
-            top: 45px;
-
-            transform: translateX(-50%);
-
-            width: 40px;
-            height: 40px;
-
-            border-radius: 50%;
-
-            background: #fff4ba;
-
-            box-shadow:
-                0 0 30px #fff5af,
-                0 0 80px #ffe66b,
-                0 0 200px #ffe66b;
-        }
-
-        /* LUZ */
-
-        /* ==========================
+/* ==========================
    AMBIENTE BACKROOMS REALISTA
 ========================== */
 
-        .backrooms {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
+.backrooms{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
 
-            background:
-                linear-gradient(to bottom,
-                    #6d5b25 0%,
-                    #5b4a1f 20%,
-                    #40351a 45%,
-                    #211d16 75%,
-                    #101010 100%);
-        }
+    background:
+    linear-gradient(
+        to bottom,
+        #6d5b25 0%,
+        #5b4a1f 20%,
+        #40351a 45%,
+        #211d16 75%,
+        #101010 100%
+    );
+}
 
-        /* TETO */
+/* TETO */
 
-        .backrooms::before {
-            content: "";
+.backrooms::before{
+    content:"";
 
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 35%;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:35%;
 
-            background:
-                repeating-linear-gradient(90deg,
-                    rgba(255, 255, 255, .04) 0px,
-                    rgba(255, 255, 255, .04) 220px,
-                    rgba(0, 0, 0, .08) 220px,
-                    rgba(0, 0, 0, .08) 225px);
+    background:
+    repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,.04) 0px,
+        rgba(255,255,255,.04) 220px,
+        rgba(0,0,0,.08) 220px,
+        rgba(0,0,0,.08) 225px
+    );
 
-            opacity: .35;
-        }
+    opacity:.35;
+}
 
-        /* PORTA */
+/* PORTA */
 
-        .door {
-            position: absolute;
+.door{
+    position:absolute;
 
-            width: 260px;
-            height: 420px;
+    width:260px;
+    height:420px;
 
-            left: 50%;
-            top: 40%;
+    left:50%;
+    top:40%;
 
-            transform: translate(-50%, -50%);
+    transform:translate(-50%,-50%);
 
-            background:
-                linear-gradient(to bottom,
-                    rgba(20, 20, 20, .7),
-                    rgba(0, 0, 0, .95));
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(20,20,20,.7),
+        rgba(0,0,0,.95)
+    );
 
-            border: 1px solid rgba(255, 255, 255, .03);
+    border:1px solid rgba(255,255,255,.03);
 
-            filter: blur(2px);
+    filter:blur(2px);
 
-            box-shadow:
-                0 0 120px rgba(0, 0, 0, .9);
+    box-shadow:
+        0 0 120px rgba(0,0,0,.9);
 
-            z-index: 1;
-        }
+    z-index:1;
+}
 
-        /* SILHUETA */
+/* SILHUETA */
 
-        .entity {
-            position: absolute;
+.entity{
+    position:absolute;
 
-            width: 70px;
-            height: 150px;
+    width:70px;
+    height:150px;
 
-            left: 50%;
-            top: 38%;
+    left:50%;
+    top:38%;
 
-            transform: translateX(-50%);
+    transform:translateX(-50%);
 
-            background: black;
+    background:black;
 
-            border-radius: 40px;
+    border-radius:40px;
 
-            opacity: .45;
+    opacity:.45;
 
-            filter: blur(10px);
+    filter:blur(10px);
 
-            z-index: 2;
-        }
+    z-index:2;
+}
 
-        /* ==========================
+/* ==========================
    LÂMPADA REALISTA
 ========================== */
 
-        .wire {
-            width: 2px;
-            height: 180px;
+.wire{
+    width:2px;
+    height:180px;
 
-            background:
-                linear-gradient(to right,
-                    #000,
-                    #333,
-                    #000);
-        }
+    background:
+    linear-gradient(
+        to right,
+        #000,
+        #333,
+        #000
+    );
+}
 
-        .lamp {
-            width: 160px;
-            height: 90px;
+.lamp{
+    width:160px;
+    height:90px;
 
-            border-radius: 120px 120px 35px 35px;
+    border-radius:120px 120px 35px 35px;
 
-            background:
-                linear-gradient(to bottom,
-                    #4d4d4d,
-                    #1c1c1c);
+    background:
+    linear-gradient(
+        to bottom,
+        #4d4d4d,
+        #1c1c1c
+    );
 
-            box-shadow:
-                inset 0 10px 15px rgba(255, 255, 255, .15),
-                inset 0 -10px 15px rgba(0, 0, 0, .5),
-                0 20px 30px rgba(0, 0, 0, .8);
-        }
+    box-shadow:
+        inset 0 10px 15px rgba(255,255,255,.15),
+        inset 0 -10px 15px rgba(0,0,0,.5),
+        0 20px 30px rgba(0,0,0,.8);
+}
 
-        /* LÂMPADA INTERNA */
+/* LÂMPADA INTERNA */
 
-        .bulb {
-            position: absolute;
+.bulb{
+    position:absolute;
 
-            left: 50%;
-            top: 52px;
+    left:50%;
+    top:52px;
 
-            transform: translateX(-50%);
+    transform:translateX(-50%);
 
-            width: 42px;
-            height: 42px;
+    width:42px;
+    height:42px;
 
-            border-radius: 50%;
+    border-radius:50%;
 
-            background: #fff8d2;
+    background:#fff8d2;
 
-            box-shadow:
-                0 0 25px #fff7b0,
-                0 0 60px #ffe77a,
-                0 0 140px #ffd84d,
-                0 0 280px rgba(255, 220, 100, .8);
-        }
+    box-shadow:
+        0 0 25px #fff7b0,
+        0 0 60px #ffe77a,
+        0 0 140px #ffd84d,
+        0 0 280px rgba(255,220,100,.8);
+}
 
-        /* CONE DE LUZ */
+/* CONE DE LUZ */
 
-        .light {
-            position: absolute;
+.light{
+    position:absolute;
 
-            top: 40px;
-            left: 50%;
+    top:40px;
+    left:50%;
 
-            transform: translateX(-50%);
+    transform:translateX(-50%);
 
-            width: 1400px;
-            height: 1400px;
+    width:1400px;
+    height:1400px;
 
-            pointer-events: none;
+    pointer-events:none;
 
-            background:
-                radial-gradient(circle,
+    background:
+    radial-gradient(
+        circle,
 
-                    rgba(255, 235, 160, .75) 0%,
+        rgba(255,235,160,.75) 0%,
 
-                    rgba(255, 235, 160, .35) 18%,
+        rgba(255,235,160,.35) 18%,
 
-                    rgba(255, 235, 160, .12) 38%,
+        rgba(255,235,160,.12) 38%,
 
-                    rgba(255, 235, 160, .05) 55%,
+        rgba(255,235,160,.05) 55%,
 
-                    transparent 78%);
+        transparent 78%
+    );
 
-            filter: blur(20px);
-        }
+    filter:blur(20px);
+}
 
-        /* REFLEXO NO CHÃO */
+/* REFLEXO NO CHÃO */
 
-        .floorGlow {
-            position: absolute;
+.floorGlow{
+    position:absolute;
 
-            left: 50%;
-            bottom: -250px;
+    left:50%;
+    bottom:-250px;
 
-            transform: translateX(-50%);
+    transform:translateX(-50%);
 
-            width: 1000px;
-            height: 500px;
+    width:1000px;
+    height:500px;
 
-            background:
-                radial-gradient(ellipse,
-                    rgba(255, 220, 120, .18),
-                    transparent 70%);
+    background:
+    radial-gradient(
+        ellipse,
+        rgba(255,220,120,.18),
+        transparent 70%
+    );
 
-            filter: blur(60px);
+    filter:blur(60px);
 
-            pointer-events: none;
-        }
+    pointer-events:none;
+}
 
-        /* NÉVOA */
+/* NÉVOA */
 
-        .fog {
-            position: absolute;
-            inset: 0;
+.fog{
+    position:absolute;
+    inset:0;
 
-            background:
-                radial-gradient(circle,
-                    rgba(255, 230, 150, .05),
-                    transparent 70%);
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,230,150,.05),
+        transparent 70%
+    );
 
-            filter: blur(20px);
+    filter:blur(20px);
 
-            animation: fogMove 18s infinite alternate ease-in-out;
-        }
+    animation:fogMove 18s infinite alternate ease-in-out;
+}
 
-        /* LOGIN */
+/* LOGIN */
 
-        .login {
-            backdrop-filter: blur(8px);
+.login{
+    backdrop-filter:blur(8px);
 
-            background:
-                rgba(0, 0, 0, .18);
+    background:
+        rgba(0,0,0,.18);
 
-            border:
-                1px solid rgba(255, 230, 120, .15);
+    border:
+        1px solid rgba(255,230,120,.15);
 
-            padding: 35px;
+    padding:35px;
 
-            box-shadow:
-                0 0 50px rgba(0, 0, 0, .4);
-        }
+    box-shadow:
+        0 0 50px rgba(0,0,0,.4);
+}
 
-        /* LOGIN */
+/* LOGIN */
 
-        .login {
+.login{
 
-            position: absolute;
+    position:absolute;
 
-            left: 50%;
-            top: 58%;
+    left:50%;
+    top:58%;
 
-            transform: translate(-50%, -50%);
+    transform:translate(-50%,-50%);
 
-            width: 420px;
+    width:420px;
 
-            z-index: 100;
-        }
+    z-index:100;
+}
 
-        .login h1 {
+.login h1{
 
-            text-align: center;
+    text-align:center;
 
-            color: #ffe58c;
+    color:#ffe58c;
 
-            font-size: 42px;
+    font-size:42px;
 
-            letter-spacing: 8px;
+    letter-spacing:8px;
 
-            margin-bottom: 35px;
+    margin-bottom:35px;
 
-            text-shadow:
-                0 0 15px rgba(255, 240, 150, .5);
-        }
+    text-shadow:
+    0 0 15px rgba(255,240,150,.5);
+}
 
-        .inputBox {
+.inputBox{
 
-            margin-bottom: 15px;
-        }
+    margin-bottom:15px;
+}
 
-        .inputBox input {
+.inputBox input{
 
-            width: 100%;
+    width:100%;
 
-            height: 55px;
+    height:55px;
 
-            border: none;
+    border:none;
 
-            outline: none;
+    outline:none;
 
-            padding-left: 20px;
+    padding-left:20px;
 
-            color: white;
+    color:white;
 
-            font-size: 16px;
+    font-size:16px;
 
-            background:
-                rgba(0, 0, 0, .35);
+    background:
+    rgba(0,0,0,.35);
 
-            border:
-                1px solid rgba(255, 220, 100, .2);
+    border:
+    1px solid rgba(255,220,100,.2);
 
-            backdrop-filter: blur(5px);
-        }
+    backdrop-filter:blur(5px);
+}
 
-        .inputBox input::placeholder {
-            color: #b8a567;
-        }
+.inputBox input::placeholder{
+    color:#b8a567;
+}
 
-        button {
+button{
 
-            width: 100%;
-            height: 55px;
+    width:100%;
+    height:55px;
 
-            border: none;
+    border:none;
 
-            cursor: pointer;
+    cursor:pointer;
 
-            color: white;
+    color:white;
 
-            font-size: 16px;
+    font-size:16px;
 
-            font-weight: bold;
+    font-weight:bold;
 
-            letter-spacing: 4px;
+    letter-spacing:4px;
 
-            background:
-                linear-gradient(#b59844,
-                    #7d6828);
+    background:
+    linear-gradient(
+    #b59844,
+    #7d6828);
 
-            transition: .3s;
-        }
+    transition:.3s;
+}
 
-        button:hover {
+button:hover{
 
-            box-shadow:
-                0 0 40px rgba(255, 220, 100, .5);
+    box-shadow:
+    0 0 40px rgba(255,220,100,.5);
 
-            transform: translateY(-2px);
-        }
+    transform:translateY(-2px);
+}
 
-        .footer {
+.footer{
 
-            margin-top: 50px;
+    margin-top:50px;
 
-            text-align: center;
+    text-align:center;
 
-            color: #8d7a40;
+    color:#8d7a40;
 
-            font-size: 11px;
+    font-size:11px;
 
-            line-height: 22px;
-        }
+    line-height:22px;
+}
 
-        /* NÉVOA */
+/* NÉVOA */
 
-        .fog {
+.fog{
 
-            position: absolute;
-            inset: 0;
+    position:absolute;
+    inset:0;
 
-            background:
-                radial-gradient(circle,
-                    rgba(255, 220, 100, .03),
-                    transparent 70%);
+    background:
+    radial-gradient(circle,
+    rgba(255,220,100,.03),
+    transparent 70%);
 
-            animation: fogMove 12s infinite alternate;
-        }
+    animation:fogMove 12s infinite alternate;
+}
 
-        @keyframes fogMove {
+@keyframes fogMove{
 
-            from {
-                transform: translateX(-20px);
-            }
+    from{
+        transform:translateX(-20px);
+    }
 
-            to {
-                transform: translateX(20px);
-            }
-        }
+    to{
+        transform:translateX(20px);
+    }
+}
 
-        /* VINHETA */
+/* VINHETA */
 
-        .vignette {
+.vignette{
 
-            position: fixed;
-            inset: 0;
+    position:fixed;
+    inset:0;
 
-            pointer-events: none;
+    pointer-events:none;
 
-            background:
-                radial-gradient(transparent 45%,
-                    rgba(0, 0, 0, .9) 100%);
-        }
+    background:
+    radial-gradient(
+    transparent 45%,
+    rgba(0,0,0,.9) 100%);
+}
 
-        /* GRANULAÇÃO */
+/* GRANULAÇÃO */
 
-        .noise {
+.noise{
 
-            position: fixed;
-            inset: 0;
+    position:fixed;
+    inset:0;
 
-            opacity: .06;
+    opacity:.06;
 
-            pointer-events: none;
+    pointer-events:none;
 
-            background-image:
-                repeating-radial-gradient(circle,
-                    white 0px,
-                    transparent 1px);
-        }
+    background-image:
+    repeating-radial-gradient(
+    circle,
+    white 0px,
+    transparent 1px);
+}
 
-        .glitch {
-            animation: glitch 0.15s;
-        }
+.glitch{
+    animation: glitch 0.15s;
+}
 
-        @keyframes glitch {
+@keyframes glitch{
 
-            0% {
-                transform: translate(0);
-            }
+    0%{
+        transform:translate(0);
+    }
 
-            20% {
-                transform: translate(-2px, 2px);
-            }
+    20%{
+        transform:translate(-2px,2px);
+    }
 
-            40% {
-                transform: translate(2px, -2px);
-            }
+    40%{
+        transform:translate(2px,-2px);
+    }
 
-            60% {
-                transform: translate(-1px, 1px);
-            }
+    60%{
+        transform:translate(-1px,1px);
+    }
 
-            100% {
-                transform: translate(0);
-            }
-        }
-    </style>
-    >>>>>>> 7ea012f1ae2d7de93d38de34f581b61d4c33c923
+    100%{
+        transform:translate(0);
+    }
+}
+
+</style>
 </head>
 
 <body>
 
+<<<<<<< HEAD
     <<<<<<< HEAD <!-- LÂMPADA -->
         <div class="ceiling"></div>
         <div class="bulb" id="bulb"></div>
@@ -857,3 +728,110 @@
                 }
 
             }, 400);
+=======
+<div class="backrooms">
+
+    <div class="door"></div>
+
+    <div class="entity"></div>
+
+    <div class="fog"></div>
+
+    <div class="lamp-system">
+
+        <div class="wire"></div>
+
+        <div class="lampSwing" id="lampSwing">
+
+            <div class="lamp">
+                <div class="bulb" id="bulb"></div>
+            </div>
+
+            <div class="light"></div>
+
+        </div>
+
+    </div>
+
+    <div class="login">
+
+        <h1>M.E.G ACCESS</h1>
+
+        <div class="inputBox">
+            <input type="text" placeholder="Usuário">
+        </div>
+
+        <div class="inputBox">
+            <input type="password" placeholder="Senha">
+        </div>
+
+        <button>ENTRAR</button>
+
+        <div class="footer">
+            M.E.G DATABASE SYSTEM<br>
+            CLEARANCE LEVEL IV REQUIRED
+        </div>
+
+    </div>
+
+</div>
+
+<div class="noise"></div>
+<div class="vignette"></div>
+
+<script>
+
+const lamp = document.getElementById("lampSwing");
+const bulb = document.getElementById("bulb");
+
+let angle = 0.25;
+let velocity = 0;
+
+function animate(){
+
+    velocity += -0.002 * angle;
+
+    velocity *= 0.997;
+
+    angle += velocity;
+
+    lamp.style.transform =
+    `rotate(${angle * 50}deg)`;
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+/* Tremulação */
+const light = document.querySelector(".light");
+
+function flicker(){
+
+    const intensity = 0.7 + Math.random() * 0.3;
+
+    bulb.style.opacity = intensity;
+
+    light.style.opacity = intensity;
+
+    if(Math.random() < 0.12){
+
+        bulb.style.opacity = 0.15;
+        light.style.opacity = 0.1;
+
+        setTimeout(()=>{
+            bulb.style.opacity = 1;
+            light.style.opacity = 1;
+        },50);
+    }
+
+    setTimeout(flicker,80 + Math.random()*300);
+}
+
+flicker();
+
+</script>
+
+</body>
+</html>
+>>>>>>> 0775e553d318046d2011547d4cb80230fede25a7
