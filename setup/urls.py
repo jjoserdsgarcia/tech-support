@@ -20,6 +20,7 @@ from techsupport import views
 from techsupport.views import loginscreen, mainlobby, registerscreen
 
 urlpatterns = [
+    path('', loginscreen, name='home'),
     path('admin/', admin.site.urls),
     
     
