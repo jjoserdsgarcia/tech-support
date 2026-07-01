@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,6 @@
     rel="stylesheet">
 
   <style>
-    /* ================= RESET ================= */
     * {
       margin: 0;
       padding: 0;
@@ -25,7 +25,6 @@
       overflow: hidden;
     }
 
-    /* ================= INTRO ================= */
     #intro {
       position: fixed;
       inset: 0;
@@ -49,13 +48,8 @@
     }
 
     @keyframes scanMove {
-      0% {
-        transform: translateY(-100%);
-      }
-
-      100% {
-        transform: translateY(100%);
-      }
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
     }
 
     .introBox {
@@ -81,12 +75,8 @@
     }
 
     @keyframes blink {
-      50% {
-        opacity: 0.2;
-      }
+      50% { opacity: 0.2; }
     }
-
-    /* ================= WINDOW ================= */
 
     .window {
       width: 95%;
@@ -98,7 +88,6 @@
       flex-direction: column;
     }
 
-    /* TOP */
     .topbar {
       height: 60px;
       background: #1b1a14;
@@ -121,7 +110,6 @@
       margin-right: 6px;
     }
 
-    /* LAYOUT */
     .content {
       flex: 1;
       display: grid;
@@ -170,7 +158,6 @@
       cursor: pointer;
     }
 
-    /* METRICS */
     .bar {
       height: 10px;
       background: #2a2921;
@@ -183,7 +170,6 @@
       width: 50%;
     }
 
-    /* FOOTER */
     .footer {
       height: 35px;
       display: flex;
@@ -199,7 +185,10 @@
 
 <body>
 
-  <!-- ================= INTRO ================= -->
+  <!-- AUDIO -->
+  <audio id="introAudio" src="{% static 'audio/intro.mp3' %}" preload="auto"></audio>
+
+  <!-- INTRO -->
   <div id="intro">
     <div class="scan"></div>
 
@@ -209,7 +198,7 @@
     </div>
   </div>
 
-  <!-- ================= SYSTEM ================= -->
+  <!-- SYSTEM -->
   <div class="window">
 
     <div class="topbar">
@@ -217,7 +206,6 @@
         <span class="status-dot"></span>
         M.E.G INTERNAL DATABASE
       </div>
-
       <div id="clock">00:00:00</div>
     </div>
 
@@ -225,74 +213,78 @@
 
       <div class="panel">
         <h2>SYSTEM STATUS</h2>
-
         <p>DATABASE: ONLINE</p>
         <p>AUTH SERVER: ACTIVE</p>
-
         <hr style="margin:10px 0;opacity:.2">
-
         <p>ACTIVE USERS:</p>
-        <p> {{ dashboard_data.users_count|default:"0" }} </p>
-
+        <p>{{ dashboard_data.users_count|default:"0" }}</p>
       </div>
-
 
       <form method="post">
         {% csrf_token %}
+
         <div class="center">
-
           <h2>REGISTER ENROLLMENT</h2>
-
-
 
           <input name="username" placeholder="Username">
           <input name="email" placeholder="Corporate Email">
           <input name="password" placeholder="Password">
 
-          <div class="d-grid">
-            <button type="submit" class="btn btn-steam">CRIAR CONTA</button>
-          </div>
-
+          <button type="submit">CRIAR CONTA</button>
         </div>
-
-        <div class="panel">
 
       </form>
 
-      <h2>SERVER METRICS</h2>
+      <div class="panel">
+        <h2>SERVER METRICS</h2>
 
-      CPU LOAD
-      <div class="bar">
-        <div class="fill" id="cpu"></div>
+        CPU LOAD
+        <div class="bar"><div class="fill" id="cpu"></div></div>
+
+        RAM USAGE
+        <div class="bar"><div class="fill" id="ram"></div></div>
+
+        <p id="ping">PING: --</p>
+        <p id="temp">TEMP: --</p>
+
+        <hr style="margin:10px 0;opacity:.2">
+
+        <p>ACTIVE TICKETS: {{ dashboard_data.total_tickets|default:"0" }}</p>
       </div>
 
-      RAM USAGE
-      <div class="bar">
-        <div class="fill" id="ram"></div>
-      </div>
+    </div>
 
-      <p id="ping">PING: --</p>
-      <p id="temp">TEMP: --</p>
-
-      <hr style="margin:10px 0;opacity:.2">
-
-      <p>ACTIVE TICKETS: {{ dashboard_data.total_tickets|default:"0" }} </p>
-
+    <div class="footer">
+      <div>M.E.G RESTRICTED ACCESS SYSTEM</div>
+      <div id="log">SYSTEM INITIALIZED</div>
     </div>
 
   </div>
 
-  <div class="footer">
-    <div>M.E.G RESTRICTED ACCESS SYSTEM</div>
-    <div id="log">SYSTEM INITIALIZED</div>
-  </div>
-
-  </div>
-
+  <!-- SCRIPT OTIMIZADO -->
   <script>
+    const audio = document.getElementById("introAudio");
+    const intro = document.getElementById("intro");
+    const typeEl = document.getElementById("type");
+    const clockEl = document.getElementById("clock");
+    const cpuEl = document.getElementById("cpu");
+    const ramEl = document.getElementById("ram");
+    const logEl = document.getElementById("log");
 
-    /* ================= INTRO TYPE ================= */
+    // AUDIO START
+    function startAudio() {
+      audio.volume = 0.5;
+      audio.play().catch(() => {
+        console.log("Autoplay bloqueado");
+      });
+    }
 
+    window.addEventListener("click", () => {
+      audio.volume = 0.5;
+      audio.play();
+    }, { once: true });
+
+    // INTRO TEXT
     const introText = [
       "M.E.G CORE SYSTEM BOOTING...",
       "ACCESSING BACKROOMS DATABASE...",
@@ -307,10 +299,8 @@
     function typeIntro() {
       if (i >= introText.length) return;
 
-      let current = introText[i];
-
-      document.getElementById("type").innerText =
-        current.substring(0, char);
+      const current = introText[i];
+      typeEl.innerText = current.substring(0, char);
 
       char++;
 
@@ -323,46 +313,30 @@
       }
     }
 
-    typeIntro();
+    function closeIntro() {
+      intro.style.transition = "1.5s";
+      intro.style.opacity = "0";
 
-    /* REMOVE INTRO */
-    setTimeout(() => {
-      document.getElementById("intro").style.transition = "1.5s";
-      document.getElementById("intro").style.opacity = "0";
+      audio.pause();
+      audio.currentTime = 0;
 
       setTimeout(() => {
-        document.getElementById("intro").style.display = "none";
+        intro.style.display = "none";
       }, 1500);
+    }
 
-    }, 7000);
+    // CLOCK
+    function updateClock() {
+      clockEl.innerText = new Date().toLocaleTimeString();
+    }
 
-    /* ================= SYSTEM ================= */
+    // METRICS
+    function updateMetrics() {
+      cpuEl.style.width = (Math.random() * 40 + 30) + "%";
+      ramEl.style.width = (Math.random() * 30 + 40) + "%";
+    }
 
-    setInterval(() => {
-      document.getElementById("clock").innerText =
-        new Date().toLocaleTimeString();
-    }, 1000);
-
-    setInterval(() => {
-      document.getElementById("cpu").style.width =
-        (Math.random() * 40 + 30) + "%";
-
-      document.getElementById("ram").style.width =
-        (Math.random() * 30 + 40) + "%";
-    }, 2500);
-
-
-    setInterval(loadUsers, 4000);
-    loadUsers();
-
-    setInterval(() => {
-      document.getElementById("ping").innerText =
-        "PING: " + (Math.floor(Math.random() * 20) + 10) + "ms";
-
-      document.getElementById("temp").innerText =
-        "TEMP: " + (Math.floor(Math.random() * 10) + 35) + "°C";
-    }, 2000);
-
+    // LOGS
     const logs = [
       "User authentication system online",
       "Database sync completed",
@@ -371,13 +345,20 @@
       "System monitoring active"
     ];
 
-    setInterval(() => {
-      document.getElementById("log").innerText =
-        logs[Math.floor(Math.random() * logs.length)];
-    }, 3500);
+    function updateLogs() {
+      logEl.innerText = logs[Math.floor(Math.random() * logs.length)];
+    }
 
+    // START SEQUENCE
+    typeIntro();
+    startAudio();
+
+    setTimeout(closeIntro, 7000);
+
+    setInterval(updateClock, 1000);
+    setInterval(updateMetrics, 2500);
+    setInterval(updateLogs, 3500);
   </script>
 
 </body>
-
 </html>
