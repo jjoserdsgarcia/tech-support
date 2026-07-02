@@ -17,13 +17,26 @@ from django.contrib.auth.models import User
     
     
     
+class Priority(models.TextChoices):
+    ALTA = 'ALTA', ('Alta')
+    MEDIA = 'MÉDIA', ('Média')
+    BAIXA = 'BAIXA', ('Baixa')
+    
+
+
+class Status(models.TextChoices):
+    ABERTO = 'ABERTO', ('Aberto')
+    FECHADO = 'FECHADO', ('Fechado')
+    EM_ANDAMENTO = 'EM ANDAMENTO', ('Em Andamento')
+    CANCELADO = 'CANCELADO', ('Cancelado')
+
 class Ticket(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=20, default='open')
-    priority = models.CharField(max_length=20, default='medium')
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.EM_ANDAMENTO,)
+    priority = models.CharField(max_length=20, choices=Priority.choices, default=Priority.MEDIA,)
     assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):

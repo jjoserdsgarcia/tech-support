@@ -1243,16 +1243,7 @@ STATUS
 
 
 
-            <a href="#">
-                <i class="bi bi-eye"></i>
-                <span>Entities</span>
-            </a>
 
-
-            <a href="#">
-                <i class="bi bi-map"></i>
-                <span>Levels</span>
-            </a>
 
 
 
@@ -1322,6 +1313,16 @@ STATUS
                 <p>Active Cases</p>
             </div>
 
+            <div class="card">
+                <h2> {{ dashboard_data.cancelled_tickets|default:"0" }} </h2>
+                <p>Unactive Cases</p>
+            </div>
+
+            <div class="card">
+                <h2> {{ dashboard_data.pending_tickets|default:"0" }} </h2>
+                <p>Pending Cases</p>
+            </div>
+
 
             <div class="card">
                 <h2> {{ dashboard_data.entities_count|default:"0" }} </h2>
@@ -1345,22 +1346,42 @@ STATUS
 
             <table>
 
-                <tr>
+                <form method="post">
+                    {% csrf_token %}
 
+                    <div class="center">
+                        <h2>REGISTER ENROLLMENT</h2>
+
+                        <input name="title" placeholder="Título do Ticket">
+                        <input name="description" placeholder="Descreva o seu problema">
+                        <input name="priority" placeholder="Prioridade">
+
+                        <button type="submit">CRIAR TICKET</button>
+                    </div>
+
+                </form>
+
+                <tr>
                     <th>ID</th>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Prioridade</th>
                     <th>Status</th>
-                    <th>Location</th>
 
                 </tr>
 
+                {% for data in dashboard_data.recent_tickets %}
 
                 <tr>
-
-                    <td>-</td>
-                    <td>Waiting Data</td>
-                    <td>LEVEL 0</td>
+                    <td>{{data.id}}</td>
+                    <td>{{data.title}}</td>
+                    <td>{{data.description}}</td>
+                    <td>{{data.priority}}</td>
+                    <td>{{data.status}}</td>
 
                 </tr>
+
+                {% endfor %}
 
 
             </table>
@@ -1391,6 +1412,8 @@ STATUS
 
 
     </script>
+
+
 
 
 </body>

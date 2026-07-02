@@ -32,6 +32,6 @@ urlpatterns = [
     path('register/', registerscreen, name='registerscreen'),
     
 
-    path('ticketing/', views.ticketing2, name='ticketing'),
+    path('ticketing/', views.ticketing, name='ticketing'),
 
 ]
