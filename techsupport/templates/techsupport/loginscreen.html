@@ -137,7 +137,7 @@ drop-shadow(0 0 10px #00ff9d);
 
 transition:.5s;
 
-}
+}s
 
 
 
@@ -587,111 +587,73 @@ filter:brightness(1.2);
 
 }
 
-
-
 /* ========================= */
 /* FOOTER */
 /* ========================= */
 
-
 .footer{
-
 
 margin-top:20px;
 
-
 text-align:center;
-
 
 font-size:9px;
 
-
 letter-spacing:2px;
-
 
 color:#666;
 
-
 }
-
-
 
 /* ========================= */
 /* GLITCH */
 /* ========================= */
 
-
 .glitch{
-
 
 position:relative;
 
-
 display:inline-block;
 
-
 }
-
-
 
 .glitch::before,
 
 .glitch::after{
 
-
 content:"M.E.G";
-
 
 position:absolute;
 
-
 left:0;
-
 
 width:100%;
 
-
 z-index:-1;
 
-
 }
-
-
 
 .glitch::before{
 
-
 color:#def512;
-
 
 top:-2px;
 
-
 animation:glitch 2s infinite;
 
-
 }
-
-
 
 .glitch::after{
 
-
 color:#def512;
-
 
 top:2px;
 
-
 animation:glitch 1.5s infinite;
-
 
 }
 
-
-
 @keyframes glitch{
-
 
 0%{
 
@@ -701,13 +663,11 @@ opacity:.3;
 
 }
 
-
 20%{
 
 transform:translate(-2px,1px);
 
 }
-
 
 40%{
 
@@ -715,20 +675,17 @@ transform:translate(2px,-1px);
 
 }
 
-
 60%{
 
 transform:translate(-1px,0);
 
 }
 
-
 80%{
 
 transform:translate(2px,2px);
 
 }
-
 
 100%{
 
@@ -738,16 +695,13 @@ opacity:.2;
 
 }
 
-
 }
-
 
 </style>
 
 </head>
 
 <body>
-
 
 <!-- VÍDEO DE FUNDO -->
 
@@ -757,31 +711,17 @@ opacity:.2;
 
 </video>
 
-
-
 <div class="overlay"></div>
-
 
 <div class="scanlines"></div>
 
-
-
-
 <!-- ÍCONE INICIAL -->
-
 
 <div class="access-icon" onclick="openLogin()">
     <img src="{% static 'images/meg_logos.png' %}" alt="M.E.G LOGO">
 </div>
 
-
-
-
-
-
-
 <!-- BARRA SUPERIOR -->
-
 
 <div class="topbar">
 
@@ -795,27 +735,17 @@ opacity:.2;
 
 </div>
 
-
-
-
-
-
 <!-- LOGIN -->
 
-
 <div class="login-box" id="loginBox">
-
 
 <h1 class="glitch">
 M.E.G
 </h1>
 
-
 <p>
 INTERNAL ACCESS PORTAL
 </p>
-
-
 
 <div class="input-group">
 
@@ -825,9 +755,6 @@ placeholder="USER ID">
 
 </div>
 
-
-
-
 <div class="input-group">
 
 <input 
@@ -836,18 +763,11 @@ placeholder="PASSWORD">
 
 </div>
 
-
-
-
 <button onclick="auth()">
 
 AUTHENTICATE
 
 </button>
-
-
-
-
 
 <div class="footer">
 
@@ -855,103 +775,53 @@ ULTIMATE SECURITY PROTOCOL • VERIFICATION REQUIRED
 
 </div>
 
-
-
 </div>
-
-
-
-
-
-
-
 
 <script>
 
-
 // ABRIR LOGIN PELO ICONE
-
 
 function openLogin(){
 
-
 const icon = document.querySelector(".access-icon");
-
 
 const box = document.getElementById("loginBox");
 
-
-
 icon.style.opacity="0";
-
 
 icon.style.transform=
 "translate(-50%,-50%) scale(0)";
 
-
-
 setTimeout(()=>{
-
 
 icon.style.display="none";
 
-
 box.classList.add("active");
-
 
 },500);
 
-
-
 }
-
-
-
-
-
-
-
 
 // BOTÃO AUTHENTICATE
 
-
 function auth(){
-
 
 const btn=document.querySelector("button");
 
-
-
 btn.innerHTML="VERIFYING...";
-
 
 btn.disabled=true;
 
-
-
 setTimeout(()=>{
 
-
 btn.innerHTML="ACCESS DENIED";
-
-
 
 btn.style.background=
 "linear-gradient(90deg,#ff0033,#ff8800)";
 
-
-
 },2000);
 
-
-
 }
-
-
-
 </script>
-
-
 </body>
-
 </html>
