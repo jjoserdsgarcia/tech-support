@@ -1,827 +1,784 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>M.E.G ACCESS TERMINAL</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<title>TechSupport - Login</title>
 
 
 <style>
 
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Orbitron',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI", Arial, sans-serif;
 }
 
 
 body{
 
-height:100vh;
-
-overflow:hidden;
-
-background:#05070a;
+    height:100vh;
+    overflow:hidden;
+    background:black;
 
 }
 
 
-/* ========================= */
-/* VIDEO FUNDO */
-/* ========================= */
+/* =========================
+   VIDEO FUNDO LOGIN
+========================= */
 
 
-.background-video{
+.video-bg{
 
-position:fixed;
+    position:fixed;
 
-top:0;
+    top:0;
+    left:0;
 
-left:0;
+    width:100%;
+    height:100%;
 
-width:100%;
+    object-fit:cover;
 
-height:100%;
-
-object-fit:cover;
-
-filter:brightness(.25) contrast(1.3);
-
-transform:scale(1.05);
-
-z-index:-3;
+    z-index:-2;
 
 }
 
 
 
-/* camada escura */
+/* ESCURECER VIDEO */
 
 .overlay{
 
-position:fixed;
+    position:fixed;
 
-inset:0;
+    inset:0;
 
-background:rgba(0,0,0,.35);
+    background:
 
-z-index:-2;
+    linear-gradient(
+        rgba(0,0,0,.45),
+        rgba(0,0,0,.85)
+    );
 
-}
-
-
-
-/* ========================= */
-/* ICONE CENTRAL */
-/* ========================= */
-
-
-.access-icon{
-
-position:absolute;
-
-top:50%;
-left:50%;
-
-transform:translate(-50%,-50%);
-
-width:140px;
-height:140px;
-
-border-radius:50%;
-
-border:2px solid #00ff9d;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-cursor:pointer;
-
-background:rgba(0,255,157,.05);
-
-box-shadow:
-0 0 20px #00ff9d,
-inset 0 0 20px rgba(0,255,157,.4);
-
-animation:pulse 2s infinite;
-
-transition:.5s;
-
-overflow:hidden;
-
-}
-
-
-/* LOGO DENTRO DO ICONE */
-
-.access-icon img{
-
-width:250px;
-
-height: 250px;
-
-object-fit:contain;
-
-filter:
-drop-shadow(0 0 10px #00ff9d);
-
-transition:.5s;
-
-}s
-
-
-
-/* EFEITO AO PASSAR O MOUSE */
-
-.access-icon:hover{
-
-transform:
-translate(-50%,-50%)
-scale(1.15);
-
-}
-
-
-.access-icon:hover img{
-
-filter:
-drop-shadow(0 0 25px #00ff9d);
-
-transform:scale(1.1);
+    z-index:-1;
 
 }
 
 
 
-/* PULSAÇÃO */
 
-@keyframes pulse{
-
-
-0%{
-
-box-shadow:
-0 0 15px #def512;
-
-}
+/* =========================
+   INTRO
+========================= */
 
 
-50%{
+.intro-screen{
 
-box-shadow:
-0 0 60px #def512;
+    position:fixed;
 
-}
+    inset:0;
 
+    background:black;
 
-100%{
+    z-index:9999;
 
-box-shadow:
-0 0 15px #def512;
+    display:flex;
 
-}
+    justify-content:center;
 
+    align-items:center;
 
-}
+    overflow:hidden;
 
+    opacity:1;
 
-
-/* ========================= */
-/* TOP BAR */
-/* ========================= */
-
-
-.topbar{
-
-
-position:absolute;
-
-
-top:0;
-
-
-width:100%;
-
-
-padding:18px 25px;
-
-
-display:flex;
-
-
-justify-content:space-between;
-
-
-color:#aaa;
-
-
-font-size:11px;
-
-
-letter-spacing:2px;
-
-
-background:rgba(0,0,0,.3);
-
+    transition:opacity 2s ease, visibility 2s;
 
 }
 
 
-.status-online{
 
-color:#00ff88;
+.intro-screen video{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
 
 }
 
-/* ========================= */
-/* LOGIN BOX */
-/* ========================= */
+
+
+.intro-screen::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.5);
+
+}
+
+
+
+
+.intro-text{
+
+    position:absolute;
+
+    z-index:2;
+
+    text-align:center;
+
+    color:white;
+
+}
+
+
+
+
+.intro-text h1{
+
+    font-size:65px;
+
+    letter-spacing:12px;
+
+    color:#e6c86e;
+
+
+    text-shadow:
+
+    0 0 20px #d4af37,
+
+    0 0 40px #d4af37;
+
+}
+
+
+
+.intro-text p{
+
+    margin-top:20px;
+
+    font-size:22px;
+
+    color:#ddd;
+
+}
+
+
+
+
+.fade-out{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+}
+
+
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
+
+
+.container{
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+
 
 
 .login-box{
 
 
-position:absolute;
+    width:420px;
 
 
-top:50%;
+    padding:45px;
 
 
-left:50%;
+    background:
 
-
-transform:
-
-translate(-50%,-45%)
-
-scale(.8);
+    rgba(255,255,255,.08);
 
 
 
-width:420px;
+    backdrop-filter:blur(15px);
 
 
 
-padding:40px;
+    border-radius:18px;
 
 
 
-opacity:0;
+    border:
+
+    1px solid rgba(255,255,255,.15);
 
 
 
-pointer-events:none;
+    box-shadow:
+
+    0 0 40px black,
+
+    inset 0 0 30px rgba(255,200,100,.08);
 
 
 
-background:
-
-linear-gradient(
-
-135deg,
-
-rgba(0,255,157,.10),
-
-rgba(0,0,0,.85)
-
-);
-
-
-
-border:
-
-1px solid rgba(0,255,157,.4);
-
-
-
-box-shadow:
-
-
-0 0 40px rgba(0,255,157,.25),
-
-
-inset 0 0 50px rgba(0,255,157,.05);
-
-
-
-backdrop-filter:blur(15px);
-
-
-
-transition:1s;
-
+    color:white;
 
 
 }
 
 
 
-/* aparece depois do clique */
-
-
-.login-box.active{
-
-
-opacity:1;
-
-
-pointer-events:auto;
-
-
-
-transform:
-
-translate(-50%,-50%)
-
-scale(1);
-
-
-
-}
-
-
-
-/* linha de scanner */
-
-
-.login-box::before{
-
-
-content:"";
-
-
-position:absolute;
-
-
-top:0;
-
-
-left:0;
-
-
-height:2px;
-
-
-width:100%;
-
-
-background:#00ff9d;
-
-
-animation:scan 2s infinite;
-
-
-}
-
-
-
-@keyframes scan{
-
-
-0%{
-
-transform:translateX(-100%);
-
-}
-
-
-100%{
-
-transform:translateX(100%);
-
-}
-
-
-}
-
-
-
-/* ========================= */
-/* TITULO */
-/* ========================= */
 
 
 .login-box h1{
 
 
-text-align:center;
+    text-align:center;
 
 
-font-size:25px;
+    margin-bottom:35px;
 
 
-letter-spacing:6px;
+    font-size:38px;
 
 
-color:white;
+    letter-spacing:5px;
 
 
-margin-bottom:8px;
-
-
-}
+    color:#e6c86e;
 
 
 
-.login-box p{
+    text-shadow:
 
+    0 0 10px #d4af37,
 
-text-align:center;
-
-
-font-size:10px;
-
-
-letter-spacing:3px;
-
-
-color:#777;
-
-
-margin-bottom:25px;
+    0 0 20px #d4af37;
 
 
 }
 
 
 
-/* ========================= */
-/* INPUTS */
-/* ========================= */
+
+.input-box{
+
+    position:relative;
+
+    margin-bottom:20px;
+
+}
 
 
-.input-group{
 
 
-margin-bottom:15px;
+
+input{
+
+
+    width:100%;
+
+
+    padding:15px;
+
+
+    padding-right:50px;
+
+
+    border:none;
+
+
+    outline:none;
+
+
+    border-radius:10px;
+
+
+
+    background:
+
+    rgba(255,255,255,.12);
+
+
+
+    color:white;
+
+
+    font-size:16px;
 
 
 }
 
 
 
-.input-group input{
 
+input::placeholder{
 
-width:100%;
+    color:#ddd;
 
-
-padding:14px;
-
-
-background:rgba(255,255,255,.05);
+}
 
 
 
-border:
-
-1px solid rgba(255,255,255,.1);
 
 
+/* OLHO */
 
-color:white;
-
-
-outline:none;
+.olho{
 
 
-font-size:12px;
+    position:absolute;
 
 
-letter-spacing:2px;
+    right:15px;
 
 
-transition:.3s;
+    top:50%;
+
+
+    transform:translateY(-50%);
+
+
+
+    cursor:pointer;
+
+
+    font-size:20px;
+
+
+    color:#e6c86e;
 
 
 }
 
 
 
-.input-group input:focus{
 
+.olho:hover{
 
-border-color:#def512;
-
-
-box-shadow:
-
-0 0 15px rgba(0,255,157,.4);
-
+    color:white;
 
 }
 
 
-
-/* ========================= */
-/* BOTAO */
-/* ========================= */
 
 
 button{
 
 
-width:100%;
+    width:100%;
 
 
-padding:14px;
-
-
-
-border:none;
-
-
-cursor:pointer;
+    padding:15px;
 
 
 
-background:
+    border:none;
 
-linear-gradient(
 
-90deg,
-
-#00ff9d,
-
-#00b8ff
-
-);
+    border-radius:10px;
 
 
 
-color:#000;
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    #c89b3c,
+
+    #f5db8a
+
+    );
 
 
 
-font-weight:bold;
+    color:#222;
 
 
-letter-spacing:3px;
+    font-size:17px;
 
 
-transition:.3s;
+    font-weight:bold;
+
+
+    cursor:pointer;
+
+
+
+    transition:.3s;
 
 
 }
+
+
 
 
 
 button:hover{
 
 
-transform:scale(1.04);
+    transform:scale(1.04);
 
 
-filter:brightness(1.2);
+    box-shadow:
+
+    0 0 25px #d4af37;
 
 
 }
 
-/* ========================= */
-/* FOOTER */
-/* ========================= */
 
-.footer{
 
-margin-top:20px;
 
-text-align:center;
 
-font-size:9px;
+.erro{
 
-letter-spacing:2px;
 
-color:#666;
+    margin-top:20px;
 
-}
 
-/* ========================= */
-/* GLITCH */
-/* ========================= */
+    text-align:center;
 
-.glitch{
 
-position:relative;
+    color:#ff6b6b;
 
-display:inline-block;
+
+    font-weight:bold;
+
 
 }
 
-.glitch::before,
 
-.glitch::after{
 
-content:"M.E.G";
 
-position:absolute;
 
-left:0;
+.cadastro{
 
-width:100%;
 
-z-index:-1;
+    margin-top:25px;
 
-}
 
-.glitch::before{
+    text-align:center;
 
-color:#def512;
-
-top:-2px;
-
-animation:glitch 2s infinite;
 
 }
 
-.glitch::after{
 
-color:#def512;
 
-top:2px;
 
-animation:glitch 1.5s infinite;
+.cadastro a{
 
-}
 
-@keyframes glitch{
+    color:#e6c86e;
 
-0%{
 
-transform:translate(0);
+    text-decoration:none;
 
-opacity:.3;
 
 }
 
-20%{
 
-transform:translate(-2px,1px);
 
-}
+.cadastro a:hover{
 
-40%{
-
-transform:translate(2px,-1px);
+    text-decoration:underline;
 
 }
 
-60%{
-
-transform:translate(-1px,0);
-
-}
-
-80%{
-
-transform:translate(2px,2px);
-
-}
-
-100%{
-
-transform:translate(0);
-
-opacity:.2;
-
-}
-
-}
 
 </style>
 
+
 </head>
+
+
 
 <body>
 
-<!-- VÍDEO DE FUNDO -->
 
-<video class="background-video" autoplay muted loop playsinline>
 
-    <source src="{% static 'video/video.mp4' %}" type="video/mp4">
+<!-- VIDEO DO LOGIN -->
+
+<video class="video-bg" autoplay muted loop>
+
+    <source src="/static/video/video.mp4" type="video/mp4">
 
 </video>
 
+
+
+
 <div class="overlay"></div>
 
-<div class="scanlines"></div>
 
-<!-- ÍCONE INICIAL -->
 
-<div class="access-icon" onclick="openLogin()">
-    <img src="{% static 'images/meg_logos.png' %}" alt="M.E.G LOGO">
-</div>
 
-<!-- BARRA SUPERIOR -->
 
-<div class="topbar">
+<!-- INTRO -->
 
-    <div>M.E.G SYSTEMS v2.7.1</div>
+<div class="intro-screen" id="intro">
 
-    <div>NODE : BACKROOMS-02</div>
 
-    <div class="status-online">
-        STATUS : ONLINE
+    <video id="introVideo" autoplay muted>
+
+        <source src="/static/video/Fall.mp4" type="video/mp4">
+
+    </video>
+
+
+
+    <div class="intro-text">
+
+
+        <h1>TECHSUPPORT</h1>
+
+
+        <p>Inicializando sistema...</p>
+
+
     </div>
 
+
 </div>
+
+
+
+
+
+
 
 <!-- LOGIN -->
 
-<div class="login-box" id="loginBox">
 
-<h1 class="glitch">
-M.E.G
-</h1>
+<div class="container">
 
-<p>
-INTERNAL ACCESS PORTAL
-</p>
 
-<div class="input-group">
+<div class="login-box">
 
-<input 
-type="text" 
-placeholder="USER ID">
+
+
+<h1>TECHSUPPORT</h1>
+
+
+
+<form method="POST">
+
+
+{% csrf_token %}
+
+
+
+<div class="input-box">
+
+
+<input
+
+type="text"
+
+name="username"
+
+placeholder="Usuário"
+
+required>
+
 
 </div>
 
-<div class="input-group">
 
-<input 
-type="password" 
-placeholder="PASSWORD">
+
+
+
+<div class="input-box">
+
+
+<input
+
+type="password"
+
+id="password"
+
+name="password"
+
+placeholder="Senha"
+
+required>
+
+
+
+<span class="olho" onclick="mostrarSenha()">
+
+👁
+
+</span>
+
+
 
 </div>
 
-<button onclick="auth()">
 
-AUTHENTICATE
+
+
+
+<button type="submit">
+
+ENTRAR
 
 </button>
 
-<div class="footer">
 
-ULTIMATE SECURITY PROTOCOL • VERIFICATION REQUIRED
+
+
+</form>
+
+
+
+
+{% if error %}
+
+<div class="erro">
+
+{{ error }}
+
+</div>
+
+{% endif %}
+
+
+
+
+
+<div class="cadastro">
+
+
+<a href="{% url 'registerscreen' %}">
+
+Criar conta
+
+</a>
+
+
+</div>
+
+
 
 </div>
 
 </div>
+
+
+
+
+
+
 
 <script>
 
-// ABRIR LOGIN PELO ICONE
 
-function openLogin(){
+// MOSTRAR SENHA
 
-const icon = document.querySelector(".access-icon");
+function mostrarSenha(){
 
-const box = document.getElementById("loginBox");
 
-icon.style.opacity="0";
+    let senha = document.getElementById("password");
 
-icon.style.transform=
-"translate(-50%,-50%) scale(0)";
 
-setTimeout(()=>{
+    if(senha.type === "password"){
 
-icon.style.display="none";
 
-box.classList.add("active");
+        senha.type="text";
 
-},500);
 
-}
+    }
 
-// BOTÃO AUTHENTICATE
+    else{
 
-function auth(){
 
-const btn=document.querySelector("button");
+        senha.type="password";
 
-btn.innerHTML="VERIFYING...";
 
-btn.disabled=true;
+    }
 
-setTimeout(()=>{
-
-btn.innerHTML="ACCESS DENIED";
-
-btn.style.background=
-"linear-gradient(90deg,#ff0033,#ff8800)";
-
-},2000);
 
 }
+
+
+
+
+
+// TRANSIÇÃO INTRO
+
+
+window.onload=function(){
+
+
+    let intro=document.getElementById("intro");
+
+    let video=document.getElementById("introVideo");
+
+
+
+    video.addEventListener("ended",function(){
+
+
+        intro.classList.add("fade-out");
+
+
+    });
+
+
+
+    // segurança caso o vídeo seja longo
+
+    setTimeout(function(){
+
+
+        intro.classList.add("fade-out");
+
+
+    },10000);
+
+
+
+};
+
+
+
 </script>
+
+
+
 </body>
+
 </html>
