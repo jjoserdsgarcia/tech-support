@@ -42,16 +42,15 @@
 
 
 
-        body {
-
-            font-family: 'Inter', sans-serif;
-
-            height: 100vh;
-
-            overflow: hidden;
+      body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
 
 
-            background:
+
+    background:
 
                 radial-gradient(circle at 50% -20%,
                     #fff4a8,
@@ -1194,6 +1193,141 @@ STATUS
 
 
         }
+
+
+
+        /* =========================
+   AJUSTE DO REGISTER
+========================= */
+
+
+.panel table {
+
+    margin-top: 20px;
+
+}
+
+
+
+.panel form {
+
+    display:block;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.center {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.center h2 {
+
+    font-size:26px;
+
+    color:#111;
+
+    font-weight:800;
+
+    margin-bottom:5px;
+
+}
+
+
+
+.center input {
+
+    height:40px;
+
+    padding:0 15px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+    background:white;
+
+    font-family:Inter;
+
+}
+
+
+
+.center input:focus {
+
+    outline:none;
+
+    border-color:#e8d66b;
+
+}
+
+
+
+.center button {
+
+    width:180px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#111;
+
+    color:#ffe66d;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+
+
+.center button:hover {
+
+    background:#ffe66d;
+
+    color:#111;
+
+}
+
+
+
+/* tabela */
+
+.panel table {
+
+    border-collapse:collapse;
+
+}
+
+
+
+.panel th {
+
+    height:50px;
+
+}
+
+
+
+.panel td {
+
+    height:50px;
+
+}
     </style>
 
 </head>
@@ -1341,53 +1475,76 @@ STATUS
 
 
 
-        <div class="panel">
+       <div class="panel">
 
 
-            <table>
+    <form method="post">
 
-                <form method="post">
-                    {% csrf_token %}
+        {% csrf_token %}
 
-                    <div class="center">
-                        <h2>REGISTER ENROLLMENT</h2>
+        <div class="center">
 
-                        <input name="title" placeholder="Título do Ticket">
-                        <input name="description" placeholder="Descreva o seu problema">
-                        <input name="priority" placeholder="Prioridade">
+            <h2>REGISTER ENROLLMENT</h2>
 
-                        <button type="submit">CRIAR TICKET</button>
-                    </div>
+            <input name="title" placeholder="Título do Ticket">
 
-                </form>
+            <input name="description" placeholder="Descreva o seu problema">
 
-                <tr>
-                    <th>ID</th>
-                    <th>Título</th>
-                    <th>Descrição</th>
-                    <th>Prioridade</th>
-                    <th>Status</th>
+            <input name="priority" placeholder="Prioridade">
 
-                </tr>
-
-                {% for data in dashboard_data.recent_tickets %}
-
-                <tr>
-                    <td>{{data.id}}</td>
-                    <td>{{data.title}}</td>
-                    <td>{{data.description}}</td>
-                    <td>{{data.priority}}</td>
-                    <td>{{data.status}}</td>
-
-                </tr>
-
-                {% endfor %}
-
-
-            </table>
-
+            <button type="submit">
+                CRIAR TICKET
+            </button>
 
         </div>
+
+    </form>
+
+
+
+    <table>
+
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Título</th>
+
+            <th>Descrição</th>
+
+            <th>Prioridade</th>
+
+            <th>Status</th>
+
+        </tr>
+
+
+
+        {% for data in dashboard_data.recent_tickets %}
+
+        <tr>
+
+            <td>{{data.id}}</td>
+
+            <td>{{data.title}}</td>
+
+            <td>{{data.description}}</td>
+
+            <td>{{data.priority}}</td>
+
+            <td>{{data.status}}</td>
+
+        </tr>
+
+        {% endfor %}
+
+
+
+    </table>
+
+
+</div>
 
 
 
