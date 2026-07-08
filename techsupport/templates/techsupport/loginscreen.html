@@ -732,7 +732,6 @@
 
 <body>
 
-
     <!-- VÍDEO DE FUNDO -->
 
     <video class="background-video" autoplay muted loop playsinline>
@@ -786,30 +785,56 @@
 
     <!-- LOGIN -->
 
-    <form method="POST">
-        {% csrf_token %}
 
-        <div class="mb-3">
-            <label class="form-label">Usuário ou Email</label>
-            <input type="text" name="username" class="form-control" placeholder="Digite seu usuário ou email" required>
+    <div class="login-box" id="loginBox">
+
+
+        <h1 class="glitch">
+            M.E.G
+        </h1>
+
+
+        <p>
+            INTERNAL ACCESS PORTAL
+        </p>
+
+
+
+        <div class="input-group">
+
+            <input type="text" placeholder="USER ID">
+
         </div>
 
-        <div class="mb-3">
+
+
+
+        <div class="input-group">
+
+            <input type="password" placeholder="PASSWORD">
 
         </div>
 
-        <label class="form-label">Senha</label>
-        <input type="password" name="password" class="form-control" placeholder="Digite sua senha" required>
-        {% if error %}
-        <div class="alert alert-danger" role="alert" style="margin-top: 15px;">
-            {{ error }}
-        </div>
-        {% endif %}
 
-        <div class="d-grid">
-            <button type="submit" class="btn btn-steam" href="{% url 'mainlobby' %}">Entrar</button>
+
+
+        <button onclick="auth()">
+
+            AUTHENTICATE
+
+        </button>
+
+
+
+
+
+        <div class="footer">
+
+            ULTIMATE SECURITY PROTOCOL • VERIFICATION REQUIRED
+
         </div>
-    </form>
+
+
 
     </div>
 
@@ -869,6 +894,37 @@
         // BOTÃO AUTHENTICATE
 
 
+        function auth() {
+
+
+            const btn = document.querySelector("button");
+
+
+
+            btn.innerHTML = "VERIFYING...";
+
+
+            btn.disabled = true;
+
+
+
+            setTimeout(() => {
+
+
+                btn.innerHTML = "ACCESS DENIED";
+
+
+
+                btn.style.background =
+                    "linear-gradient(90deg,#ff0033,#ff8800)";
+
+
+
+            }, 2000);
+
+
+
+        }
 
 
 
