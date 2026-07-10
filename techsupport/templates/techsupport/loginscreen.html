@@ -3,522 +3,516 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TechSupport - Login</title>
-
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Segoe UI", Arial, sans-serif;
-}
+    <title>TechSupport - Login</title>
 
 
-body{
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
 
-    height:100vh;
-    overflow:hidden;
-    background:black;
 
-}
+        body {
+
+            height: 100vh;
+            overflow: hidden;
+            background: black;
+
+        }
 
 
-/* =========================
+        /* =========================
    VIDEO FUNDO LOGIN
 ========================= */
 
 
-.video-bg{
+        .video-bg {
 
-    position:fixed;
+            position: fixed;
 
-    top:0;
-    left:0;
+            top: 0;
+            left: 0;
 
-    width:100%;
-    height:100%;
+            width: 100%;
+            height: 100%;
 
-    object-fit:cover;
+            object-fit: cover;
 
-    z-index:-2;
+            z-index: -2;
 
-}
+        }
 
 
 
-/* ESCURECER VIDEO */
+        /* ESCURECER VIDEO */
 
-.overlay{
+        .overlay {
 
-    position:fixed;
+            position: fixed;
 
-    inset:0;
+            inset: 0;
 
-    background:
+            background:
 
-    linear-gradient(
-        rgba(0,0,0,.45),
-        rgba(0,0,0,.85)
-    );
+                linear-gradient(rgba(0, 0, 0, .45),
+                    rgba(0, 0, 0, .85));
 
-    z-index:-1;
+            z-index: -1;
 
-}
+        }
 
 
 
 
-/* =========================
+        /* =========================
    INTRO
 ========================= */
 
 
-.intro-screen{
+        .intro-screen {
 
-    position:fixed;
+            position: fixed;
 
-    inset:0;
+            inset: 0;
 
-    background:black;
+            background: black;
 
-    z-index:9999;
+            z-index: 9999;
 
-    display:flex;
+            display: flex;
 
-    justify-content:center;
+            justify-content: center;
 
-    align-items:center;
+            align-items: center;
 
-    overflow:hidden;
+            overflow: hidden;
 
-    opacity:1;
+            opacity: 1;
 
-    transition:opacity 2s ease, visibility 2s;
+            transition: opacity 2s ease, visibility 2s;
 
-}
+        }
 
 
 
-.intro-screen video{
+        .intro-screen video {
 
-    width:100%;
+            width: 100%;
 
-    height:100%;
+            height: 100%;
 
-    object-fit:cover;
+            object-fit: cover;
 
-}
+        }
 
 
 
-.intro-screen::after{
+        .intro-screen::after {
 
-    content:"";
+            content: "";
 
-    position:absolute;
+            position: absolute;
 
-    inset:0;
+            inset: 0;
 
-    background:rgba(0,0,0,.5);
+            background: rgba(0, 0, 0, .5);
 
-}
+        }
 
 
 
 
-.intro-text{
+        .intro-text {
 
-    position:absolute;
+            position: absolute;
 
-    z-index:2;
+            z-index: 2;
 
-    text-align:center;
+            text-align: center;
 
-    color:white;
+            color: white;
 
-}
+        }
 
 
 
 
-.intro-text h1{
+        .intro-text h1 {
 
-    font-size:65px;
+            font-size: 65px;
 
-    letter-spacing:12px;
+            letter-spacing: 12px;
 
-    color:#e6c86e;
+            color: #e6c86e;
 
 
-    text-shadow:
+            text-shadow:
 
-    0 0 20px #d4af37,
+                0 0 20px #d4af37,
 
-    0 0 40px #d4af37;
+                0 0 40px #d4af37;
 
-}
+        }
 
 
 
-.intro-text p{
+        .intro-text p {
 
-    margin-top:20px;
+            margin-top: 20px;
 
-    font-size:22px;
+            font-size: 22px;
 
-    color:#ddd;
+            color: #ddd;
 
-}
+        }
 
 
 
 
-.fade-out{
+        .fade-out {
 
-    opacity:0;
+            opacity: 0;
 
-    visibility:hidden;
+            visibility: hidden;
 
-    pointer-events:none;
+            pointer-events: none;
 
-}
+        }
 
 
 
 
 
-/* =========================
+        /* =========================
    LOGIN
 ========================= */
 
 
 
-.container{
+        .container {
 
-    height:100vh;
+            height: 100vh;
 
-    display:flex;
+            display: flex;
 
-    justify-content:center;
+            justify-content: center;
 
-    align-items:center;
+            align-items: center;
 
-}
+        }
 
 
 
 
 
-.login-box{
+        .login-box {
 
+            width: 420px;
 
-    width:420px;
+            width: 420px;
 
 
-    padding:45px;
+            padding: 45px;
 
 
-    background:
+            background:
 
-    rgba(255,255,255,.08);
+                rgba(255, 255, 255, .08);
 
 
 
-    backdrop-filter:blur(15px);
+            backdrop-filter: blur(15px);
 
 
 
-    border-radius:18px;
+            border-radius: 18px;
 
 
 
-    border:
+            border:
 
-    1px solid rgba(255,255,255,.15);
+                1px solid rgba(255, 255, 255, .15);
 
 
 
-    box-shadow:
+            box-shadow:
 
-    0 0 40px black,
+                0 0 40px black,
 
-    inset 0 0 30px rgba(255,200,100,.08);
+                inset 0 0 30px rgba(255, 200, 100, .08);
 
 
 
-    color:white;
+            color: white;
 
 
-}
+        }
 
 
 
 
 
-.login-box h1{
+        .login-box h1 {
 
 
-    text-align:center;
+            text-align: center;
 
 
-    margin-bottom:35px;
+            margin-bottom: 35px;
 
 
-    font-size:38px;
+            font-size: 38px;
 
 
-    letter-spacing:5px;
+            letter-spacing: 5px;
 
 
-    color:#e6c86e;
+            color: #e6c86e;
 
 
 
-    text-shadow:
+            text-shadow:
 
-    0 0 10px #d4af37,
+                0 0 10px #d4af37,
 
-    0 0 20px #d4af37;
+                0 0 20px #d4af37;
 
 
-}
+        }
 
 
 
 
-.input-box{
+        .input-box {
 
-    position:relative;
+            position: relative;
 
-    margin-bottom:20px;
+            margin-bottom: 20px;
 
-}
+        }
 
 
 
 
 
-input{
+        input {
 
 
-    width:100%;
+            width: 100%;
 
 
-    padding:15px;
+            padding: 15px;
 
 
-    padding-right:50px;
+            padding-right: 50px;
 
 
-    border:none;
+            border: none;
 
 
-    outline:none;
+            outline: none;
 
 
-    border-radius:10px;
+            border-radius: 10px;
 
 
 
-    background:
+            background:
 
-    rgba(255,255,255,.12);
+                rgba(255, 255, 255, .12);
 
 
 
-    color:white;
+            color: white;
 
 
-    font-size:16px;
+            font-size: 16px;
 
 
-}
+        }
 
 
 
 
-input::placeholder{
+        input::placeholder {
 
-    color:#ddd;
+            color: #ddd;
 
-}
+        }
 
 
 
 
 
-/* OLHO */
+        /* OLHO */
 
-.olho{
+        .olho {
 
 
-    position:absolute;
+            position: absolute;
 
 
-    right:15px;
+            right: 15px;
 
 
-    top:50%;
+            top: 50%;
 
 
-    transform:translateY(-50%);
+            transform: translateY(-50%);
 
 
 
-    cursor:pointer;
+            cursor: pointer;
 
 
-    font-size:20px;
+            font-size: 20px;
 
 
-    color:#e6c86e;
+            color: #e6c86e;
 
 
-}
+        }
 
 
 
 
-.olho:hover{
+        .olho:hover {
 
-    color:white;
+            color: white;
 
-}
+        }
 
 
 
 
-button{
+        button {
 
 
-    width:100%;
+            width: 100%;
 
 
-    padding:15px;
+            padding: 15px;
 
 
 
-    border:none;
+            border: none;
 
 
-    border-radius:10px;
+            border-radius: 10px;
 
 
 
-    background:
+            background:
 
-    linear-gradient(
+                linear-gradient(90deg,
 
-    90deg,
+                    #c89b3c,
 
-    #c89b3c,
+                    #f5db8a);
 
-    #f5db8a
 
-    );
+            color: #000;
 
+            color: #222;
 
 
-    color:#222;
+            font-size: 17px;
 
 
-    font-size:17px;
+            font-weight: bold;
 
+            letter-spacing: 3px;
 
-    font-weight:bold;
+            cursor: pointer;
 
 
-    cursor:pointer;
 
+            transition: .3s;
 
 
-    transition:.3s;
+        }
 
 
-}
 
 
 
+        button:hover {
 
 
-button:hover{
+            transform: scale(1.04);
 
 
-    transform:scale(1.04);
+            box-shadow:
 
+                0 0 25px #d4af37;
 
-    box-shadow:
 
-    0 0 25px #d4af37;
+        }
 
 
-}
 
 
 
+        .erro {
 
 
-.erro{
+            margin-top: 20px;
 
 
-    margin-top:20px;
+            text-align: center;
 
 
-    text-align:center;
+            color: #ff6b6b;
 
 
-    color:#ff6b6b;
+            font-weight: bold;
 
 
-    font-weight:bold;
+        }
 
 
-}
 
 
 
+        .cadastro {
 
 
-.cadastro{
+            margin-top: 25px;
 
 
-    margin-top:25px;
+            text-align: center;
 
 
-    text-align:center;
+        }
 
 
-}
 
 
+        .cadastro a {
 
 
-.cadastro a{
+            color: #e6c86e;
 
 
-    color:#e6c86e;
+            text-decoration: none;
 
 
-    text-decoration:none;
+        }
 
 
-}
 
+        .cadastro a:hover {
 
+            text-decoration: underline;
 
-.cadastro a:hover{
-
-    text-decoration:underline;
-
-}
-
-
-</style>
+        }
+    </style>
 
 
 </head>
@@ -529,98 +523,90 @@ button:hover{
 
 
 
-<!-- VIDEO DO LOGIN -->
+    <!-- VIDEO DO LOGIN -->
 
-<video class="video-bg" autoplay muted loop>
+    <video class="video-bg" autoplay muted loop>
 
-    <source src="/static/video/video.mp4" type="video/mp4">
-
-</video>
-
-
-
-
-<div class="overlay"></div>
-
-
-
-
-
-<!-- INTRO -->
-
-<div class="intro-screen" id="intro">
-
-
-    <video id="introVideo" autoplay muted>
-
-        <source src="/static/video/Fall.mp4" type="video/mp4">
+        <source src="/static/video/video.mp4" type="video/mp4">
 
     </video>
 
 
 
-    <div class="intro-text">
+
+    <div class="overlay"></div>
 
 
-        <h1>TECHSUPPORT</h1>
 
 
-        <p>Inicializando sistema...</p>
+
+    <!-- INTRO -->
+
+    <div class="intro-screen" id="intro">
+
+
+        <video id="introVideo" autoplay muted>
+
+            <source src="/static/video/Fall.mp4" type="video/mp4">
+
+        </video>
+
+
+
+        <div class="intro-text">
+
+
+            <h1>TECHSUPPORT</h1>
+
+
+            <p>Inicializando sistema...</p>
+
+
+        </div>
 
 
     </div>
 
 
-</div>
 
 
 
 
 
+    <!-- LOGIN -->
 
 
-<!-- LOGIN -->
+    <div class="container">
 
 
-<div class="container">
-
-
-<div class="login-box">
-
-
-
-<h1>TECHSUPPORT</h1>
+        <div class="login-box">
 
 
 
-<form method="POST">
-
-
-{% csrf_token %}
+            <h1>TECHSUPPORT</h1>
 
 
 
-<div class="input-box">
+            <form method="POST">
 
 
-<input
-
-type="text"
-
-name="username"
-
-placeholder="Usuário"
-
-required>
+                {% csrf_token %}
 
 
-</div>
+
+                <div class="input-box">
+
+
+                    <input type="text" name="username" placeholder="Usuário" required>
+
+
+                </div>
 
 
 
 
 
-<div class="input-box">
+                <div class="input-box">
 
 
 <input
@@ -636,118 +622,137 @@ placeholder="Senha"
 required>
 
 
-<span class="olho" onclick="mostrarSenha()">
+                    <span class="olho" onclick="mostrarSenha()">
 
-👁
+                        👁
 
-</span>
+                    </span>
 
 
-</div>
 
-<button type="submit">
+                </div>
 
-ENTRAR
 
-</button>
 
-</form>
 
-{% if error %}
 
-<div class="erro">
+                <button type="submit">
 
-{{ error }}
+                    ENTRAR
 
-</div>
+                </button>
 
-{% endif %}
 
-<div class="cadastro">
 
 
-<a href="{% url 'registerscreen' %}">
+            </form>
 
-Criar conta
 
-</a>
 
 
-</div>
+            {% if error %}
 
+            <div class="erro">
 
+                {{ error }}
 
-</div>
+            </div>
 
-</div>
+            {% endif %}
 
-<script>
 
 
-// MOSTRAR SENHA
 
-function mostrarSenha(){
 
+            <div class="cadastro">
 
-    let senha = document.getElementById("password");
 
+                <a href="{% url 'registerscreen' %}">
 
-    if(senha.type === "password"){
+                    Criar conta
 
+                </a>
 
-        senha.type="text";
 
+            </div>
 
-    }
 
-    else{
 
+        </div>
 
-        senha.type="password";
+    </div>
 
+    <script>
 
-    }
 
+        // MOSTRAR SENHA
 
-}
+        function mostrarSenha() {
 
-// TRANSIÇÃO INTRO
 
+            let senha = document.getElementById("password");
 
-window.onload=function(){
 
+            if (senha.type === "password") {
 
-    let intro=document.getElementById("intro");
 
-    let video=document.getElementById("introVideo");
+                senha.type = "text";
 
 
+            }
 
-    video.addEventListener("ended",function(){
+            else {
 
 
-        intro.classList.add("fade-out");
+                senha.type = "password";
 
 
-    });
+            }
 
 
+        }
 
-    // segurança caso o vídeo seja longo
+        // TRANSIÇÃO INTRO
 
-    setTimeout(function(){
 
+        window.onload = function () {
 
-        intro.classList.add("fade-out");
 
+            let intro = document.getElementById("intro");
 
-    },10000);
+            let video = document.getElementById("introVideo");
 
 
 
-};
+            video.addEventListener("ended", function () {
 
-</script>
+
+                intro.classList.add("fade-out");
+
+
+            });
+
+
+
+            // segurança caso o vídeo seja longo
+
+            setTimeout(function () {
+
+
+                intro.classList.add("fade-out");
+
+
+            }, 10000);
+
+
+
+        };
+
+
+
+    </script>
+
+
 
 </body>
 
