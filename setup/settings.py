@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -75,11 +76,17 @@ WSGI_APPLICATION = 'setup.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres.hjjhyehldkjdxqnuknjx',
+        'PASSWORD': 'uHgJmO25jJBjLUcg',
+        'HOST': 'aws-1-us-west-2.pooler.supabase.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
-}
-
+}   
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -121,3 +128,7 @@ STATIC_URL = '/static/'
 LOGIN_URL = 'loginscreen'
 LOGIN_REDIRECT_URL = 'mainlobby'
 LOGOUT_REDIRECT_URL = 'loginscreen'
+
+
+
+

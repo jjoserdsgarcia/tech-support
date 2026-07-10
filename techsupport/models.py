@@ -50,6 +50,23 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.author} on {self.ticket}'
     
+
+    class SystemLog(models.Model):
+     message = models.CharField(max_length=255)
+
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.message
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.message
+    
 class Levels(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField()
@@ -64,3 +81,4 @@ class Entities(models.Model):
     def __str__(self):
         return self.name
     
+

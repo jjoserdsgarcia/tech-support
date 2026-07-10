@@ -34,4 +34,13 @@ urlpatterns = [
 
     path('ticketing/', views.ticketing, name='ticketing'),
 
+    # Painel Staff
+    path('admin-panel/', views.admin_panel, name='admin_panel'),
+
+    path("admin-panel/", views.admin_panel, name="admin_panel"),
+
+path("admin-panel/view/<int:ticket_id>/", views.view_ticket, name="view_ticket"),
+path("admin-panel/edit/<int:ticket_id>/", views.edit_ticket, name="edit_ticket"),
+path("admin-panel/close/<int:ticket_id>/", views.close_ticket, name="close_ticket"),
+path("admin-panel/delete/<int:ticket_id>/", views.delete_ticket, name="delete_ticket"),
 ]
