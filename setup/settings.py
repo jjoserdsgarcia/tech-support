@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     "tech-support-g14r.onrender.com",
     "localhost",
     "127.0.0.1",
+    "*",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
