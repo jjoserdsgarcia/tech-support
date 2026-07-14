@@ -3,10 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .models import Levels, Entities, User, Ticket, Comment
 from django.contrib import messages
-from .decorators import staff_required
+
 from django.utils import timezone
 from datetime import timedelta
 from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import get_object_or_404
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 # Create your views here.
 
@@ -55,65 +58,108 @@ def loginscreen(request):
             }
         )
   
-
-
 @login_required
 def mainlobby(request):
-    
-
 
     dashboard_data = {
 
         'levels_count': Levels.objects.count(),
+
         'entities_count': Entities.objects.count(),
+
         'users_count': User.objects.count(),
+
         'total_tickets': Ticket.objects.count(),
-        'open_tickets': Ticket.objects.filter(status='Aberto').count(),
-        'closed_tickets': Ticket.objects.filter(status='Fechado').count(),
-        'pending_tickets': Ticket.objects.filter(status='Em Andamento').count(),
-        'cancelled_tickets': Ticket.objects.filter(status='Cancelado').count(),
-        'entity_name': Entities.objects.first().name if Entities.objects.exists() else 'N/A',
-        'recent_tickets': Ticket.objects.prefetch_related('comments').all(),
-        'authors': {comment.author.username if comment.author else 'Unknown' for comment in Comment.objects.all()},
+
+        'open_tickets': Ticket.objects.filter(
+            status='ABERTO'
+        ).count(),
+
+        'closed_tickets': Ticket.objects.filter(
+            status='FECHADO'
+        ).count(),
+
+        'pending_tickets': Ticket.objects.filter(
+            status='EM ANDAMENTO'
+        ).count(),
+
+        'cancelled_tickets': Ticket.objects.filter(
+            status='CANCELADO'
+        ).count(),
+
+
+        # IMPORTANTE:
+        # usuário comum só vê os próprios tickets
+
+        'recent_tickets': Ticket.objects.filter(
+            created_by=request.user
+        ).prefetch_related(
+            'comments',
+            'comments__author'
+        ).order_by('-id'),
+
     }
-    return render(request, 'techsupport/mainlobby.html', {'dashboard_data': dashboard_data})
+
+
+    return render(
+        request,
+        'techsupport/mainlobby.html',
+        {
+            'dashboard_data': dashboard_data
+        }
+    )
 
 @login_required
 def ticketing(request):
 
-    print("ticketing")
-    
+    if request.method == 'POST':
 
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        priority = request.POST.get('priority')
+
+        Ticket.objects.create(
+            title=title,
+            description=description,
+            priority=priority,
+            created_by=request.user
+        )
+
+        messages.success(request, 'Ticket criado com sucesso.')
+        return redirect('ticketing')
 
     dashboard_data = {
 
         'levels_count': Levels.objects.count(),
         'entities_count': Entities.objects.count(),
         'users_count': User.objects.count(),
+
         'total_tickets': Ticket.objects.count(),
+
         'open_tickets': Ticket.objects.filter(status='ABERTO').count(),
         'closed_tickets': Ticket.objects.filter(status='FECHADO').count(),
         'pending_tickets': Ticket.objects.filter(status='EM ANDAMENTO').count(),
         'cancelled_tickets': Ticket.objects.filter(status='CANCELADO').count(),
+
         'entity_name': Entities.objects.first().name if Entities.objects.exists() else 'N/A',
-        'recent_tickets': Ticket.objects.prefetch_related('comments').all(),
-        'authors': {comment.author.username if comment.author else 'Unknown' for comment in Comment.objects.all()},
+
+        'recent_tickets': Ticket.objects.filter(
+            created_by=request.user
+        ).prefetch_related(
+            'comments',
+            'comments__author'
+        ).order_by('-id'),
+
     }
 
-    
-        
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        priority = request.POST.get('priority')
-        ticket = Ticket.objects.create(title=title, description=description, priority=priority)
-        ticket.save()
-        messages.success(request, 'Ticket criado com sucesso.')
-
-        return redirect('ticketing')
-       
-    print(dashboard_data)
-    return render(request, 'techsupport/ticketing.html', {'dashboard_data': dashboard_data})
+    return render(
+        request,
+        'techsupport/ticketing.html',
+        {
+            'dashboard_data': dashboard_data,
+            'tickets': dashboard_data['recent_tickets'],
+        }
+    )
 
 
 
@@ -135,7 +181,7 @@ def registerscreen(request):
         'pending_tickets': Ticket.objects.filter(status='Em Andamento').count(),
         'cancelled_tickets': Ticket.objects.filter(status='Cancelado').count(),
         'entity_name': Entities.objects.first().name if Entities.objects.exists() else 'N/A',
-        'recent_tickets': Ticket.objects.prefetch_related('comments').all(),
+        'recent_tickets': Ticket.objects.prefetch_related('comments'),
         'authors': {comment.author.username if comment.author else 'Unknown' for comment in Comment.objects.all()},
         }
 
@@ -172,8 +218,10 @@ def admin_panel(request):
         Ticket.objects.create(
             title=title,
             description=description,
-            priority=priority
+            priority=priority,
+            created_by=request.user
         )
+    
 
         messages.success(request, "Ticket criado com sucesso!")
 
@@ -187,7 +235,7 @@ def admin_panel(request):
         'open_tickets': Ticket.objects.filter(status='ABERTO').count(),
         'closed_tickets': Ticket.objects.filter(status='FECHADO').count(),
         'pending_tickets': Ticket.objects.filter(status='EM ANDAMENTO').count(),
-        'recent_tickets': Ticket.objects.order_by('-id'),
+        'recent_tickets': Ticket.objects.prefetch_related('comments', 'comments__author').order_by('-id'),
     }
 
     return render(request, "techsupport/admin.html", {
@@ -241,6 +289,26 @@ def delete_ticket(request, ticket_id):
     ticket.delete()
 
     messages.success(request, "Ticket excluído.")
+    return redirect("admin_panel")
+
+
+@staff_member_required
+def add_comment(request, ticket_id):
+
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+
+    if request.method == "POST":
+
+        text = request.POST.get("comment")
+
+        if text:
+
+            Comment.objects.create(
+                ticket=ticket,
+                author=request.user,
+                content=text
+            )
+
     return redirect("admin_panel")
 
 

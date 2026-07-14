@@ -43,4 +43,5 @@ path("admin-panel/view/<int:ticket_id>/", views.view_ticket, name="view_ticket")
 path("admin-panel/edit/<int:ticket_id>/", views.edit_ticket, name="edit_ticket"),
 path("admin-panel/close/<int:ticket_id>/", views.close_ticket, name="close_ticket"),
 path("admin-panel/delete/<int:ticket_id>/", views.delete_ticket, name="delete_ticket"),
+path("admin-panel/comment/<int:ticket_id>/", views.add_comment, name="add_comment"),
 ]

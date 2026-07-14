@@ -3,1276 +3,1234 @@
 
 <head>
 
-    <!-- ======================================================
-         META
-    ======================================================= -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M.E.G Admin Panel</title>
 
-    <title>M.E.G Admin Panel</title>
 
-    <!-- ======================================================
-         ÍCONES E FONTES
-    ======================================================= -->
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
-    <!-- ======================================================
-         CSS GERAL
-    ======================================================= -->
-
-    <style>
-
-    /* ===============================
-       RESET
-    =============================== */
-
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-    }
-
-    :root{
-
-        --yellow:#FFE66D;
-        --dark:#111111;
-        --light:#FFFCEB;
-        --gray:#666;
-        --border:#d9cb7c;
-
-        --blue:#3498db;
-        --orange:#f39c12;
-        --green:#2ecc71;
-        --red:#e74c3c;
-
-    }
-
-    body{
-
-        font-family:'Inter',sans-serif;
-
-        background:
-        linear-gradient(
-            135deg,
-            #d8c75b,
-            #c8b54c
-        );
-
-        color:#222;
-
-        min-height:100vh;
-
-    }
-
-    a{
-
-        text-decoration:none;
-
-    }
-
-    button{
-
-        font-family:'Inter',sans-serif;
-
-    }
-
-    /* ===============================
-       SIDEBAR
-    =============================== */
-
-    .sidebar{
-
-        position:fixed;
-
-        top:0;
-        left:0;
-
-        width:240px;
-        height:100vh;
-
-        background:var(--dark);
-
-        display:flex;
-        flex-direction:column;
-
-        padding:30px 20px;
-
-        color:white;
-
-    }
-
-    .logo{
-
-        margin-bottom:45px;
-
-    }
-
-    .logo h1{
-
-        font-family:'Orbitron';
-
-        color:var(--yellow);
-
-        font-size:30px;
-
-    }
-
-    .logo p{
-
-        color:#888;
-
-        margin-top:8px;
-
-        font-size:13px;
-
-    }
-
-    .menu{
-
-        display:flex;
-
-        flex-direction:column;
-
-        gap:10px;
-
-    }
-
-    .menu a{
-
-        display:flex;
-
-        align-items:center;
-
-        gap:12px;
-
-        padding:14px 16px;
-
-        border-radius:10px;
-
-        color:#ddd;
-
-        transition:.25s;
-
-    }
-
-    .menu a:hover{
-
-        background:rgba(255,230,109,.15);
-
-        color:var(--yellow);
-
-    }
-
-    .menu i{
-
-        color:var(--yellow);
-
-        font-size:18px;
-
-    }
-
-    /* ===============================
-       ÁREA PRINCIPAL
-    =============================== */
-
-    .main{
-
-        margin-left:240px;
-
-        padding:35px;
-
-    }
-
-    /* ===============================
-       HEADER
-    =============================== */
-
-    .header{
-
-        display:flex;
-
-        justify-content:space-between;
-
-        align-items:center;
-
-        margin-bottom:35px;
-
-    }
-
-    .header h2{
-
-        font-family:'Orbitron';
-
-        font-size:32px;
-
-        color:#111;
-
-    }
-
-    .header p{
-
-        color:#555;
-
-        margin-top:6px;
-
-    }
-
-    .user-box{
-
-        background:white;
-
-        padding:12px 20px;
-
-        border-radius:12px;
-
-        box-shadow:0 8px 20px rgba(0,0,0,.10);
-
-        font-weight:600;
-
-    }
-
-    /* ===============================
-       SEÇÕES
-    =============================== */
-
-    .section{
-
-        display:none;
-
-        background:rgba(255,255,255,.90);
-
-        border-radius:18px;
-
-        padding:25px;
-
-        box-shadow:0 10px 25px rgba(0,0,0,.12);
-
-    }
-
-    .section.active{
-
-        display:block;
-
-    }
-
-    h3{
-
-        font-size:24px;
-
-        margin-bottom:25px;
-
-        font-weight:700;
-
-    }
-
-    </style>
-
-</head>
-
-<body>
-
-<!-- ======================================================
-     SIDEBAR
-======================================================= -->
-
-<aside class="sidebar">
-
-    <div class="logo">
-
-        <h1>M.E.G</h1>
-
-        <p>Administration Panel</p>
-
-    </div>
-
-    <nav class="menu">
-
-        <a href="#" onclick="showSection('dashboard')">
-
-            <i class="bi bi-speedometer2"></i>
-
-            Dashboard
-
-        </a>
-
-        <a href="#" onclick="showSection('tickets')">
-
-            <i class="bi bi-ticket-detailed-fill"></i>
-
-            Tickets
-
-        </a>
-
-        <a href="#" onclick="showSection('users')">
-
-            <i class="bi bi-people-fill"></i>
-
-            Usuários
-
-        </a>
-
-        <a href="{% url 'loginscreen' %}">
-
-            <i class="bi bi-box-arrow-right"></i>
-
-            Logout
-
-        </a>
-
-    </nav>
-
-</aside>
-
-<!-- ======================================================
-     CONTEÚDO PRINCIPAL
-======================================================= -->
-
-<main class="main">
-
-<!-- ======================================================
-     HEADER
-======================================================= -->
-
-<div class="header">
-
-    <div>
-
-        <h2>Painel Administrativo</h2>
-
-        <p>M.E.G Ticket Control System</p>
-
-    </div>
-
-    <div class="user-box">
-
-        Administrador
-
-    </div>
-
-</div>
-
-<!-- ======================================================
-     DASHBOARD
-======================================================= -->
 
 <style>
 
 /* ===============================
-   CARDS DO DASHBOARD
+RESET
 =============================== */
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+}
+
+
+:root{
+
+--yellow:#FFE66D;
+--dark:#111;
+--white:#fff;
+--gray:#666;
+
+--green:#2ecc71;
+--blue:#3498db;
+--orange:#f39c12;
+--red:#e74c3c;
+
+}
+
+
+
+body{
+
+font-family:'Inter',sans-serif;
+
+background:
+
+linear-gradient(
+135deg,
+#d8c75b,
+#c8b54c
+);
+
+min-height:100vh;
+
+color:#222;
+
+}
+
+
+
+a{
+
+text-decoration:none;
+
+}
+
+
+
+button{
+
+font-family:'Inter',sans-serif;
+
+cursor:pointer;
+
+}
+
+
+
+/* ===============================
+SIDEBAR
+=============================== */
+
+
+.sidebar{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:240px;
+
+height:100vh;
+
+background:#111;
+
+padding:30px 20px;
+
+color:white;
+
+}
+
+
+
+.logo{
+
+margin-bottom:40px;
+
+}
+
+
+
+.logo h1{
+
+font-family:'Orbitron';
+
+font-size:32px;
+
+color:#FFE66D;
+
+}
+
+
+
+.logo p{
+
+color:#888;
+
+font-size:13px;
+
+margin-top:8px;
+
+}
+
+
+
+.menu{
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+
+
+.menu a{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+padding:14px;
+
+border-radius:10px;
+
+color:#ddd;
+
+transition:.3s;
+
+}
+
+
+
+.menu a:hover{
+
+background:rgba(255,230,109,.15);
+
+color:#FFE66D;
+
+}
+
+
+
+.menu i{
+
+color:#FFE66D;
+
+font-size:20px;
+
+}
+
+
+
+
+
+/* ===============================
+MAIN
+=============================== */
+
+
+.main{
+
+margin-left:240px;
+
+padding:35px;
+
+}
+
+
+
+
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:35px;
+
+}
+
+
+
+.header h2{
+
+font-family:'Orbitron';
+
+font-size:32px;
+
+}
+
+
+
+.header p{
+
+color:#555;
+
+margin-top:5px;
+
+}
+
+
+
+.user-box{
+
+background:white;
+
+padding:12px 20px;
+
+border-radius:12px;
+
+font-weight:bold;
+
+box-shadow:
+
+0 10px 20px rgba(0,0,0,.1);
+
+}
+
+
+
+
+
+
+
+/* ===============================
+SEÇÕES
+=============================== */
+
+
+.section{
+
+display:none;
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:
+
+0 10px 25px rgba(0,0,0,.12);
+
+}
+
+
+
+.section.active{
+
+display:block;
+
+}
+
+
+
+h3{
+
+font-size:25px;
+
+margin-bottom:25px;
+
+}
+
+
+
+
+
+
+
+/* ===============================
+CARDS DASHBOARD
+=============================== */
+
 
 .cards{
 
-    display:grid;
+display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+grid-template-columns:
+repeat(auto-fit,minmax(190px,1fr));
 
-    gap:22px;
+gap:20px;
 
 }
+
+
 
 .card{
 
-    background:white;
+background:white;
 
-    border-radius:18px;
+padding:25px;
 
-    padding:28px 20px;
+border-radius:18px;
 
-    text-align:center;
+text-align:center;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.12);
+box-shadow:
 
-    transition:.25s;
+0 10px 20px rgba(0,0,0,.12);
 
-    cursor:default;
+transition:.3s;
 
 }
+
+
 
 .card:hover{
 
-    transform:translateY(-6px);
+transform:translateY(-5px);
 
 }
+
+
 
 .card i{
 
-    font-size:34px;
+font-size:35px;
 
-    color:var(--yellow);
+color:#FFE66D;
 
-    margin-bottom:14px;
+margin-bottom:15px;
 
 }
+
+
 
 .card h2{
 
-    font-size:34px;
-
-    color:var(--dark);
-
-    margin-bottom:8px;
+font-size:35px;
 
 }
+
+
 
 .card p{
 
-    color:#666;
+color:#666;
 
-    font-size:15px;
+margin-top:8px;
 
 }
+
+
 
 </style>
 
-<section id="dashboard" class="section active">
 
-    <h3>Dashboard</h3>
+</head>
 
-    <div class="cards">
 
-        <div class="card">
+<body>
 
-            <i class="bi bi-ticket-detailed-fill"></i>
 
-            <h2>{{ total_tickets }}</h2>
 
-            <p>Total de Tickets</p>
+<!-- ===============================
+SIDEBAR
+=============================== -->
 
-        </div>
 
-        <div class="card">
+<aside class="sidebar">
 
-            <i class="bi bi-folder2-open"></i>
 
-            <h2>{{ open_tickets }}</h2>
+<div class="logo">
 
-            <p>Tickets Abertos</p>
+<h1>M.E.G</h1>
 
-        </div>
-
-        <div class="card">
-
-            <i class="bi bi-hourglass-split"></i>
-
-            <h2>{{ pending_tickets }}</h2>
-
-            <p>Em Andamento</p>
-
-        </div>
-
-        <div class="card">
-
-            <i class="bi bi-check-circle-fill"></i>
-
-            <h2>{{ closed_tickets }}</h2>
-
-            <p>Fechados</p>
-
-        </div>
-
-        <div class="card">
-
-            <i class="bi bi-people-fill"></i>
-
-            <h2>{{ users_count }}</h2>
-
-            <p>Usuários</p>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ======================================================
-     TICKETS
-======================================================= -->
-
-<style>
-
-/* ===============================
-   FORMULÁRIO DE TICKETS
-=============================== */
-
-.ticket-form{
-
-    background:#fff;
-
-    border-radius:18px;
-
-    padding:25px;
-
-    box-shadow:0 10px 20px rgba(0,0,0,.10);
-
-    margin-bottom:30px;
-
-}
-
-.ticket-form form{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-
-}
-
-.ticket-form label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    font-weight:600;
-
-}
-
-.ticket-form select,
-.ticket-form textarea{
-
-    width:100%;
-
-    padding:14px;
-
-    border:1px solid #ddd;
-
-    border-radius:10px;
-
-    outline:none;
-
-    font-size:15px;
-
-    transition:.25s;
-
-}
-
-.ticket-form select:focus,
-.ticket-form textarea:focus{
-
-    border-color:var(--yellow);
-
-    box-shadow:0 0 0 4px rgba(255,230,109,.25);
-
-}
-
-.ticket-form textarea{
-
-    min-height:140px;
-
-    resize:vertical;
-
-}
-
-/* ===============================
-   BOTÃO CRIAR
-=============================== */
-
-.create-ticket{
-
-    width:220px;
-
-    height:48px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:var(--dark);
-
-    color:var(--yellow);
-
-    font-size:15px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.create-ticket:hover{
-
-    background:#222;
-
-}
-
-/* ===============================
-   PESQUISA
-=============================== */
-
-.ticket-tools{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin:30px 0 20px;
-
-}
-
-.ticket-tools input{
-
-    width:320px;
-
-    padding:13px 16px;
-
-    border:1px solid #ddd;
-
-    border-radius:10px;
-
-    outline:none;
-
-    transition:.25s;
-
-}
-
-.ticket-tools input:focus{
-
-    border-color:var(--yellow);
-
-    box-shadow:0 0 0 4px rgba(255,230,109,.25);
-
-}
-
-</style>
-
-<section id="tickets" class="section">
-
-<h3>Gerenciamento de Tickets</h3>
-
-<!-- ==========================
-     NOVO TICKET
-========================== -->
-
-<div class="ticket-form">
-
-<form method="POST" action="{% url 'admin_panel' %}">
-
-    {% csrf_token %}
-
-<div>
-
-<label>Tipo do Ticket</label>
-
-<select name="title" required>
-
-<option value="" selected disabled>
-Selecione o tipo do ticket
-</option>
-
-<option value="Pedido de Auxílio">
-🆘 Pedido de Auxílio
-</option>
-
-<option value="Solicitação de Ajuda">
-🤝 Solicitação de Ajuda
-</option>
-
-<option value="Solicitação de Orientação">
-📖 Solicitação de Orientação
-</option>
-
-<option value="Problema Técnico">
-💻 Problema Técnico
-</option>
-
-<option value="Erro no Sistema">
-⚠️ Erro no Sistema
-</option>
-
-<option value="Problema de Acesso">
-🔑 Problema de Acesso
-</option>
-
-<option value="Solicitação de Permissão">
-📋 Solicitação de Permissão
-</option>
-
-<option value="Atualização de Cadastro">
-📝 Atualização de Cadastro
-</option>
-
-<option value="Dúvidas Gerais">
-❓ Dúvidas Gerais
-</option>
-
-<option value="Sugestão">
-💡 Sugestão
-</option>
-
-<option value="Outro">
-📂 Outro
-</option>
-
-</select>
+<p>Administration Panel</p>
 
 </div>
 
+
+
+<nav class="menu">
+
+
+<a href="#" onclick="showSection('dashboard')">
+
+<i class="bi bi-speedometer2"></i>
+
+Dashboard
+
+</a>
+
+
+
+<a href="#" onclick="showSection('tickets')">
+
+<i class="bi bi-ticket-detailed-fill"></i>
+
+Tickets
+
+</a>
+
+
+
+<a href="#" onclick="showSection('users')">
+
+<i class="bi bi-people-fill"></i>
+
+Usuários
+
+</a>
+
+
+
+<a href="{% url 'loginscreen' %}">
+
+<i class="bi bi-box-arrow-right"></i>
+
+Logout
+
+</a>
+
+
+</nav>
+
+
+
+</aside>
+
+
+
+
+
+
+<!-- ===============================
+MAIN
+=============================== -->
+
+
+<main class="main">
+
+
+
+<div class="header">
+
+
 <div>
 
-<label>Prioridade</label>
+<h2>
+Painel Administrativo
+</h2>
 
-<select name="priority" required>
 
-<option value="" selected disabled>
-Selecione a prioridade
+<p>
+M.E.G Ticket Control System
+</p>
+
+
+</div>
+
+
+
+<div class="user-box">
+
+Administrador
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ===============================
+DASHBOARD
+=============================== -->
+
+
+<section id="dashboard" class="section active">
+
+
+<h3>
+Dashboard
+</h3>
+
+
+
+<div class="cards">
+
+
+
+<div class="card">
+
+<i class="bi bi-ticket-detailed-fill"></i>
+
+<h2>
+{{ total_tickets }}
+</h2>
+
+<p>
+Total de Tickets
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<i class="bi bi-folder2-open"></i>
+
+<h2>
+{{ open_tickets }}
+</h2>
+
+<p>
+Tickets Abertos
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<i class="bi bi-hourglass-split"></i>
+
+<h2>
+{{ pending_tickets }}
+</h2>
+
+<p>
+Em Andamento
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<i class="bi bi-check-circle-fill"></i>
+
+<h2>
+{{ closed_tickets }}
+</h2>
+
+<p>
+Fechados
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<i class="bi bi-people-fill"></i>
+
+<h2>
+{{ users_count }}
+</h2>
+
+<p>
+Usuários
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+<!-- ===============================
+     TICKETS
+=============================== -->
+
+
+<section id="tickets" class="section">
+
+
+<h3>
+Gerenciamento de Tickets
+</h3>
+
+
+
+<!-- ===============================
+     CRIAR TICKET
+=============================== -->
+
+
+<div class="ticket-form"
+style="
+background:#fff;
+padding:25px;
+border-radius:18px;
+box-shadow:0 10px 20px rgba(0,0,0,.1);
+margin-bottom:30px;
+">
+
+
+<form method="POST" action="{% url 'admin_panel' %}">
+
+
+{% csrf_token %}
+
+
+
+<label>
+Tipo do Ticket
+</label>
+
+
+<select 
+name="title"
+required
+style="
+width:100%;
+padding:14px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #ddd;
+">
+
+
+<option value="" disabled selected>
+Selecione
 </option>
+
+
+<option value="Pedido de Auxílio">🆘 Pedido de Auxílio</option>
+<option value="Solicitação de Ajuda">🤝 Solicitação de Ajuda</option>
+<option value="Solicitação de Orientação">📖 Solicitação de Orientação</option>
+<option value="Problema Técnico">💻 Problema Técnico</option>
+<option value="Erro no Sistema">⚠️ Erro no Sistema</option>
+<option value="Acesso ao Sistema">🔑 Problema de Acesso</option>
+<option value="Solicitação de Permissão">📋 Solicitação de Permissão</option>
+<option value="Atualização de Cadastro">📝 Atualização de Cadastro</option>
+<option value="Dúvidas Gerais">❓ Dúvidas Gerais</option>
+<option value="Sugestão">💡 Sugestão</option>
+<option value="Outro">📂 Outro</option>
+
+
+</select>
+
+
+
+
+
+<label>
+Prioridade
+</label>
+
+
+<select
+name="priority"
+required
+style="
+width:100%;
+padding:14px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #ddd;
+">
+
+
+<option value="" disabled selected>
+Selecione
+</option>
+
 
 <option value="Baixa">
 🟢 Baixa
 </option>
 
+
 <option value="Média">
 🟡 Média
 </option>
+
 
 <option value="Alta">
 🟠 Alta
 </option>
 
+
 <option value="Crítica">
 🔴 Crítica
 </option>
 
+
 </select>
 
-</div>
 
-<div>
 
-<label>Descrição</label>
+
+
+<label>
+Descrição
+</label>
+
 
 <textarea
 name="description"
-placeholder="Descreva o problema..."
-required></textarea>
+required
+placeholder="Descrição do problema..."
+style="
+width:100%;
+height:120px;
+padding:14px;
+border-radius:10px;
+border:1px solid #ddd;
+margin:10px 0;
+"></textarea>
 
-</div>
 
-<button class="create-ticket">
 
-<i class="bi bi-plus-circle-fill"></i>
+
+
+<button
+type="submit"
+style="
+background:#111;
+color:#FFE66D;
+border:none;
+padding:14px 25px;
+border-radius:10px;
+font-weight:bold;
+">
+
+
+<i class="bi bi-plus-circle"></i>
 
 Criar Ticket
 
+
 </button>
+
+
 
 </form>
 
-</div>
-
-<!-- ==========================
-     PESQUISA
-========================== -->
-
-<div class="ticket-tools">
-
-<input
-type="text"
-id="searchTicket"
-placeholder="Pesquisar ticket..."
-onkeyup="searchTickets()">
 
 </div>
 
-<!-- ==========================
-     TABELA DOS TICKETS
-========================== -->
 
-<style>
 
-/* ======================================
-   TABELA
-====================================== */
 
-.ticket-table{
 
-    width:100%;
 
-    border-collapse:collapse;
 
-    overflow:hidden;
+<!-- ===============================
+     TABELA
+=============================== -->
 
-    background:#fff;
 
-    border-radius:18px;
+<table
+style="
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 20px rgba(0,0,0,.1);
+">
 
-    box-shadow:0 10px 20px rgba(0,0,0,.10);
 
-}
+<thead
+style="
+background:#111;
+color:#FFE66D;
+">
 
-.ticket-table thead{
-
-    background:#111;
-
-}
-
-.ticket-table th{
-
-    color:#FFE66D;
-
-    padding:16px;
-
-    text-align:center;
-
-    font-size:14px;
-
-    letter-spacing:.5px;
-
-}
-
-.ticket-table td{
-
-    padding:15px;
-
-    text-align:center;
-
-    border-bottom:1px solid #ececec;
-
-}
-
-.ticket-table tbody tr{
-
-    transition:.2s;
-
-}
-
-.ticket-table tbody tr:hover{
-
-    background:#FFF8D5;
-
-}
-
-/* ======================================
-   BADGES
-====================================== */
-
-.badge{
-
-    padding:6px 14px;
-
-    border-radius:20px;
-
-    color:white;
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-.priority-baixa{
-
-    background:#2ecc71;
-
-}
-
-.priority-media{
-
-    background:#f1c40f;
-
-    color:#111;
-
-}
-
-.priority-alta{
-
-    background:#e67e22;
-
-}
-
-.priority-critica{
-
-    background:#e74c3c;
-
-}
-
-.status-aberto{
-
-    background:#3498db;
-
-}
-
-.status-andamento{
-
-    background:#f39c12;
-
-}
-
-.status-fechado{
-
-    background:#2ecc71;
-
-}
-
-.status-cancelado{
-
-    background:#7f8c8d;
-
-}
-
-/* ======================================
-   BOTÕES
-====================================== */
-
-.actions{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:8px;
-
-}
-
-.btn{
-
-    width:38px;
-
-    height:38px;
-
-    border:none;
-
-    border-radius:10px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    cursor:pointer;
-
-    color:white;
-
-    transition:.2s;
-
-    text-decoration:none;
-
-}
-
-.btn:hover{
-
-    transform:translateY(-2px);
-
-}
-
-.blue{
-
-    background:#3498db;
-
-}
-
-.orange{
-
-    background:#f39c12;
-
-}
-
-.green{
-
-    background:#2ecc71;
-
-}
-
-.red{
-
-    background:#e74c3c;
-
-}
-
-</style>
-
-<table class="ticket-table">
-
-<thead>
 
 <tr>
 
-<th>ID</th>
 
-<th>Título</th>
+<th style="padding:15px">
+ID
+</th>
 
-<th>Prioridade</th>
 
-<th>Status</th>
+<th>
+Título
+</th>
 
-<th>Ações</th>
+
+<th>
+Descrição
+</th>
+
+
+<th>
+Prioridade
+</th>
+
+
+<th>
+Status
+</th>
+
+
+<th>
+Ações
+</th>
+
 
 </tr>
 
+
 </thead>
+
+
+
+
 
 <tbody>
 
+
+
 {% for ticket in tickets %}
 
-<tr class="ticket-row">
 
-<td>
+
+<tr
+class="ticket-row"
+style="
+border-bottom:1px solid #eee;
+text-align:center;
+">
+
+
+
+<td style="padding:15px">
 
 {{ ticket.id }}
 
 </td>
 
-<td class="ticket-title">
+
+
+
+
+<td>
 
 {{ ticket.title }}
 
 </td>
 
+
+
+
+
 <td>
 
-<span class="badge
-{% if ticket.priority == 'Baixa' %}priority-baixa{% endif %}
-{% if ticket.priority == 'Média' %}priority-media{% endif %}
-{% if ticket.priority == 'Alta' %}priority-alta{% endif %}
-{% if ticket.priority == 'Crítica' %}priority-critica{% endif %}">
+{{ ticket.description|truncatechars:60 }}
+
+</td>
+
+
+
+
+
+<td>
 
 {{ ticket.priority }}
 
-</span>
-
 </td>
 
-<td>
 
-<span class="badge
-{% if ticket.status == 'ABERTO' %}status-aberto{% endif %}
-{% if ticket.status == 'EM ANDAMENTO' %}status-andamento{% endif %}
-{% if ticket.status == 'FECHADO' %}status-fechado{% endif %}
-{% if ticket.status == 'CANCELADO' %}status-cancelado{% endif %}">
+
+
+
+<td>
 
 {{ ticket.get_status_display }}
 
-</span>
-
 </td>
+
+
+
+
 
 <td>
 
-<div class="actions">
+
+<div
+style="
+display:flex;
+justify-content:center;
+gap:8px;
+">
+
+
+
+
+
+<!-- VISUALIZAR -->
 
 <button
+
 type="button"
-class="btn blue"
 
 onclick="openViewModal(
+
 '{{ ticket.id }}',
+
 '{{ ticket.title|escapejs }}',
+
 '{{ ticket.description|escapejs }}',
-'{{ ticket.get_priority_display|escapejs }}',
+
+'{{ ticket.priority|escapejs }}',
+
 '{{ ticket.get_status_display|escapejs }}'
-)">
+
+)"
+
+style="
+background:#3498db;
+color:white;
+border:none;
+width:38px;
+height:38px;
+border-radius:10px;
+">
+
 
 <i class="bi bi-eye-fill"></i>
 
+
 </button>
 
+
+
+
+
+
+
+<!-- EDITAR -->
+
+
 <button
+
 type="button"
-class="btn orange"
 
 onclick="openEditModal(
+
 '{{ ticket.id }}',
+
 '{{ ticket.title|escapejs }}',
+
 '{{ ticket.description|escapejs }}',
+
 '{{ ticket.priority|escapejs }}',
+
 '{{ ticket.status|escapejs }}'
-)">
+
+)"
+
+style="
+background:#f39c12;
+color:white;
+border:none;
+width:38px;
+height:38px;
+border-radius:10px;
+">
+
 
 <i class="bi bi-pencil-fill"></i>
 
+
 </button>
 
-<a
-href="{% url 'close_ticket' ticket.id %}"
-class="btn green"
 
-onclick="return confirm('Deseja fechar este ticket?')">
+
+
+
+
+
+<!-- FECHAR -->
+
+
+<a
+
+href="{% url 'close_ticket' ticket.id %}"
+
+style="
+background:#2ecc71;
+color:white;
+width:38px;
+height:38px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+">
+
 
 <i class="bi bi-check-lg"></i>
 
+
 </a>
 
-<a
-href="{% url 'delete_ticket' ticket.id %}"
-class="btn red"
 
-onclick="return confirm('Deseja excluir este ticket?')">
+
+
+
+
+
+<!-- EXCLUIR -->
+
+
+<a
+
+href="{% url 'delete_ticket' ticket.id %}"
+
+onclick="return confirm('Excluir ticket?')"
+
+style="
+background:#e74c3c;
+color:white;
+width:38px;
+height:38px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+">
+
 
 <i class="bi bi-trash-fill"></i>
 
+
 </a>
+
+
+
+
 
 </div>
 
+
+
 </td>
+
+
+
+
 
 </tr>
 
+
+
+
+
 {% empty %}
+
+
 
 <tr>
 
-<td colspan="5">
+
+<td colspan="6">
 
 Nenhum ticket encontrado.
 
 </td>
 
+
 </tr>
+
+
 
 {% endfor %}
 
+
+
 </tbody>
+
 
 </table>
 
+
+
 </section>
 
-<!-- ======================================================
+
+<!-- ===============================
      USUÁRIOS
-======================================================= -->
+=============================== -->
 
-<style>
-
-/* ===============================
-   TABELA DE USUÁRIOS
-=============================== */
-
-.user-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    background:#fff;
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 20px rgba(0,0,0,.10);
-
-}
-
-.user-table thead{
-
-    background:#111;
-
-}
-
-.user-table th{
-
-    color:#FFE66D;
-
-    padding:16px;
-
-    text-align:center;
-
-}
-
-.user-table td{
-
-    padding:16px;
-
-    text-align:center;
-
-    border-bottom:1px solid #ececec;
-
-}
-
-.user-table tbody tr{
-
-    transition:.2s;
-
-}
-
-.user-table tbody tr:hover{
-
-    background:#FFF8D5;
-
-}
-
-/* ===============================
-   BADGES
-=============================== */
-
-.admin{
-
-    background:#2ecc71;
-
-    color:white;
-
-    padding:6px 14px;
-
-    border-radius:20px;
-
-    font-weight:bold;
-
-}
-
-.normal{
-
-    background:#95a5a6;
-
-    color:white;
-
-    padding:6px 14px;
-
-    border-radius:20px;
-
-    font-weight:bold;
-
-}
-
-</style>
 
 <section id="users" class="section">
 
-<h3>Usuários do Sistema</h3>
 
-<table class="user-table">
+<h3>
+Usuários do Sistema
+</h3>
 
-<thead>
+
+
+<table
+style="
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:18px;
+overflow:hidden;
+">
+
+
+
+<thead
+style="
+background:#111;
+color:#FFE66D;
+">
+
 
 <tr>
 
-<th>ID</th>
+<th style="padding:15px">
+ID
+</th>
 
-<th>Usuário</th>
 
-<th>E-mail</th>
+<th>
+Usuário
+</th>
 
-<th>Permissão</th>
+
+<th>
+Email
+</th>
+
+
+<th>
+Permissão
+</th>
+
 
 </tr>
 
+
 </thead>
+
+
+
+
 
 <tbody>
 
+
+
 {% for user in users %}
 
-<tr>
 
-<td>
+
+<tr
+style="
+text-align:center;
+border-bottom:1px solid #eee;
+">
+
+
+
+<td style="padding:15px">
 
 {{ user.id }}
 
 </td>
+
+
 
 <td>
 
@@ -1280,37 +1238,64 @@ Nenhum ticket encontrado.
 
 </td>
 
+
+
 <td>
 
 {{ user.email }}
 
 </td>
 
+
+
 <td>
+
 
 {% if user.is_staff %}
 
-<span class="admin">
+
+<span
+style="
+background:#2ecc71;
+color:white;
+padding:6px 15px;
+border-radius:20px;
+">
 
 Administrador
 
 </span>
 
+
 {% else %}
 
-<span class="normal">
+
+<span
+style="
+background:#95a5a6;
+color:white;
+padding:6px 15px;
+border-radius:20px;
+">
 
 Usuário
 
 </span>
 
+
 {% endif %}
+
+
 
 </td>
 
+
 </tr>
 
+
+
 {% empty %}
+
 
 <tr>
 
@@ -1322,450 +1307,1058 @@ Nenhum usuário cadastrado.
 
 </tr>
 
+
+
 {% endfor %}
+
+
 
 </tbody>
 
+
 </table>
+
+
 
 </section>
 
-<!-- ======================================================
-     MODAL - VISUALIZAR TICKET
-====================================================== -->
 
-<style>
 
-/* ===============================
-   MODAIS
-=============================== */
 
-.modal{
 
-    position:fixed;
 
-    inset:0;
 
-    display:none;
 
-    justify-content:center;
+<!-- ===============================
+     MODAL VISUALIZAR TICKET
+=============================== -->
 
-    align-items:center;
 
-    background:rgba(0,0,0,.65);
+<div
+id="viewModal"
+style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
 
-    z-index:9999;
 
-}
 
-.modal-box{
 
-    width:650px;
 
-    max-width:95%;
+<div
+style="
+background:white;
+width:650px;
+max-width:95%;
+padding:30px;
+border-radius:18px;
+max-height:85vh;
+overflow:auto;
+">
 
-    background:white;
 
-    border-radius:18px;
 
-    padding:30px;
 
-    box-shadow:0 20px 45px rgba(0,0,0,.30);
 
-}
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+">
 
-.modal-header{
 
-    display:flex;
 
-    justify-content:space-between;
+<h2>
 
-    align-items:center;
+Detalhes do Ticket
 
-    margin-bottom:25px;
+</h2>
 
-}
 
-.modal-header h2{
 
-    font-family:'Orbitron';
 
-    color:#111;
+<button
 
-}
+onclick="closeViewModal()"
 
-.modal-header button{
-
-    border:none;
-
-    background:none;
-
-    font-size:24px;
-
-    cursor:pointer;
-
-}
-
-.modal-info{
-
-    display:grid;
-
-    grid-template-columns:140px 1fr;
-
-    row-gap:15px;
-
-    margin-bottom:20px;
-
-}
-
-.modal-info strong{
-
-    color:#111;
-
-}
-
-.modal-description{
-
-    margin-top:20px;
-
-    padding:18px;
-
-    background:#f8f8f8;
-
-    border-radius:10px;
-
-}
-
-.form-group{
-
-    margin-bottom:18px;
-
-}
-
-.form-group label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    font-weight:600;
-
-}
-
-.form-group input,
-
-.form-group textarea,
-
-.form-group select{
-
-    width:100%;
-
-    padding:12px;
-
-    border:1px solid #ddd;
-
-    border-radius:10px;
-
-    outline:none;
-
-}
-
-.form-group input:focus,
-
-.form-group textarea:focus,
-
-.form-group select:focus{
-
-    border-color:#FFE66D;
-
-}
-
-.save-btn{
-
-    width:100%;
-
-    padding:14px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#111;
-
-    color:#FFE66D;
-
-    font-size:15px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.save-btn:hover{
-
-    background:#222;
-
-}
-
-</style>
-
-<div id="viewModal" class="modal">
-
-<div class="modal-box">
-
-<div class="modal-header">
-
-<h2>Visualizar Ticket</h2>
-
-<button onclick="closeViewModal()">
+style="
+border:none;
+background:#111;
+color:#FFE66D;
+width:40px;
+height:40px;
+border-radius:10px;
+">
 
 <i class="bi bi-x-lg"></i>
 
+
 </button>
+
+
 
 </div>
 
-<div class="modal-info">
 
-<strong>ID</strong>
+
+
+
+
+
+<p>
+
+<strong>ID:</strong>
+
 <span id="m_id"></span>
 
-<strong>Título</strong>
+
+</p>
+
+
+
+
+<p>
+
+<strong>Título:</strong>
+
 <span id="m_title"></span>
 
-<strong>Prioridade</strong>
+
+</p>
+
+
+
+
+<p>
+
+<strong>Prioridade:</strong>
+
 <span id="m_priority"></span>
 
-<strong>Status</strong>
+
+</p>
+
+
+
+
+<p>
+
+<strong>Status:</strong>
+
 <span id="m_status"></span>
 
+
+</p>
+
+
+
+
+
+<hr>
+
+
+
+
+
+<h3>
+
+Descrição
+
+</h3>
+
+
+<p id="m_description">
+
+</p>
+
+
+
+
+
+
+
+<hr>
+
+
+
+
+
+<h3>
+
+Comentários do Suporte
+
+</h3>
+
+
+
+
+
+
+
+<div
+id="commentsArea"
+style="
+max-height:220px;
+overflow:auto;
+">
+
+
+
+
+
+{% for ticket in tickets %}
+
+
+
+
+<div
+
+id="comments-{{ ticket.id }}"
+
+style="
+display:none;
+">
+
+
+
+
+
+{% for comment in ticket.comments.all %}
+
+
+
+
+<div
+
+style="
+background:#f4f4f4;
+padding:15px;
+border-radius:10px;
+margin-bottom:12px;
+">
+
+
+<strong>
+
+{{ comment.author.username }}
+
+</strong>
+
+
+
+<br><br>
+
+
+
+{{ comment.content }}
+
+
+
+<br><br>
+
+
+
+<small>
+
+{{ comment.created_at|date:"d/m/Y H:i" }}
+
+</small>
+
+
+
 </div>
 
-<div class="modal-description">
 
-<strong>Descrição</strong>
 
-<p id="m_description"></p>
 
-</div>
 
-</div>
+{% empty %}
 
-</div>
 
-<!-- ======================================================
-     MODAL - EDITAR
-====================================================== -->
 
-<div id="editModal" class="modal">
 
-<div class="modal-box">
+<p>
 
-<div class="modal-header">
+O administrador ainda não respondeu este ticket.
 
-<h2>Editar Ticket</h2>
+</p>
 
-<button type="button" onclick="closeEditModal()">
 
-<i class="bi bi-x-lg"></i>
 
-</button>
+
+{% endfor %}
+
+
+
 
 </div>
 
-<form id="editForm" method="POST">
+
+
+
+
+{% endfor %}
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<hr>
+
+
+
+
+
+<h3>
+
+Responder usuário
+
+</h3>
+
+
+
+
+
+<form
+
+id="commentForm"
+
+method="POST">
+
+
 
 {% csrf_token %}
 
-<div class="form-group">
 
-<label>Título</label>
-
-<input
-type="text"
-id="editTitle"
-name="title"
-required>
-
-</div>
-
-<div class="form-group">
-
-<label>Descrição</label>
 
 <textarea
-id="editDescription"
-name="description"
-rows="5"
-required></textarea>
 
-</div>
+name="comment"
 
-<div class="form-group">
+required
 
-<label>Prioridade</label>
+placeholder="Digite a resposta..."
 
-<select
-id="editPriority"
-name="priority">
+style="
+width:100%;
+height:100px;
+padding:15px;
+border-radius:10px;
+border:1px solid #ddd;
+margin-bottom:15px;
+"></textarea>
 
-<option value="Baixa">🟢 Baixa</option>
-<option value="Média">🟡 Média</option>
-<option value="Alta">🟠 Alta</option>
-<option value="Crítica">🔴 Crítica</option>
 
-</select>
 
-</div>
 
-<div class="form-group">
 
-<label>Status</label>
+<button
 
-<select
-id="editStatus"
-name="status">
+type="submit"
 
-<option value="ABERTO">Aberto</option>
-<option value="EM ANDAMENTO">Em Andamento</option>
-<option value="FECHADO">Fechado</option>
-<option value="CANCELADO">Cancelado</option>
+style="
+background:#111;
+color:#FFE66D;
+border:none;
+padding:14px 25px;
+border-radius:10px;
+font-weight:bold;
+width:100%;
+">
 
-</select>
 
-</div>
+Enviar Resposta
 
-<button class="save-btn">
-
-Salvar Alterações
 
 </button>
 
+
+
+
 </form>
 
-</div>
+
+
+
 
 </div>
 
-<!-- ======================================================
+
+
+</div>
+
+
+<!-- ===============================
+     MODAL EDITAR TICKET
+=============================== -->
+
+
+<div
+id="editModal"
+style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
+
+
+
+
+
+<div
+
+style="
+background:white;
+width:600px;
+max-width:95%;
+padding:30px;
+border-radius:18px;
+">
+
+
+
+
+
+<div
+
+style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+">
+
+
+
+<h2>
+
+Editar Ticket
+
+</h2>
+
+
+
+
+
+<button
+
+type="button"
+
+onclick="closeEditModal()"
+
+style="
+border:none;
+background:#111;
+color:#FFE66D;
+width:40px;
+height:40px;
+border-radius:10px;
+">
+
+
+<i class="bi bi-x-lg"></i>
+
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<form
+
+id="editForm"
+
+method="POST">
+
+
+
+{% csrf_token %}
+
+
+
+
+
+
+<label>
+
+Título
+
+</label>
+
+
+
+<input
+
+id="editTitle"
+
+name="title"
+
+type="text"
+
+required
+
+style="
+width:100%;
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+margin:8px 0 15px;
+">
+
+
+
+
+
+
+
+<label>
+
+Descrição
+
+</label>
+
+
+
+<textarea
+
+id="editDescription"
+
+name="description"
+
+required
+
+style="
+width:100%;
+height:120px;
+padding:12px;
+border-radius:10px;
+border:1px solid #ddd;
+margin:8px 0 15px;
+"></textarea>
+
+
+
+
+
+
+
+
+<label>
+
+Prioridade
+
+</label>
+
+
+
+
+<select
+
+id="editPriority"
+
+name="priority"
+
+style="
+width:100%;
+padding:12px;
+border-radius:10px;
+margin:8px 0 15px;
+">
+
+
+
+<option value="Baixa">
+
+🟢 Baixa
+
+</option>
+
+
+
+<option value="Média">
+
+🟡 Média
+
+</option>
+
+
+
+<option value="Alta">
+
+🟠 Alta
+
+</option>
+
+
+
+<option value="Crítica">
+
+🔴 Crítica
+
+</option>
+
+
+
+</select>
+
+
+
+
+
+
+
+
+<label>
+
+Status
+
+</label>
+
+
+
+
+<select
+
+id="editStatus"
+
+name="status"
+
+style="
+width:100%;
+padding:12px;
+border-radius:10px;
+margin:8px 0 20px;
+">
+
+
+
+<option value="ABERTO">
+
+Aberto
+
+</option>
+
+
+
+<option value="EM ANDAMENTO">
+
+Em Andamento
+
+</option>
+
+
+
+<option value="FECHADO">
+
+Fechado
+
+</option>
+
+
+
+<option value="CANCELADO">
+
+Cancelado
+
+</option>
+
+
+
+</select>
+
+
+
+
+
+
+
+<button
+
+type="submit"
+
+style="
+width:100%;
+padding:15px;
+background:#111;
+color:#FFE66D;
+border:none;
+border-radius:10px;
+font-weight:bold;
+">
+
+
+Salvar Alterações
+
+
+</button>
+
+
+
+
+
+</form>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+<!-- ===============================
      JAVASCRIPT
-====================================================== -->
+=============================== -->
+
 
 <script>
 
+
+
 /* ===============================
-   NAVEGAÇÃO
+   TROCAR SEÇÕES
 =============================== */
+
 
 function showSection(id){
 
-    document.querySelectorAll(".section").forEach(section=>{
+    document
+    .querySelectorAll(".section")
+    .forEach(section=>{
 
         section.classList.remove("active");
 
     });
 
-    document.getElementById(id).classList.add("active");
+
+    document
+    .getElementById(id)
+    .classList.add("active");
 
 }
 
-/* ===============================
-   PESQUISA
-=============================== */
 
-function searchTickets(){
 
-    let input=document
-        .getElementById("searchTicket")
-        .value
-        .toLowerCase();
 
-    document.querySelectorAll(".ticket-row").forEach(row=>{
 
-        let title=row.querySelector(".ticket-title")
-                     .textContent
-                     .toLowerCase();
 
-        row.style.display=
-            title.includes(input)
-            ? ""
-            : "none";
-
-    });
-
-}
 
 /* ===============================
    MODAL VISUALIZAR
 =============================== */
 
-function openViewModal(id,title,description,priority,status){
 
-    document.getElementById("m_id").textContent=id;
-    document.getElementById("m_title").textContent=title;
-    document.getElementById("m_priority").textContent=priority;
-    document.getElementById("m_status").textContent=status;
-    document.getElementById("m_description").textContent=description;
+function openViewModal(
+id,
+title,
+description,
+priority,
+status
+){
 
-    document.getElementById("viewModal").style.display="flex";
+
+
+    document
+    .getElementById("m_id")
+    .textContent=id;
+
+
+
+    document
+    .getElementById("m_title")
+    .textContent=title;
+
+
+
+    document
+    .getElementById("m_description")
+    .textContent=description;
+
+
+
+    document
+    .getElementById("m_priority")
+    .textContent=priority;
+
+
+
+    document
+    .getElementById("m_status")
+    .textContent=status;
+
+
+
+
+
+    /*
+        Esconde todos comentários
+    */
+
+
+    document
+    .querySelectorAll("[id^='comments-']")
+    .forEach(div=>{
+
+        div.style.display="none";
+
+    });
+
+
+
+
+
+
+
+    /*
+        Mostra comentários
+        apenas deste ticket
+    */
+
+
+    let comments = document
+    .getElementById(
+        "comments-"+id
+    );
+
+
+
+    if(comments){
+
+        comments.style.display="block";
+
+    }
+
+
+
+
+
+
+
+    /*
+        Liga formulário ao ticket
+    */
+
+
+    document
+    .getElementById("commentForm")
+    .action =
+    "/admin-panel/comment/"+id+"/";
+
+
+
+
+
+    document
+    .getElementById("viewModal")
+    .style.display="flex";
+
+
 
 }
+
+
+
+
+
+
 
 function closeViewModal(){
 
-    document.getElementById("viewModal").style.display="none";
+
+    document
+    .getElementById("viewModal")
+    .style.display="none";
+
 
 }
+
+
+
+
+
+
+
 
 /* ===============================
    MODAL EDITAR
 =============================== */
 
-function openEditModal(id,title,description,priority,status){
 
-    document.getElementById("editTitle").value=title;
-    document.getElementById("editDescription").value=description;
-    document.getElementById("editPriority").value=priority;
-    document.getElementById("editStatus").value=status;
+function openEditModal(
+id,
+title,
+description,
+priority,
+status
+){
 
-    document.getElementById("editForm").action="/admin-panel/edit/"+id+"/";
 
-    document.getElementById("editModal").style.display="flex";
+
+    document
+    .getElementById("editTitle")
+    .value=title;
+
+
+
+    document
+    .getElementById("editDescription")
+    .value=description;
+
+
+
+    document
+    .getElementById("editPriority")
+    .value=priority;
+
+
+
+    document
+    .getElementById("editStatus")
+    .value=status;
+
+
+
+
+
+
+
+    document
+    .getElementById("editForm")
+    .action =
+    "/admin-panel/edit/"+id+"/";
+
+
+
+
+
+
+
+    document
+    .getElementById("editModal")
+    .style.display="flex";
+
 
 }
+
+
+
+
+
+
 
 function closeEditModal(){
 
-    document.getElementById("editModal").style.display="none";
+
+    document
+    .getElementById("editModal")
+    .style.display="none";
+
 
 }
 
+
+
+
+
+
+
+
 /* ===============================
-   FECHAR MODAIS
+   FECHAR CLICANDO FORA
 =============================== */
 
-window.onclick=function(e){
 
-    if(e.target==document.getElementById("viewModal")){
+window.onclick=function(event){
+
+
+
+    let view =
+    document.getElementById(
+        "viewModal"
+    );
+
+
+
+    let edit =
+    document.getElementById(
+        "editModal"
+    );
+
+
+
+
+
+    if(event.target === view){
 
         closeViewModal();
 
     }
 
-    if(e.target==document.getElementById("editModal")){
+
+
+
+
+    if(event.target === edit){
 
         closeEditModal();
 
     }
 
+
+
 }
+
+
+
 
 </script>
 
-</main>
 
 </body>
 
