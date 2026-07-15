@@ -201,6 +201,7 @@ def registerscreen(request):
             user = User.objects.create_user(username=username, password=password, email=email)
             user.save()
             messages.success(request, 'Conta criada com sucesso. Faça login para continuar.')
+
             return redirect('/login/')
         
 
@@ -310,8 +311,5 @@ def add_comment(request, ticket_id):
             )
 
     return redirect("admin_panel")
-
-
-
 
 
