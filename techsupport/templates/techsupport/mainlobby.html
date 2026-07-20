@@ -305,7 +305,7 @@
         <aside class="sidebar">
             <div class="logo">
                 <h2>TECH SUPPORT</h2>
-                <small>Backrooms Internal Network</small>
+                <small>Internal Network</small>
             </div>
 
             <hr>
@@ -381,7 +381,7 @@
             <div class="topbar">
                 <div>
                     <h2>Main Lobby</h2>
-                    <small>Sistema Central das Backrooms</small>
+                    <small>Sistema Central</small>
                 </div>
                 <div class="system-status">
                     <div>Usuário</div>
@@ -392,40 +392,9 @@
                 </div>
             </div>
 
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card dashboard-card level-card h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <small class="text-uppercase">Níveis</small>
-                                    <h1 class="display-4 fw-bold mt-2">{{ dashboard_data.levels_count|default:"0" }}
-                                    </h1>
-                                </div>
-                                <div class="display-3">🗺️</div>
-                            </div>
-                            <hr>
-                            <div class="small">Áreas catalogadas</div>
-                        </div>
-                    </div>
-                </div>
+            
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="card dashboard-card entity-card h-100">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <small class="text-uppercase">Entidades</small>
-                                    <h1 class="display-4 fw-bold mt-2">{{ dashboard_data.entities_count|default:"0" }}
-                                    </h1>
-                                </div>
-                                <div class="display-3">👁️</div>
-                            </div>
-                            <hr>
-                            <div class="small">Entidades registradas</div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <div class="col-lg-3 col-md-6">
                     <div class="card dashboard-card user-card h-100">
@@ -472,25 +441,19 @@
                                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                                     style="width:92%;">Sistema Operacional</div>
                             </div>
-                            <div class="progress mb-4" style="height:30px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
-                                    style="width:74%;">Monitoramento das Entidades</div>
-                            </div>
+                            
                             <div class="progress mb-4" style="height:30px;">
                                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
                                     style="width:58%;">Tickets Processados</div>
                             </div>
-                            <div class="progress" style="height:30px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
-                                    style="width:31%;">Ameaças Detectadas</div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4">
                     <div class="card shadow-sm h-100">
-                        <div class="card-header"><strong>Threat Level</strong></div>
+                        <div class="card-header"><strong>Funcionamento do Sistema</strong></div>
                         <div class="card-body text-center">
                             <h1 id="threatLevel" style="color:#28a745;font-size:60px;font-weight:bold;">LOW</h1>
                             <p>Nenhuma atividade crítica detectada.</p>
@@ -507,32 +470,12 @@
                 > Initializing Internal Network...
                 > Connecting Operators...
                 > Loading Database...
-                > Entity Scanner Activated...
                 > Waiting...
                 </pre>
                 </div>
             </div>
 
-            <div class="row mt-5">
-                <div class="col-lg-4">
-                    <div class="card shadow-sm h-100">
-                        <div class="card-header"><strong>Radar de Entidades</strong></div>
-                        <div class="card-body text-center">
-                            <div class="radar">
-                                <div class="pulse pulse1"></div>
-                                <div class="pulse pulse2"></div>
-                                <div class="pulse pulse3"></div>
-                                <div class="dot dot1"></div>
-                                <div class="dot dot2"></div>
-                                <div class="dot dot3"></div>
-                            </div>
-                            <hr>
-                            <h5 id="entityName"> {{ dashboard_data.entity_name|default:"Entidade não identificada" }}
-                            </h5>
-                            <small>Distância: <span id="entityDistance">123 m</span></small>
-                        </div>
-                    </div>
-                </div>
+           
 
                 <div class="col-lg-4">
                     <div class="card shadow-sm h-100">
@@ -594,40 +537,7 @@
                 </div>
             </div>
 
-            <div class="row mt-5">
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header">Atividade do Sistema</div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Hora</th>
-                                        <th>Evento</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>12:14</td>
-                                        <td>Scanner iniciado</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12:19</td>
-                                        <td>Ticket recebido</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12:28</td>
-                                        <td>Banco sincronizado</td>
-                                    </tr>
-                                    <tr>
-                                        <td>12:31</td>
-                                        <td>Nova entidade registrada</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+            
 
                 <div class="col-lg-6">
                     <div class="card">
@@ -658,9 +568,9 @@
             "> Comunicação estabilizada.",
             "> Ticket recebido.",
             "> Banco atualizado.",
-            "> Entity-001 localizada.",
-            "> Entity-004 desapareceu.",
-            "> Monitorando câmeras.",
+            
+            
+            
             "> Aguardando comandos.",
             "> Operador conectado.",
             "> Sistema operacional estável.",
